@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0054a4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8ef4f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- MSA Text -->
+  <text x="20" y="80" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="url(#blueGradient)">MSA</text>
+  
+  <!-- Company Name -->
+  <text x="20" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0054a4">PT. MITRAJAYA SELARAS ABADI</text>
+  <text x="20" y="125" font-family="Arial, sans-serif" font-size="10" fill="#0054a4">LABORATORY • MEDICAL EQUIPMENT SUPPLY AND CONSULTANT</text>
+  
+  <!-- Medical Icon -->
+  <circle cx="400" cy="50" r="30" fill="#c4fffb" opacity="0.7"/>
+  <path d="M390 50 L410 50 M400 40 L400 60" stroke="#0054a4" stroke-width="4" stroke-linecap="round"/>
+</svg>
