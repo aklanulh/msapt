@@ -236,52 +236,6 @@
             color: var(--secondary-color);
         }
 
-        /* Breadcrumb Fixes */
-        .breadcrumb {
-            background-color: transparent;
-            padding: 0;
-            margin: 0;
-            font-size: 0.9rem;
-            overflow: visible;
-            white-space: nowrap;
-        }
-
-        .breadcrumb-item {
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .breadcrumb-item + .breadcrumb-item::before {
-            content: "/";
-            color: #6c757d;
-            margin: 0 0.5rem;
-            display: inline-block;
-        }
-
-        .breadcrumb-item a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .breadcrumb-item a:hover {
-            color: #003d7a;
-            text-decoration: underline;
-        }
-
-        .breadcrumb-item.active {
-            color: #6c757d;
-        }
-
-        /* Ensure breadcrumb section has proper spacing */
-        .py-3 {
-            padding-top: 1rem !important;
-            padding-bottom: 1rem !important;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .whatsapp-float {
@@ -290,16 +244,6 @@
                 bottom: 20px;
                 right: 20px;
                 font-size: 24px;
-            }
-            
-            .breadcrumb {
-                font-size: 0.8rem;
-                flex-wrap: wrap;
-            }
-            
-            .breadcrumb-item {
-                white-space: normal;
-                word-break: break-word;
             }
         }
     </style>
