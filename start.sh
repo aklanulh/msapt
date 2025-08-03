@@ -35,7 +35,22 @@ if [ ! -f .env ]; then
     echo "APP_URL=http://localhost:$PORT" >> .env
     echo "LOG_CHANNEL=single" >> .env
     echo "LOG_LEVEL=debug" >> .env
+    echo "" >> .env
+    echo "DB_CONNECTION=sqlite" >> .env
+    echo "DB_DATABASE=/var/www/database/database.sqlite" >> .env
+    echo "" >> .env
+    echo "SESSION_DRIVER=file" >> .env
+    echo "SESSION_LIFETIME=120" >> .env
 fi
+
+echo "Setting up database..."
+# Create database directory and file
+mkdir -p database
+touch database/database.sqlite
+chmod 664 database/database.sqlite
+
+echo "Running database migrations..."
+php artisan migrate --force || echo "Migration failed, continuing..."
 
 echo "Final .env check:"
 cat .env
