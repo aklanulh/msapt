@@ -10,7 +10,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">
-                    Solusi Terpercaya untuk <span style="color: var(--secondary-color);">Alat Kesehatan</span> Anda
+                    Solusi Terpercaya untuk <span style="color: var(--secondary-color);">Alat Kesehatan</span>
                 </h1>
                 <p class="lead mb-4">
                     PT Mitrajaya Selaras Abadi menyediakan alat kesehatan, laboratorium, medis berkualitas tinggi dan jasa konsultan profesional untuk institusi kesehatan di seluruh Indonesia.
