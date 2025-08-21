@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-6 text-center">
                 <div class="hero-image mt-5 mt-lg-0">
-                    <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid" style="max-height: 300px;">
+                    <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid logo-animation" style="max-height: 300px;">
                 </div>
             </div>
         </div>
@@ -38,25 +38,37 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">80+</h2>
+                <div class="stat-item text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-building" style="font-size: 3rem; color: var(--primary-color); opacity: 0.8;"></i>
+                    </div>
+                    <h2 class="display-4 fw-bold counter" data-target="80" style="color: var(--primary-color);">0</h2>
                     <p class="mb-0">Institusi Terpercaya</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">17</h2>
+                <div class="stat-item text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-calendar-alt" style="font-size: 3rem; color: var(--primary-color); opacity: 0.8;"></i>
+                    </div>
+                    <h2 class="display-4 fw-bold counter" data-target="17" style="color: var(--primary-color);">0</h2>
                     <p class="mb-0">Tahun Pengalaman</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">500+</h2>
+                <div class="stat-item text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-boxes" style="font-size: 3rem; color: var(--primary-color); opacity: 0.8;"></i>
+                    </div>
+                    <h2 class="display-4 fw-bold counter" data-target="500" style="color: var(--primary-color);">0</h2>
                     <p class="mb-0">Jenis Produk Tersedia</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
+                <div class="stat-item text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary-color); opacity: 0.8;"></i>
+                    </div>
                     <h2 class="display-4 fw-bold" style="color: var(--primary-color);">24/7</h2>
                     <p class="mb-0">Support Teknis</p>
                 </div>
@@ -246,3 +258,64 @@
     </div>
 </section>
 @endsection
+
+<style>
+/* Logo Animation */
+.logo-animation {
+    animation: logoFloat 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.logo-animation:hover {
+    transform: scale(1.05);
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+</style>
+
+<script>
+// Counter Animation for Stats Section
+document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.counter');
+    
+    const animateCounter = (counter) => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + (target === 80 || target === 500 ? '+' : '');
+            }
+        };
+        
+        updateCounter();
+    };
+    
+    // Intersection Observer for triggering animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                entry.target.classList.add('animated');
+                animateCounter(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+});
+</script>

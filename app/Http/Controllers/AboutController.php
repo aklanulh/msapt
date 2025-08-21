@@ -12,49 +12,22 @@ class AboutController extends Controller
             'name' => 'PT. Mitrajaya Selaras Abadi (MSA)',
             'established' => '2010',
             'description' => 'Distributor dan subdistributor alat kesehatan serta perlengkapan rumah sakit dengan komitmen tinggi terhadap kualitas dan pelayanan. Kami menyediakan produk-produk kesehatan impor berkualitas tinggi yang telah memenuhi standar internasional dan digunakan oleh berbagai rumah sakit ternama di Indonesia.',
-            'vision' => 'Menjadi perusahaan yang tumbuh selaras, handal, dan terpercaya dengan standar internasional dalam penyediaan peralatan kesehatan, menjaga kualitas produk dan layanan, serta menjadi distributor alat kesehatan yang kompetitif baik di tingkat daerah maupun nasional. Fokus pada zero defect delivery, peningkatan layanan, dan kepuasan pelanggan.',
+            'vision' => 'Menjadi perusahaan yang tumbuh selaras, handal dan terpercaya dengan standard Internasional di bidang penyediaan peralatan kesehatanaan dengan menjaga kualitas produk- produk dan layanan service/ perbaikan peralatan kesehatan sehingga dapat menjadi perusahaan distributor alat kesehatan yang mempunyai daya saing dan menjadi pemain alat kesehatan terkemuka di daerah dan di luar daerah. Keamanan dan ketepatan waktu pengiriman, sehingga tercapai zero default quality dan delivery. Berkembang terus dalam meningkatkan kapasitas dan kualitas layanan dengan pelayanan yang prima sehingga tercapai kepuasan pelanggan.',
             'mission' => [
-                'Memenuhi kebutuhan masyarakat atas peralatan kesehatan berkualitas dan berdaya saing',
-                'Menyediakan alat kesehatan yang aman dan sesuai standar',
-                'Memadukan jasa pengiriman, bea cukai, gudang, dan distribusi dalam satu sistem terintegrasi',
-                'Memanfaatkan jaringan dan infrastruktur yang ada untuk mendukung perputaran ekonomi nasional',
-                'Mengoptimalkan teknologi untuk pertumbuhan berkelanjutan dan kesejahteraan karyawan',
-                'Memberikan pelayanan terbaik dan menjaga tanggung jawab sosial perusahaan'
-            ],
-            'history' => [
-                [
-                    'year' => '2010',
-                    'event' => 'Pendirian PT Mitrajaya Selaras Abadi'
-                ],
-                [
-                    'year' => '2012',
-                    'event' => 'Ekspansi ke bidang alat laboratorium'
-                ],
-                [
-                    'year' => '2015',
-                    'event' => 'Sertifikasi ISO 9001:2015'
-                ],
-                [
-                    'year' => '2018',
-                    'event' => 'Pembukaan divisi jasa konsultan'
-                ],
-                [
-                    'year' => '2020',
-                    'event' => 'Kemitraan dengan brand internasional'
-                ],
-                [
-                    'year' => '2023',
-                    'event' => 'Melayani 500+ institusi kesehatan'
-                ]
+                'Memenuhi kebutuhan masyarakat akan peralatan kesehatan yang mempunyai keunggulan kompetitif',
+                'Menyediakan dan menyalurkan alat-alat kesehatan yang merupakan produk terbaik dari segi standar keamanan dan kualitas',
+                'Memadukan jasa pengiriman, kepabeanan, pergudangan dan pendistribusian dalam satu sistem yang terintegrasi secara efektif, efisien dan flexible',
+                'Mendayagunakan jaringan dan infrastruktur yang dimiliki sebagai kontribusi pada proses perputaran roda ekonomi dengan di dukung oleh SDM yang profesional dan memiliki integritas moral yang tinggi',
+                'Memanfaatkan perkembangan teknologi secara tepat, guna mendorong pertumbuhan usaha yang berkesinambungan dalam rangka mencapai kesejahteraan karyawan dan senantiasa meningkatkan tanggung jawab sosial',
+                'Memberikan pelayanan terbaik kepada konsumen'
             ],
             'legal' => [
                 'company_name' => 'PT. Mitrajaya Selaras Abadi (MSA)',
                 'registration' => 'Terdaftar dalam sistem pengadaan elektronik LKPP – LPSE – SIKAP',
                 'documents' => 'NIB, IDAK, dan seluruh dokumen hukum tersedia dan sah',
                 'address' => 'Ruko Maison Avenue MA.19, Kota Wisata, Cibubur, Kabupaten Bogor, 16820',
-                'phone' => '(021) 824-82412',
                 'whatsapp' => '0811 9466 470',
-                'emails' => ['marketing@ptmsa.biz.id', 'cs@ptmsa.biz.id', 'mitrajayaselarasabadi@gmail.com'],
+                'emails' => ['mitrajayaselarasabadi@gmail.com', 'cs@ptmsa.biz.id', 'marketing@ptmsa.biz.id'],
                 'website' => 'www.ptmsa.biz.id'
             ]
         ];

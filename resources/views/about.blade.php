@@ -1,7 +1,72 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - MSA Mitrajaya Selaras Abadi')
-@section('description', 'Mengenal lebih dekat PT Mitrajaya Selaras Abadi - Visi, misi, sejarah, dan legalitas perusahaan penyedia alat kesehatan terpercaya di Indonesia.')
+@section('title', 'Tentang Kami - MSA | Mitrajaya Selaras Abadi')
+@section('description', 'Mengenal lebih dekat PT Mitrajaya Selaras Abadi (MSA) - distributor alat kesehatan terpercaya dengan pengalaman puluhan tahun melayani institusi kesehatan di Indonesia.')
+
+@section('styles')
+<style>
+    /* Counter Animation */
+    .counter {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    /* Floating Animation */
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+    
+    /* Pulse Ring Animation */
+    .pulse-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        border: 3px solid var(--primary-color);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0.7;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 0.3;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0.7;
+        }
+    }
+    
+    .experience-animation {
+        position: relative;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .floating-icon {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+@endsection
 
 @section('content')
 <!-- Page Header -->
@@ -82,25 +147,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <div class="col-6">
-                        <div class="text-center">
-                            <h3 class="fw-bold" style="color: var(--primary-color);">80+</h3>
-                            <p class="mb-0">Institusi Terpercaya</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="text-center">
-                            <h3 class="fw-bold" style="color: var(--primary-color);">14</h3>
-                            <p class="mb-0">Tahun Pengalaman</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <div class="p-5">
-                    <i class="fas fa-building" style="font-size: 10rem; color: var(--secondary-color);"></i>
-                </div>
             </div>
         </div>
     </div>
@@ -147,34 +193,73 @@
     </div>
 </section>
 
-<!-- Company History -->
+<!-- Experience Section -->
 <section class="py-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Sejarah Perusahaan</h2>
-                <p class="lead text-muted">Perjalanan MSA dalam melayani industri kesehatan Indonesia</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="timeline">
-                    @foreach($companyInfo['history'] as $index => $history)
-                    <div class="row mb-4">
-                        <div class="col-lg-2 col-md-3">
-                            <div class="year-badge bg-primary text-white text-center py-2 rounded fw-bold">
-                                {{ $history['year'] }}
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="experience-content">
+                    <h2 class="display-4 fw-bold mb-4">
+                        <span class="counter" data-target="17">0</span> 
+                        <span style="color: var(--primary-color);">Tahun</span>
+                    </h2>
+                    <h3 class="fw-bold mb-3">Pengalaman Melayani Industri Kesehatan</h3>
+                    <p class="lead mb-4">Sejak tahun 2008, MSA telah dipercaya sebagai mitra strategis dalam penyediaan alat medis, laboratorium, BMHP berkualitas dan konsultan.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">80+</h6>
+                                    <small class="text-muted">Institusi Terpercaya</small>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-10 col-md-9">
-                            <div class="card border-start border-primary border-4">
-                                <div class="card-body">
-                                    <p class="mb-0">{{ $history['event'] }}</p>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">17</h6>
+                                    <small class="text-muted">Tahun Pengalaman</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">500+</h6>
+                                    <small class="text-muted">Jenis Produk Tersedia</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">24/7</h6>
+                                    <small class="text-muted">Support Teknis</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="experience-animation">
+                    <div class="floating-icon" style="animation: float 3s ease-in-out infinite;">
+                        <i class="fas fa-award" style="font-size: 8rem; color: var(--primary-color); opacity: 0.8;"></i>
+                    </div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
@@ -210,10 +295,6 @@
                             <div class="col-md-6 mb-3">
                                 <strong>Alamat:</strong><br>
                                 {{ $companyInfo['legal']['address'] }}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <strong>Telepon:</strong><br>
-                                {{ $companyInfo['legal']['phone'] }}
                             </div>
                             <div class="col-md-6 mb-3">
                                 <strong>WhatsApp:</strong><br>
@@ -317,11 +398,57 @@
                 <a href="{{ route('contact') }}" class="btn btn-light btn-lg me-3">
                     <i class="fas fa-envelope me-2"></i>Hubungi Kami
                 </a>
-                <a href="https://wa.me/6281194664700?text=Halo,%20saya%20ingin%20mengetahui%20lebih%20lanjut%20tentang%20MSA" class="btn btn-outline-light btn-lg" target="_blank">
+                <a href="https://wa.me/628119466470?text=Halo,%20saya%20ingin%20mengetahui%20lebih%20lanjut%20tentang%20MSA" class="btn btn-outline-light btn-lg" target="_blank">
                     <i class="fab fa-whatsapp me-2"></i>WhatsApp
                 </a>
             </div>
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+    // Counter Animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const counters = document.querySelectorAll('.counter');
+        
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const increment = target / 100;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.ceil(current);
+                    setTimeout(updateCounter, 20);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        };
+        
+        // Intersection Observer for counter animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelector('.counter');
+                    if (counter && !counter.classList.contains('animated')) {
+                        counter.classList.add('animated');
+                        animateCounter(counter);
+                    }
+                }
+            });
+        });
+        
+        // Observe experience section
+        const experienceSection = document.querySelector('.experience-content');
+        if (experienceSection) {
+            observer.observe(experienceSection);
+        }
+    });
+</script>
 @endsection
