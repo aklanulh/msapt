@@ -9,8 +9,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="display-4 fw-bold mb-3">Produk & Layanan</h1>
+                <h1 class="display-4 fw-bold mb-3">Produk & Layanan <span class="badge bg-warning text-dark">Coming Soon</span></h1>
                 <p class="lead">Solusi lengkap untuk kebutuhan alat kesehatan institusi Anda</p>
+                <div class="alert alert-warning mt-3" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Informasi:</strong> Isi halaman ini hanya ilustrasi. Konten lengkap akan segera tersedia.
+                </div>
             </div>
         </div>
     </div>

@@ -272,7 +272,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            Produk & Layanan
+                            Produk & Layanan <span class="badge bg-warning text-dark ms-1">Coming Soon</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('products') }}">Semua Kategori</a></li>
@@ -284,13 +284,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('catalog') }}">Katalog</a>
+                        <a class="nav-link" href="{{ route('catalog') }}">Katalog <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('projects') }}">Klien & Proyek</a>
+                        <a class="nav-link" href="{{ route('projects') }}">Klien & Proyek <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('blog') }}">Artikel</a>
+                        <a class="nav-link" href="{{ route('blog') }}">Artikel <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">Kontak</a>
