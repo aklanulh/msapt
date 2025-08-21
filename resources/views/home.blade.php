@@ -10,23 +10,23 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">
-                    Solusi Terpercaya untuk <span style="color: var(--secondary-color);">Alat Kesehatan</span>
+                    Solusi terpercaya untuk pengadaan <span style="color: var(--secondary-color);">alat medis, laboratorium, BMHP berkualitas dan konsultan</span>
                 </h1>
                 <p class="lead mb-4">
-                    PT Mitrajaya Selaras Abadi menyediakan alat kesehatan, laboratorium, medis berkualitas tinggi dan jasa konsultan profesional untuk institusi kesehatan di seluruh Indonesia.
+                    PT Mitrajaya Selaras Abadi menyediakan alat medis, peralatan laboratorium, serta BMHP berkualitas dengan harga kompetitif, didukung layanan konsultasi profesional bagi institusi kesehatan di seluruh Indonesia.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="{{ route('products') }}" class="btn btn-light btn-lg" role="button" style="text-decoration: none; pointer-events: auto;">
                         <i class="fas fa-eye me-2"></i>Lihat Produk
                     </a>
-                    <a href="https://wa.me/6281194664700?text=Halo,%20saya%20tertarik%20dengan%20produk%20MSA" class="btn btn-outline-light btn-lg" target="_blank" role="button" style="text-decoration: none; pointer-events: auto;">
+                    <a href="https://wa.me/628119466470?text=Halo,%20saya%20tertarik%20dengan%20produk%20MSA" class="btn btn-outline-light btn-lg" target="_blank" role="button" style="text-decoration: none; pointer-events: auto;">
                         <i class="fab fa-whatsapp me-2"></i>Hubungi Kami
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
                 <div class="hero-image mt-5 mt-lg-0">
-                    <i class="fas fa-heartbeat" style="font-size: 15rem; opacity: 0.3;"></i>
+                    <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid" style="max-height: 300px;">
                 </div>
             </div>
         </div>
@@ -45,14 +45,14 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">14</h2>
+                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">17</h2>
                     <p class="mb-0">Tahun Pengalaman</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">1000+</h2>
-                    <p class="mb-0">Produk Tersedia</p>
+                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">500+</h2>
+                    <p class="mb-0">Jenis Produk Tersedia</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h5>Sertifikasi Lengkap</h5>
+                        <h5>Legalitas Perusahaan</h5>
                         <p class="text-muted mb-0">Memiliki sertifikasi ISO 9001:2015 dan legalitas perusahaan yang lengkap.</p>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                 <a href="{{ route('rfq.create') }}" class="btn btn-light btn-lg me-3">
                     <i class="fas fa-file-alt me-2"></i>Minta Penawaran
                 </a>
-                <a href="https://wa.me/6281194664700?text=Halo,%20saya%20tertarik%20untuk%20berpartner%20dengan%20MSA" class="btn btn-outline-light btn-lg" target="_blank">
+                <a href="https://wa.me/628119466470?text=Halo,%20saya%20tertarik%20untuk%20berpartner%20dengan%20MSA" class="btn btn-outline-light btn-lg" target="_blank">
                     <i class="fab fa-whatsapp me-2"></i>WhatsApp
                 </a>
             </div>

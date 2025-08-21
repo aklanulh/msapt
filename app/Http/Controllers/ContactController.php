@@ -11,11 +11,10 @@ class ContactController extends Controller
     {
         $contact_info = [
             'address' => 'Ruko Maison Avenue MA.19, Kota Wisata, Cibubur, Kabupaten Bogor, 16820',
-            'phone' => '(021) 824-82412',
             'whatsapp' => '0811 9466 470',
-            'email' => 'marketing@ptmsa.biz.id',
+            'email' => 'mitrajayaselarasabadi@gmail.com',
             'email_cs' => 'cs@ptmsa.biz.id',
-            'email_alt' => 'mitrajayaselarasabadi@gmail.com',
+            'email_alt' => 'marketing@ptmsa.biz.id',
             'website' => 'www.ptmsa.biz.id',
             'office_hours' => 'Senin - Jumat: 08:00 - 17:00 WIB',
             'maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.1234567890!2d106.9234567!3d-6.3456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69abc123def456%3A0x789abc123def4567!2sRuko%20Maison%20Avenue%2C%20Kota%20Wisata%2C%20Cibubur!5e0!3m2!1sen!2sid!4v1234567890'

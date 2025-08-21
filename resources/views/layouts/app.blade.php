@@ -343,8 +343,7 @@
                     <h5>Kontak</h5>
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt me-2"></i>Ruko Maison Avenue MA.19, Kota Wisata, Cibubur, Kabupaten Bogor, 16820</li>
-                        <li><i class="fas fa-phone me-2"></i>(021) 824-82412</li>
-                        <li><i class="fas fa-envelope me-2"></i>marketing@ptmsa.biz.id</li>
+                        <li><i class="fas fa-envelope me-2"></i>mitrajayaselarasabadi@gmail.com</li>
                         <li><i class="fab fa-whatsapp me-2"></i>0811 9466 470</li>
                     </ul>
                 </div>
@@ -363,7 +362,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/6281194664700?text=Halo,%20saya%20tertarik%20dengan%20produk%20MSA" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/628119466470?text=Halo,%20saya%20tertarik%20dengan%20produk%20MSA" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 

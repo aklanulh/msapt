@@ -33,15 +33,6 @@
                     </div>
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="contact-item text-center">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-phone" style="font-size: 2rem;"></i>
-                            </div>
-                            <h5 class="fw-bold">Telepon</h5>
-                            <p class="text-muted">{{ $contact_info['phone'] }}</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="contact-item text-center">
                             <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                                 <i class="fab fa-whatsapp" style="font-size: 2rem;"></i>
                             </div>
@@ -204,13 +195,8 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6 mb-3">
-                <a href="https://wa.me/6281194664700?text=Halo,%20saya%20ingin%20konsultasi%20produk%20MSA" class="btn btn-success btn-lg w-100" target="_blank">
+                <a href="https://wa.me/628119466470?text=Halo,%20saya%20ingin%20konsultasi%20produk%20MSA" class="btn btn-success btn-lg w-100" target="_blank">
                     <i class="fab fa-whatsapp me-2"></i>WhatsApp
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-3">
-                <a href="tel:{{ $contact_info['phone'] }}" class="btn btn-primary btn-lg w-100">
-                    <i class="fas fa-phone me-2"></i>Telepon
                 </a>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
