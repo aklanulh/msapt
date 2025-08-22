@@ -78,7 +78,7 @@
 </section>
 
 <!-- Services Section -->
-<section class="py-5">
+<section class="py-5" style="background-color: #ffffff;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
@@ -221,8 +221,25 @@
     </div>
 </section>
 
+<!-- Business Partners Section -->
+<section class="py-3" style="background-color: #ffffff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-3">
+                <h2 class="display-5 fw-bold mb-2">Mitra Bisnis Kami</h2>
+                <p class="lead text-muted">Mitra terpercaya dalam menyediakan solusi alat kesehatan berkualitas tinggi</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <img src="{{ asset('images/business partner.png') }}" alt="Business Partners MSA" class="img-fluid business-partners-image">
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Testimonials Section -->
-<section class="py-5">
+<section class="py-5" style="background-color: #f8f9fa;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
@@ -351,6 +368,29 @@
 /* Pause animation on hover */
 .product-carousel-container:hover .product-carousel {
     animation-play-state: paused;
+}
+
+/* Business Partners Styles */
+.business-partners-container {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.business-partners-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.business-partners-image {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.business-partners-image:hover {
+    transform: scale(1.02);
 }
 </style>
 
