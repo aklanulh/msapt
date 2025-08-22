@@ -86,6 +86,28 @@
                 <p class="lead text-muted">Kami menyediakan berbagai kategori produk dan layanan untuk kebutuhan institusi kesehatan Anda</p>
             </div>
         </div>
+        
+        <!-- Product Carousel -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="product-carousel-container">
+                    <div class="product-carousel">
+                        @for($i = 1; $i <= 12; $i++)
+                        <div class="product-slide">
+                            <img src="{{ asset('images/produkMSA/' . $i . '.png') }}" alt="Produk MSA {{ $i }}" class="img-fluid">
+                        </div>
+                        @endfor
+                        <!-- Duplicate slides for seamless loop -->
+                        @for($i = 1; $i <= 12; $i++)
+                        <div class="product-slide">
+                            <img src="{{ asset('images/produkMSA/' . $i . '.png') }}" alt="Produk MSA {{ $i }}" class="img-fluid">
+                        </div>
+                        @endfor
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="row">
             @foreach($services as $service)
             <div class="col-lg-3 col-md-6 mb-4">
@@ -277,6 +299,58 @@
     50% {
         transform: translateY(-10px);
     }
+}
+
+/* Product Carousel Styles */
+.product-carousel-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.product-carousel {
+    display: flex;
+    animation: scroll 30s linear infinite;
+    width: calc(200px * 24); /* 12 images * 2 (duplicated) * width */
+}
+
+.product-slide {
+    flex: 0 0 200px;
+    margin-right: 20px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-slide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-200px * 12 - 20px * 12)); /* Move by width of 12 images */
+    }
+}
+
+/* Pause animation on hover */
+.product-carousel-container:hover .product-carousel {
+    animation-play-state: paused;
 }
 </style>
 
