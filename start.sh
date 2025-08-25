@@ -67,6 +67,9 @@ fi
 echo "Running database migrations..."
 php artisan migrate --force || echo "Migration failed, continuing..."
 
+echo "Running database seeders..."
+php artisan db:seed --force || echo "Seeding failed, continuing..."
+
 echo "Final .env check:"
 cat .env
 
