@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Page Header -->
-<section class="py-3" style="background-color: #f8f9fa;">
+<section class="py-5 mt-5" style="background-color: #f8f9fa;">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -24,17 +24,101 @@
         <div class="row">
             <div class="col-lg-6 mb-4">
                 <div class="product-image-container">
-                    <div class="d-flex align-items-center justify-content-center" style="height: 400px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%); border-radius: 10px;">
-                        @if($product['category'] == 'alat-kesehatan')
-                            <i class="fas fa-heartbeat" style="font-size: 8rem; color: var(--primary-color);"></i>
-                        @elseif($product['category'] == 'alat-laboratorium')
-                            <i class="fas fa-microscope" style="font-size: 8rem; color: var(--primary-color);"></i>
-                        @elseif($product['category'] == 'alat-medis')
-                            <i class="fas fa-stethoscope" style="font-size: 8rem; color: var(--primary-color);"></i>
-                        @else
-                            <i class="fas fa-user-tie" style="font-size: 8rem; color: var(--primary-color);"></i>
+                    @if($product['images'] && count($product['images']) > 0)
+                        <div id="productCarousel" class="carousel slide position-relative" data-bs-ride="carousel" style="width: 400px; height: 400px; margin: 0 auto;">
+                            <div class="carousel-inner" style="border-radius: 10px; width: 100%; height: 100%;">
+                                @foreach($product['images'] as $index => $image)
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('storage/' . $image) }}" class="d-block w-100 h-100" style="object-fit: cover; border-radius: 10px;" alt="{{ $product['name'] }}">
+                                </div>
+                                @endforeach
+                            </div>
+                            @if(count($product['images']) > 1)
+                            <button class="carousel-control-prev position-absolute" type="button" data-bs-target="#productCarousel" data-bs-slide="prev" style="background: rgba(0,0,0,0.6); border: none; border-radius: 50%; width: 45px; height: 45px; top: 50%; transform: translateY(-50%); left: 15px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-chevron-left" style="color: white; font-size: 16px;"></i>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next position-absolute" type="button" data-bs-target="#productCarousel" data-bs-slide="next" style="background: rgba(0,0,0,0.6); border: none; border-radius: 50%; width: 45px; height: 45px; top: 50%; transform: translateY(-50%); right: 15px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-chevron-right" style="color: white; font-size: 16px;"></i>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            <!-- Dots indicator -->
+                            <div class="carousel-indicators position-absolute" style="bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">
+                                @foreach($product['images'] as $index => $image)
+                                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" style="width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; background: {{ $index == 0 ? 'white' : 'transparent' }}; margin: 0 3px;"></button>
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                        
+                        <!-- Thumbnail Gallery -->
+                        @if(count($product['images']) > 1)
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-center flex-wrap gap-2">
+                                @foreach($product['images'] as $index => $image)
+                                <div class="thumbnail-item" style="cursor: pointer;">
+                                    <img src="{{ asset('storage/' . $image) }}" 
+                                         class="img-thumbnail {{ $index == 0 ? 'border-primary' : '' }}" 
+                                         style="width: 70px; height: 70px; object-fit: cover; border-width: 2px;"
+                                         onclick="changeCarouselSlide({{ $index }})"
+                                         data-index="{{ $index }}"
+                                         alt="Thumbnail {{ $index + 1 }}">
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        
+                        <script>
+                        function changeCarouselSlide(index) {
+                            // Change carousel to specific slide
+                            const carousel = new bootstrap.Carousel(document.getElementById('productCarousel'));
+                            carousel.to(index);
+                            
+                            // Update thumbnail borders
+                            document.querySelectorAll('.thumbnail-item img').forEach((thumb, i) => {
+                                if (i === index) {
+                                    thumb.classList.add('border-primary');
+                                    thumb.classList.remove('border-secondary');
+                                } else {
+                                    thumb.classList.remove('border-primary');
+                                    thumb.classList.add('border-secondary');
+                                }
+                            });
+                        }
+                        
+                        // Listen for carousel slide events to update thumbnail borders
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const carousel = document.getElementById('productCarousel');
+                            if (carousel) {
+                                carousel.addEventListener('slide.bs.carousel', function (e) {
+                                    const activeIndex = e.to;
+                                    document.querySelectorAll('.thumbnail-item img').forEach((thumb, i) => {
+                                        if (i === activeIndex) {
+                                            thumb.classList.add('border-primary');
+                                            thumb.classList.remove('border-secondary');
+                                        } else {
+                                            thumb.classList.remove('border-primary');
+                                            thumb.classList.add('border-secondary');
+                                        }
+                                    });
+                                });
+                            }
+                        });
+                        </script>
                         @endif
-                    </div>
+                    @else
+                        <div class="product-image d-flex align-items-center justify-content-center" style="height: 400px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%); border-radius: 10px;">
+                            @if($product['category'] == 'alat-kesehatan-laboratorium')
+                                <i class="fas fa-microscope" style="font-size: 8rem; color: var(--primary-color);"></i>
+                            @elseif($product['category'] == 'produk-konsumabel')
+                                <i class="fas fa-vial" style="font-size: 8rem; color: var(--primary-color);"></i>
+                            @elseif($product['category'] == 'linen-apparel-rs')
+                                <i class="fas fa-tshirt" style="font-size: 8rem; color: var(--primary-color);"></i>
+                            @else
+                                <i class="fas fa-tools" style="font-size: 8rem; color: var(--primary-color);"></i>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-lg-6">
@@ -67,13 +151,17 @@
                 <div class="card border-0 shadow h-100">
                     <div class="card-body">
                         <h4 class="fw-bold mb-4"><i class="fas fa-cogs me-2 text-primary"></i>Spesifikasi Teknis</h4>
+                        @if($product['specs'] && is_array($product['specs']))
                         <ul class="list-unstyled">
-                            @foreach($product['specs'] as $spec)
+                            @foreach($product['specs'] as $key => $value)
                             <li class="mb-2">
-                                <i class="fas fa-check-circle me-2 text-success"></i>{{ $spec }}
+                                <i class="fas fa-check-circle me-2 text-success"></i><strong>{{ $key }}:</strong> {{ $value }}
                             </li>
                             @endforeach
                         </ul>
+                        @else
+                        <p class="text-muted">Spesifikasi teknis tidak tersedia</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -81,6 +169,7 @@
                 <div class="card border-0 shadow h-100">
                     <div class="card-body">
                         <h4 class="fw-bold mb-4"><i class="fas fa-star me-2 text-primary"></i>Fitur Unggulan</h4>
+                        @if($product['features'] && is_array($product['features']))
                         <ul class="list-unstyled">
                             @foreach($product['features'] as $feature)
                             <li class="mb-2">
@@ -88,6 +177,9 @@
                             </li>
                             @endforeach
                         </ul>
+                        @else
+                        <p class="text-muted">Fitur unggulan tidak tersedia</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -106,6 +198,7 @@
             </div>
         </div>
         <div class="row">
+            @if($relatedProducts && is_array($relatedProducts))
             @foreach(array_slice($relatedProducts, 0, 3) as $related)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 border-0 shadow">
@@ -128,6 +221,7 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </div>
     </div>
 </section>

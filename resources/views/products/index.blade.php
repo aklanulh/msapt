@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Page Header -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white;">
+<section class="py-5 mt-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -88,64 +88,6 @@
     </div>
 </section>
 
-<!-- Featured Products -->
-<section class="py-5" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Produk Unggulan</h2>
-                <p class="lead text-muted">Produk-produk terpopuler dan terlaris dari MSA</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow">
-                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);">
-                        <i class="fas fa-desktop" style="font-size: 4rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Monitor Pasien Multiparameter</h5>
-                        <p class="card-text text-muted">Monitor vital signs dengan teknologi terdepan untuk ICU dan ruang perawatan.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Philips IntelliVue</small>
-                            <a href="{{ route('products.category', 'alat-kesehatan') }}" class="btn btn-outline-primary btn-sm">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow">
-                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);">
-                        <i class="fas fa-vial" style="font-size: 4rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Hematology Analyzer</h5>
-                        <p class="card-text text-muted">Analisis darah otomatis dengan akurasi tinggi untuk laboratorium modern.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Sysmex XN-1000</small>
-                            <a href="{{ route('products.category', 'alat-laboratorium') }}" class="btn btn-outline-primary btn-sm">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 border-0 shadow">
-                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);">
-                        <i class="fas fa-lungs" style="font-size: 4rem; color: var(--primary-color);"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Ventilator ICU</h5>
-                        <p class="card-text text-muted">Ventilator canggih untuk perawatan intensif dengan berbagai mode ventilasi.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">Drager Evita V300</small>
-                            <a href="{{ route('products.category', 'alat-kesehatan') }}" class="btn btn-outline-primary btn-sm">Lihat Detail</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Services Overview -->
 <section class="py-5">

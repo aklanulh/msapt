@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Page Header -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white;">
+<section class="py-5 mt-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -26,22 +26,143 @@
 <!-- Products Grid -->
 <section class="py-5">
     <div class="container">
-        @if(count($products) > 0)
         <div class="row">
-            @foreach($products as $product)
+            <!-- Sidebar Menu -->
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Kategori Produk</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="accordion" id="categoryAccordion">
+                            <!-- Alat Kesehatan & Laboratorium -->
+                            <div class="accordion-item border-0">
+                                <h6 class="accordion-header" id="heading1">
+                                    <button class="accordion-button {{ $category == 'alat-kesehatan-laboratorium' ? '' : 'collapsed' }} fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="{{ $category == 'alat-kesehatan-laboratorium' ? 'true' : 'false' }}">
+                                        <i class="fas fa-microscope me-2 text-primary"></i>
+                                        Alat Kesehatan & Lab
+                                    </button>
+                                </h6>
+                                <div id="collapse1" class="accordion-collapse collapse {{ $category == 'alat-kesehatan-laboratorium' ? 'show' : '' }}" data-bs-parent="#categoryAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="list-group list-group-flush">
+                                            @php
+                                                $controller = new \App\Http\Controllers\ProductController();
+                                                $alatKesehatanProducts = $controller->getProductsByCategory('alat-kesehatan-laboratorium');
+                                            @endphp
+                                            @foreach($alatKesehatanProducts as $product)
+                                            <a href="{{ route('products.show', $product['id']) }}" class="list-group-item list-group-item-action border-0">
+                                                <small><i class="fas fa-dot-circle me-2"></i>{{ $product['name'] }}</small>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Produk Konsumabel -->
+                            <div class="accordion-item border-0">
+                                <h6 class="accordion-header" id="heading2">
+                                    <button class="accordion-button {{ $category == 'produk-konsumabel' ? '' : 'collapsed' }} fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="{{ $category == 'produk-konsumabel' ? 'true' : 'false' }}">
+                                        <i class="fas fa-vial me-2 text-success"></i>
+                                        Produk Konsumabel
+                                    </button>
+                                </h6>
+                                <div id="collapse2" class="accordion-collapse collapse {{ $category == 'produk-konsumabel' ? 'show' : '' }}" data-bs-parent="#categoryAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="list-group list-group-flush">
+                                            @php
+                                                $konsumabelProducts = $controller->getProductsByCategory('produk-konsumabel');
+                                            @endphp
+                                            @foreach($konsumabelProducts as $product)
+                                            <a href="{{ route('products.show', $product['id']) }}" class="list-group-item list-group-item-action border-0">
+                                                <small><i class="fas fa-dot-circle me-2"></i>{{ $product['name'] }}</small>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Linen & Apparel RS -->
+                            <div class="accordion-item border-0">
+                                <h6 class="accordion-header" id="heading3">
+                                    <button class="accordion-button {{ $category == 'linen-apparel-rs' ? '' : 'collapsed' }} fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="{{ $category == 'linen-apparel-rs' ? 'true' : 'false' }}">
+                                        <i class="fas fa-tshirt me-2 text-warning"></i>
+                                        Linen & Apparel RS
+                                    </button>
+                                </h6>
+                                <div id="collapse3" class="accordion-collapse collapse {{ $category == 'linen-apparel-rs' ? 'show' : '' }}" data-bs-parent="#categoryAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="list-group list-group-flush">
+                                            @php
+                                                $linenProducts = $controller->getProductsByCategory('linen-apparel-rs');
+                                            @endphp
+                                            @foreach($linenProducts as $product)
+                                            <a href="{{ route('products.show', $product['id']) }}" class="list-group-item list-group-item-action border-0">
+                                                <small><i class="fas fa-dot-circle me-2"></i>{{ $product['name'] }}</small>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Jasa Konsultan & Maintenance -->
+                            <div class="accordion-item border-0">
+                                <h6 class="accordion-header" id="heading4">
+                                    <button class="accordion-button {{ $category == 'jasa-konsultan-maintenance' ? '' : 'collapsed' }} fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="{{ $category == 'jasa-konsultan-maintenance' ? 'true' : 'false' }}">
+                                        <i class="fas fa-tools me-2 text-info"></i>
+                                        Jasa & Konsultan
+                                    </button>
+                                </h6>
+                                <div id="collapse4" class="accordion-collapse collapse {{ $category == 'jasa-konsultan-maintenance' ? 'show' : '' }}" data-bs-parent="#categoryAccordion">
+                                    <div class="accordion-body p-0">
+                                        <div class="list-group list-group-flush">
+                                            @php
+                                                $jasaProducts = $controller->getProductsByCategory('jasa-konsultan-maintenance');
+                                            @endphp
+                                            @foreach($jasaProducts as $product)
+                                            <a href="{{ route('products.show', $product['id']) }}" class="list-group-item list-group-item-action border-0">
+                                                <small><i class="fas fa-dot-circle me-2"></i>{{ $product['name'] }}</small>
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Content -->
+            <div class="col-lg-9 col-md-8">
+                @if(count($products) > 0)
+                <div class="row">
+                    @foreach($products as $product)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100 border-0 shadow product-card">
-                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 250px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);">
-                        @if($category == 'alat-kesehatan-laboratorium')
-                            <i class="fas fa-microscope" style="font-size: 5rem; color: var(--primary-color);"></i>
-                        @elseif($category == 'produk-konsumabel')
-                            <i class="fas fa-vial" style="font-size: 5rem; color: var(--primary-color);"></i>
-                        @elseif($category == 'linen-apparel-rs')
-                            <i class="fas fa-tshirt" style="font-size: 5rem; color: var(--primary-color);"></i>
-                        @elseif($category == 'jasa-konsultan-maintenance')
-                            <i class="fas fa-tools" style="font-size: 5rem; color: var(--primary-color);"></i>
+                    <div class="card-img-top" style="height: 250px; position: relative; overflow: hidden;">
+                        @if($product['images'] && count($product['images']) > 0)
+                            <img src="{{ asset('storage/' . $product['images'][0]) }}" 
+                                 class="w-100 h-100" 
+                                 style="object-fit: cover;" 
+                                 alt="{{ $product['name'] }}">
                         @else
-                            <i class="fas fa-user-tie" style="font-size: 5rem; color: var(--primary-color);"></i>
+                            <div class="d-flex align-items-center justify-content-center h-100" style="background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);">
+                                @if($category == 'alat-kesehatan-laboratorium')
+                                    <i class="fas fa-microscope" style="font-size: 5rem; color: var(--primary-color);"></i>
+                                @elseif($category == 'produk-konsumabel')
+                                    <i class="fas fa-vial" style="font-size: 5rem; color: var(--primary-color);"></i>
+                                @elseif($category == 'linen-apparel-rs')
+                                    <i class="fas fa-tshirt" style="font-size: 5rem; color: var(--primary-color);"></i>
+                                @elseif($category == 'jasa-konsultan-maintenance')
+                                    <i class="fas fa-tools" style="font-size: 5rem; color: var(--primary-color);"></i>
+                                @else
+                                    <i class="fas fa-user-tie" style="font-size: 5rem; color: var(--primary-color);"></i>
+                                @endif
+                            </div>
                         @endif
                     </div>
                     <div class="card-body d-flex flex-column">
@@ -49,14 +170,16 @@
                         <p class="text-muted mb-2">{{ $product['brand'] }} {{ $product['model'] }}</p>
                         <p class="text-primary fw-bold mb-3">{{ $product['price_range'] }}</p>
                         
+                        @if($product['specs'] && is_array($product['specs']))
                         <div class="mb-3">
                             <h6 class="fw-bold">Spesifikasi:</h6>
                             <ul class="list-unstyled small">
-                                @foreach(array_slice($product['specs'], 0, 3) as $spec)
-                                <li><i class="fas fa-check text-success me-2"></i>{{ $spec }}</li>
+                                @foreach(array_slice($product['specs'], 0, 3) as $key => $value)
+                                <li><i class="fas fa-check text-success me-2"></i>{{ $key }}: {{ $value }}</li>
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
                         
                         <div class="mt-auto">
                             <div class="d-grid gap-2">
