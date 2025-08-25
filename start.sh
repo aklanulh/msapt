@@ -36,18 +36,33 @@ if [ ! -f .env ]; then
     echo "LOG_CHANNEL=single" >> .env
     echo "LOG_LEVEL=debug" >> .env
     echo "" >> .env
-    echo "DB_CONNECTION=sqlite" >> .env
-    echo "DB_DATABASE=/var/www/database/database.sqlite" >> .env
+    
+    # Database configuration - use PostgreSQL if DATABASE_URL is set, otherwise SQLite
+    if [ -n "$DATABASE_URL" ]; then
+        echo "DB_CONNECTION=pgsql" >> .env
+        echo "DATABASE_URL=$DATABASE_URL" >> .env
+        echo "DB_HOST=${DB_HOST:-localhost}" >> .env
+        echo "DB_PORT=${DB_PORT:-5432}" >> .env
+        echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
+        echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
+        echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
+    else
+        echo "DB_CONNECTION=sqlite" >> .env
+        echo "DB_DATABASE=/var/www/database/database.sqlite" >> .env
+    fi
+    
     echo "" >> .env
     echo "SESSION_DRIVER=file" >> .env
     echo "SESSION_LIFETIME=120" >> .env
 fi
 
 echo "Setting up database..."
-# Create database directory and file
-mkdir -p database
-touch database/database.sqlite
-chmod 664 database/database.sqlite
+# Create SQLite database if using SQLite (fallback)
+if [ "$DB_CONNECTION" = "sqlite" ] || [ -z "$DATABASE_URL" ]; then
+    mkdir -p database
+    touch database/database.sqlite
+    chmod 664 database/database.sqlite
+fi
 
 echo "Running database migrations..."
 php artisan migrate --force || echo "Migration failed, continuing..."
