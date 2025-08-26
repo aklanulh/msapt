@@ -37,20 +37,24 @@ echo "LOG_CHANNEL=single" >> .env
 echo "LOG_LEVEL=debug" >> .env
 echo "" >> .env
 
-# Force MySQL connection - never use PostgreSQL
-export DB_CONNECTION=mysql
-echo "DB_CONNECTION=mysql" >> .env
+# Force PostgreSQL connection - use Railway default
+export DB_CONNECTION=pgsql
+echo "DB_CONNECTION=pgsql" >> .env
 
-# Parse DATABASE_URL if it exists and force MySQL
+# Parse DATABASE_URL if it exists and use PostgreSQL
 if [ -n "$DATABASE_URL" ]; then
     echo "DATABASE_URL=$DATABASE_URL" >> .env
     echo "Parsing DATABASE_URL: $DATABASE_URL"
     
-    # Extract MySQL connection details from DATABASE_URL
-    # Format: mysql://user:password@host:port/database
-    if [[ $DATABASE_URL == mysql://* ]]; then
-        # Remove mysql:// prefix
-        DB_FULL="${DATABASE_URL#mysql://}"
+    # Extract PostgreSQL connection details from DATABASE_URL
+    # Format: postgresql://user:password@host:port/database or postgres://user:password@host:port/database
+    if [[ $DATABASE_URL == postgres://* ]] || [[ $DATABASE_URL == postgresql://* ]]; then
+        # Remove postgres:// or postgresql:// prefix
+        if [[ $DATABASE_URL == postgres://* ]]; then
+            DB_FULL="${DATABASE_URL#postgres://}"
+        else
+            DB_FULL="${DATABASE_URL#postgresql://}"
+        fi
         
         # Split user:password and host:port/database
         DB_USER_PASS="${DB_FULL%%@*}"
@@ -120,20 +124,24 @@ php artisan config:clear || echo "Config clear failed, continuing..."
 php artisan cache:clear || echo "Cache clear failed, continuing..."
 
 echo "Setting runtime environment for Laravel..."
-export DB_CONNECTION=mysql
+export DB_CONNECTION=pgsql
 
-# Clear any cached config that might have wrong database settings
+# Clear ALL Laravel caches that might have wrong database settings
+echo "Clearing ALL Laravel caches..."
 php artisan config:clear || echo "Config clear failed, continuing..."
 php artisan cache:clear || echo "Cache clear failed, continuing..."
 php artisan route:clear || echo "Route clear failed, continuing..."
 php artisan view:clear || echo "View clear failed, continuing..."
+php artisan event:clear || echo "Event clear failed, continuing..."
 
-# Force MySQL in environment
-echo "Forcing MySQL environment variables..."
-export DB_CONNECTION=mysql
-export DATABASE_DEFAULT=mysql
+# Force PostgreSQL in environment BEFORE caching
+echo "Forcing PostgreSQL environment variables..."
+export DB_CONNECTION=pgsql
+export DATABASE_DEFAULT=pgsql
 
-php artisan config:cache || echo "Config cache failed, continuing..."
+# DO NOT cache config - let it read from .env dynamically
+echo "Skipping config cache to force dynamic .env reading..."
+# php artisan config:cache || echo "Config cache failed, continuing..."
 
 echo "Testing database connection..."
 timeout 30 php artisan tinker --execute="echo 'Testing DB connection...'; try { \$pdo = \DB::connection()->getPdo(); echo 'Database connected successfully to: ' . \$pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS); } catch(Exception \$e) { echo 'Database connection failed: ' . \$e->getMessage(); exit(1); }" || echo "Connection test failed"

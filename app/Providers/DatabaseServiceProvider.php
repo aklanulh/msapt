@@ -10,42 +10,34 @@ class DatabaseServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Force MySQL connection at runtime - ALWAYS
-        Config::set('database.default', 'mysql');
-        
-        // Remove any PostgreSQL configuration that might exist
-        Config::forget('database.connections.pgsql');
+        // Force PostgreSQL connection at runtime
+        Config::set('database.default', 'pgsql');
         
         // Force environment variables
-        $_ENV['DB_CONNECTION'] = 'mysql';
-        putenv('DB_CONNECTION=mysql');
+        $_ENV['DB_CONNECTION'] = 'pgsql';
+        putenv('DB_CONNECTION=pgsql');
         
         // Override any existing database configuration
-        Config::set('database.connections.mysql', [
-            'driver' => 'mysql',
+        Config::set('database.connections.pgsql', [
+            'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'railway'),
-            'username' => env('DB_USERNAME', 'root'),
+            'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                \PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
         ]);
     }
 
     public function boot(): void
     {
-        // Ensure we're using MySQL
+        // Ensure we're using PostgreSQL
         DB::purge('default');
-        Config::set('database.default', 'mysql');
+        Config::set('database.default', 'pgsql');
     }
 }
