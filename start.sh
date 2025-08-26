@@ -37,14 +37,14 @@ if [ ! -f .env ]; then
     echo "LOG_LEVEL=debug" >> .env
     echo "" >> .env
     
-    # Database configuration - use PostgreSQL if DATABASE_URL is set, otherwise SQLite
+    # Database configuration - use MySQL if DATABASE_URL is set, otherwise SQLite
     if [ -n "$DATABASE_URL" ]; then
-        echo "DB_CONNECTION=pgsql" >> .env
+        echo "DB_CONNECTION=mysql" >> .env
         echo "DATABASE_URL=$DATABASE_URL" >> .env
         echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-        echo "DB_PORT=${DB_PORT:-5432}" >> .env
+        echo "DB_PORT=${DB_PORT:-3306}" >> .env
         echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-        echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
+        echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
         echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
     else
         echo "DB_CONNECTION=sqlite" >> .env
@@ -63,6 +63,10 @@ if [ "$DB_CONNECTION" = "sqlite" ] || [ -z "$DATABASE_URL" ]; then
     touch database/database.sqlite
     chmod 664 database/database.sqlite
 fi
+
+echo "Clearing Laravel config cache..."
+php artisan config:clear || echo "Config clear failed, continuing..."
+php artisan cache:clear || echo "Cache clear failed, continuing..."
 
 echo "Running database migrations..."
 php artisan migrate --force || echo "Migration failed, continuing..."
