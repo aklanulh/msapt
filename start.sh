@@ -44,29 +44,58 @@ echo "DB_CONNECTION=mysql" >> .env
 # Parse DATABASE_URL if it exists and force MySQL
 if [ -n "$DATABASE_URL" ]; then
     echo "DATABASE_URL=$DATABASE_URL" >> .env
+    echo "Parsing DATABASE_URL: $DATABASE_URL"
+    
     # Extract MySQL connection details from DATABASE_URL
     # Format: mysql://user:password@host:port/database
     if [[ $DATABASE_URL == mysql://* ]]; then
-        # Extract components
+        # Remove mysql:// prefix
         DB_FULL="${DATABASE_URL#mysql://}"
+        
+        # Split user:password and host:port/database
         DB_USER_PASS="${DB_FULL%%@*}"
         DB_HOST_PORT_DB="${DB_FULL#*@}"
+        
+        # Extract host:port and database
         DB_HOST_PORT="${DB_HOST_PORT_DB%/*}"
         DB_NAME="${DB_HOST_PORT_DB##*/}"
         
-        export DB_HOST="${DB_HOST_PORT%:*}"
-        export DB_PORT="${DB_HOST_PORT#*:}"
+        # Extract host and port
+        DB_HOST_EXTRACTED="${DB_HOST_PORT%:*}"
+        DB_PORT_EXTRACTED="${DB_HOST_PORT#*:}"
+        
+        # Extract username and password
+        DB_USERNAME_EXTRACTED="${DB_USER_PASS%:*}"
+        DB_PASSWORD_EXTRACTED="${DB_USER_PASS#*:}"
+        
+        # Set environment variables
+        export DB_HOST="$DB_HOST_EXTRACTED"
+        export DB_PORT="$DB_PORT_EXTRACTED"
         export DB_DATABASE="$DB_NAME"
-        export DB_USERNAME="${DB_USER_PASS%:*}"
-        export DB_PASSWORD="${DB_USER_PASS#*:}"
+        export DB_USERNAME="$DB_USERNAME_EXTRACTED"
+        export DB_PASSWORD="$DB_PASSWORD_EXTRACTED"
         
         echo "DB_HOST=$DB_HOST" >> .env
         echo "DB_PORT=$DB_PORT" >> .env
         echo "DB_DATABASE=$DB_DATABASE" >> .env
         echo "DB_USERNAME=$DB_USERNAME" >> .env
         echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+        
+        echo "Extracted DB config:"
+        echo "  Host: $DB_HOST"
+        echo "  Port: $DB_PORT"
+        echo "  Database: $DB_DATABASE"
+        echo "  Username: $DB_USERNAME"
+    else
+        echo "DATABASE_URL is not MySQL format, using environment variables"
+        echo "DB_HOST=${DB_HOST:-localhost}" >> .env
+        echo "DB_PORT=${DB_PORT:-3306}" >> .env
+        echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
+        echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
+        echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
     fi
 else
+    echo "No DATABASE_URL found, using environment variables"
     echo "DB_HOST=${DB_HOST:-localhost}" >> .env
     echo "DB_PORT=${DB_PORT:-3306}" >> .env
     echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
