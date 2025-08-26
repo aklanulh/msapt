@@ -52,65 +52,55 @@ echo "" >> .env
 export DB_CONNECTION=pgsql
 echo "DB_CONNECTION=pgsql" >> .env
 
-# Parse DATABASE_URL if it exists and use PostgreSQL
+# Railway PostgreSQL variables - use Railway's native variable names
 if [ -n "$DATABASE_URL" ]; then
     echo "DATABASE_URL=$DATABASE_URL" >> .env
-    echo "Parsing DATABASE_URL: $DATABASE_URL"
-    
-    # Extract PostgreSQL connection details from DATABASE_URL
-    # Format: postgresql://user:password@host:port/database or postgres://user:password@host:port/database
-    if [[ $DATABASE_URL == postgres://* ]] || [[ $DATABASE_URL == postgresql://* ]]; then
-        # Remove postgres:// or postgresql:// prefix
-        if [[ $DATABASE_URL == postgres://* ]]; then
-            DB_FULL="${DATABASE_URL#postgres://}"
-        else
-            DB_FULL="${DATABASE_URL#postgresql://}"
-        fi
-        
-        # Split user:password and host:port/database
-        DB_USER_PASS="${DB_FULL%%@*}"
-        DB_HOST_PORT_DB="${DB_FULL#*@}"
-        
-        # Extract host:port and database
-        DB_HOST_PORT="${DB_HOST_PORT_DB%/*}"
-        DB_NAME="${DB_HOST_PORT_DB##*/}"
-        
-        # Extract host and port
-        DB_HOST_EXTRACTED="${DB_HOST_PORT%:*}"
-        DB_PORT_EXTRACTED="${DB_HOST_PORT#*:}"
-        
-        # Extract username and password
-        DB_USERNAME_EXTRACTED="${DB_USER_PASS%:*}"
-        DB_PASSWORD_EXTRACTED="${DB_USER_PASS#*:}"
-        
-        # Set environment variables
-        export DB_HOST="$DB_HOST_EXTRACTED"
-        export DB_PORT="$DB_PORT_EXTRACTED"
-        export DB_DATABASE="$DB_NAME"
-        export DB_USERNAME="$DB_USERNAME_EXTRACTED"
-        export DB_PASSWORD="$DB_PASSWORD_EXTRACTED"
-        
-        echo "DB_HOST=$DB_HOST" >> .env
-        echo "DB_PORT=$DB_PORT" >> .env
-        echo "DB_DATABASE=$DB_DATABASE" >> .env
-        echo "DB_USERNAME=$DB_USERNAME" >> .env
-        echo "DB_PASSWORD=$DB_PASSWORD" >> .env
-        
-        echo "Extracted DB config:"
-        echo "  Host: $DB_HOST"
-        echo "  Port: $DB_PORT"
-        echo "  Database: $DB_DATABASE"
-        echo "  Username: $DB_USERNAME"
-    else
-        echo "DATABASE_URL not recognized as PostgreSQL; falling back to environment variables"
-        echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-        echo "DB_PORT=${DB_PORT:-5432}" >> .env
-        echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-        echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
-        echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
-    fi
+    echo "Using Railway DATABASE_URL: $DATABASE_URL"
 else
-    echo "No DATABASE_URL found, using environment variables"
+    echo "No DATABASE_URL found, checking Railway PostgreSQL variables..."
+fi
+
+# Railway provides these PostgreSQL variables automatically
+if [ -n "$POSTGRES_HOST" ]; then
+    echo "Using Railway PostgreSQL variables..."
+    export DB_HOST="$POSTGRES_HOST"
+    export DB_PORT="${POSTGRES_PORT:-5432}"
+    export DB_DATABASE="$POSTGRES_DB"
+    export DB_USERNAME="$POSTGRES_USER"
+    export DB_PASSWORD="$POSTGRES_PASSWORD"
+    
+    echo "DB_HOST=$DB_HOST" >> .env
+    echo "DB_PORT=$DB_PORT" >> .env
+    echo "DB_DATABASE=$DB_DATABASE" >> .env
+    echo "DB_USERNAME=$DB_USERNAME" >> .env
+    echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+    
+    echo "Railway PostgreSQL config:"
+    echo "  Host: $DB_HOST"
+    echo "  Port: $DB_PORT"
+    echo "  Database: $DB_DATABASE"
+    echo "  Username: $DB_USERNAME"
+elif [ -n "$PGHOST" ]; then
+    echo "Using Railway PGHOST variables..."
+    export DB_HOST="$PGHOST"
+    export DB_PORT="${PGPORT:-5432}"
+    export DB_DATABASE="$PGDATABASE"
+    export DB_USERNAME="$PGUSER"
+    export DB_PASSWORD="$PGPASSWORD"
+    
+    echo "DB_HOST=$DB_HOST" >> .env
+    echo "DB_PORT=$DB_PORT" >> .env
+    echo "DB_DATABASE=$DB_DATABASE" >> .env
+    echo "DB_USERNAME=$DB_USERNAME" >> .env
+    echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+    
+    echo "Railway PGHOST config:"
+    echo "  Host: $DB_HOST"
+    echo "  Port: $DB_PORT"
+    echo "  Database: $DB_DATABASE"
+    echo "  Username: $DB_USERNAME"
+else
+    echo "No Railway PostgreSQL variables found, using fallback..."
     echo "DB_HOST=${DB_HOST:-localhost}" >> .env
     echo "DB_PORT=${DB_PORT:-5432}" >> .env
     echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
@@ -128,7 +118,13 @@ echo "Setting up database..."
 echo "Debug: Environment variables before Laravel commands"
 echo "DB_CONNECTION: $DB_CONNECTION"
 echo "DB_HOST: $DB_HOST"
+echo "DB_PORT: $DB_PORT"
 echo "DB_DATABASE: $DB_DATABASE"
+echo "DB_USERNAME: $DB_USERNAME"
+echo "Available Railway variables:"
+echo "  DATABASE_URL: ${DATABASE_URL:0:50}..."
+echo "  POSTGRES_HOST: $POSTGRES_HOST"
+echo "  PGHOST: $PGHOST"
 
 echo "Clearing Laravel config cache..."
 php artisan config:clear || echo "Config clear failed, continuing..."
