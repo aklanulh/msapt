@@ -38,15 +38,41 @@ echo "LOG_LEVEL=debug" >> .env
 echo "" >> .env
 
 # Force MySQL connection - never use PostgreSQL
+export DB_CONNECTION=mysql
 echo "DB_CONNECTION=mysql" >> .env
+
+# Parse DATABASE_URL if it exists and force MySQL
 if [ -n "$DATABASE_URL" ]; then
     echo "DATABASE_URL=$DATABASE_URL" >> .env
+    # Extract MySQL connection details from DATABASE_URL
+    # Format: mysql://user:password@host:port/database
+    if [[ $DATABASE_URL == mysql://* ]]; then
+        # Extract components
+        DB_FULL="${DATABASE_URL#mysql://}"
+        DB_USER_PASS="${DB_FULL%%@*}"
+        DB_HOST_PORT_DB="${DB_FULL#*@}"
+        DB_HOST_PORT="${DB_HOST_PORT_DB%/*}"
+        DB_NAME="${DB_HOST_PORT_DB##*/}"
+        
+        export DB_HOST="${DB_HOST_PORT%:*}"
+        export DB_PORT="${DB_HOST_PORT#*:}"
+        export DB_DATABASE="$DB_NAME"
+        export DB_USERNAME="${DB_USER_PASS%:*}"
+        export DB_PASSWORD="${DB_USER_PASS#*:}"
+        
+        echo "DB_HOST=$DB_HOST" >> .env
+        echo "DB_PORT=$DB_PORT" >> .env
+        echo "DB_DATABASE=$DB_DATABASE" >> .env
+        echo "DB_USERNAME=$DB_USERNAME" >> .env
+        echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+    fi
+else
+    echo "DB_HOST=${DB_HOST:-localhost}" >> .env
+    echo "DB_PORT=${DB_PORT:-3306}" >> .env
+    echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
+    echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
+    echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
 fi
-echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-echo "DB_PORT=${DB_PORT:-3306}" >> .env
-echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
-echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
 
 echo "" >> .env
 echo "SESSION_DRIVER=file" >> .env
@@ -55,9 +81,17 @@ echo "SESSION_LIFETIME=120" >> .env
 echo "Setting up database..."
 # Skip SQLite setup since we're forcing MySQL
 
+echo "Debug: Environment variables before Laravel commands"
+echo "DB_CONNECTION: $DB_CONNECTION"
+echo "DB_HOST: $DB_HOST"
+echo "DB_DATABASE: $DB_DATABASE"
+
 echo "Clearing Laravel config cache..."
 php artisan config:clear || echo "Config clear failed, continuing..."
 php artisan cache:clear || echo "Cache clear failed, continuing..."
+
+echo "Setting runtime environment for Laravel..."
+export DB_CONNECTION=mysql
 php artisan config:cache || echo "Config cache failed, continuing..."
 
 echo "Running database migrations..."
