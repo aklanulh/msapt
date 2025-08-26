@@ -36,7 +36,11 @@ echo "APP_NAME=MSA_Alkes" > .env
 echo "APP_ENV=production" >> .env
 echo "APP_KEY=${APP_KEY:-base64:+WyZZFMnPx4ZHTdpMvJYvkfcoe+g9YmbWSqFPTu5gkw=}" >> .env
 echo "APP_DEBUG=true" >> .env
-echo "APP_URL=http://localhost:$PORT" >> .env
+if [ -n "$RAILWAY_PUBLIC_DOMAIN" ]; then
+  echo "APP_URL=https://$RAILWAY_PUBLIC_DOMAIN" >> .env
+else
+  echo "APP_URL=http://localhost:$PORT" >> .env
+fi
 echo "LOG_CHANNEL=single" >> .env
 echo "LOG_LEVEL=debug" >> .env
 echo "" >> .env
@@ -95,19 +99,19 @@ if [ -n "$DATABASE_URL" ]; then
         echo "  Database: $DB_DATABASE"
         echo "  Username: $DB_USERNAME"
     else
-        echo "DATABASE_URL is not MySQL format, using environment variables"
+        echo "DATABASE_URL not recognized as PostgreSQL; falling back to environment variables"
         echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-        echo "DB_PORT=${DB_PORT:-3306}" >> .env
+        echo "DB_PORT=${DB_PORT:-5432}" >> .env
         echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-        echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
+        echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
         echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
     fi
 else
     echo "No DATABASE_URL found, using environment variables"
     echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-    echo "DB_PORT=${DB_PORT:-3306}" >> .env
+    echo "DB_PORT=${DB_PORT:-5432}" >> .env
     echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-    echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
+    echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
     echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
 fi
 
@@ -150,8 +154,8 @@ echo "Skipping config cache to force dynamic .env reading..."
 echo "Testing database connection..."
 timeout 30 php artisan tinker --execute="echo 'Testing DB connection...'; try { \$pdo = \DB::connection()->getPdo(); echo 'Database connected successfully to: ' . \$pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS); } catch(Exception \$e) { echo 'Database connection failed: ' . \$e->getMessage(); exit(1); }" || echo "Connection test failed"
 
-echo "Checking database exists..."
-timeout 30 php artisan tinker --execute="try { \DB::select('SELECT 1'); echo 'Database accessible'; } catch(Exception \$e) { echo 'Database not accessible, creating...'; try { \DB::connection()->getPdo()->exec('CREATE DATABASE IF NOT EXISTS railway'); echo 'Database created'; } catch(Exception \$e2) { echo 'Failed to create database: ' . \$e2->getMessage(); } }" || echo "Database check failed"
+echo "Checking database accessibility..."
+timeout 30 php artisan tinker --execute="try { \DB::select('SELECT 1'); echo 'Database accessible'; } catch(Exception \$e) { echo 'Database NOT accessible: ' . \$e->getMessage(); exit(1); }" || echo "Database check failed"
 
 echo "Running database migrations with timeout..."
 timeout 120 php artisan migrate --force --verbose || {
@@ -163,8 +167,12 @@ timeout 120 php artisan migrate --force --verbose || {
 echo "Running database seeders..."
 php artisan db:seed --force --verbose || echo "Seeding failed, continuing..."
 
-echo "Final .env check:"
-cat .env
+echo "Skipping full .env dump to avoid leaking secrets. Showing key DB settings:"
+echo "APP_URL=$(grep ^APP_URL= .env | cut -d'=' -f2-)"
+echo "DB_CONNECTION=$DB_CONNECTION"
+echo "DB_HOST=$DB_HOST"
+echo "DB_PORT=$DB_PORT"
+echo "DB_DATABASE=$DB_DATABASE"
 
 echo "Starting server on 0.0.0.0:$PORT..."
 php artisan serve --host=0.0.0.0 --port=$PORT --verbose
