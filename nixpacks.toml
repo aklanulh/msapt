@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ['php82', 'php82Packages.composer', 'php82Extensions.pdo', 'php82Extensions.pdo_pgsql', 'php82Extensions.pgsql', 'postgresql']
+nixPkgs = ['php82', 'php82Packages.composer', 'php82Extensions.pdo', 'php82Extensions.pdo_pgsql', 'php82Extensions.pgsql', 'postgresql', 'postgresql_15']
 
 [phases.install]
 cmds = [
@@ -10,7 +10,10 @@ cmds = [
 cmds = [
     'mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views',
     'chmod -R 775 storage',
-    'chmod -R 775 bootstrap/cache'
+    'chmod -R 775 bootstrap/cache',
+    'php -m | grep -i pdo || echo "PDO extensions check failed"',
+    'php -m | grep -i pgsql || echo "PostgreSQL extensions check failed"',
+    'php -r "echo \"Available PDO drivers: \" . implode(\", \", PDO::getAvailableDrivers()) . PHP_EOL;"'
 ]
 
 [start]

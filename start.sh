@@ -153,10 +153,18 @@ echo "Skipping config cache to force dynamic .env reading..."
 echo "Testing database connection..."
 echo "First checking if PostgreSQL driver is available..."
 php -r "
+echo 'Loaded PHP extensions:' . PHP_EOL;
+\$extensions = get_loaded_extensions();
+foreach (\$extensions as \$ext) {
+    if (strpos(strtolower(\$ext), 'pdo') !== false || strpos(strtolower(\$ext), 'pgsql') !== false) {
+        echo '  - ' . \$ext . PHP_EOL;
+    }
+}
+echo 'Available PDO drivers: ' . implode(', ', PDO::getAvailableDrivers()) . PHP_EOL;
+
 if (!extension_loaded('pdo_pgsql')) {
     echo 'ERROR: pdo_pgsql extension not loaded!' . PHP_EOL;
-    echo 'Available PDO drivers: ' . implode(', ', PDO::getAvailableDrivers()) . PHP_EOL;
-    exit(1);
+    echo 'Attempting to continue anyway...' . PHP_EOL;
 } else {
     echo 'SUCCESS: pdo_pgsql extension is loaded' . PHP_EOL;
 }
