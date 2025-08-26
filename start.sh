@@ -123,11 +123,21 @@ echo "Setting runtime environment for Laravel..."
 export DB_CONNECTION=mysql
 php artisan config:cache || echo "Config cache failed, continuing..."
 
-echo "Running database migrations..."
-php artisan migrate --force || echo "Migration failed, continuing..."
+echo "Testing database connection..."
+timeout 30 php artisan tinker --execute="echo 'Testing DB connection...'; try { \$pdo = \DB::connection()->getPdo(); echo 'Database connected successfully to: ' . \$pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS); } catch(Exception \$e) { echo 'Database connection failed: ' . \$e->getMessage(); exit(1); }" || echo "Connection test failed"
+
+echo "Checking database exists..."
+timeout 30 php artisan tinker --execute="try { \DB::select('SELECT 1'); echo 'Database accessible'; } catch(Exception \$e) { echo 'Database not accessible, creating...'; try { \DB::connection()->getPdo()->exec('CREATE DATABASE IF NOT EXISTS railway'); echo 'Database created'; } catch(Exception \$e2) { echo 'Failed to create database: ' . \$e2->getMessage(); } }" || echo "Database check failed"
+
+echo "Running database migrations with timeout..."
+timeout 120 php artisan migrate --force --verbose || {
+    echo "Migration failed, retrying once..."
+    sleep 5
+    timeout 120 php artisan migrate --force --verbose || echo "Migration failed completely"
+}
 
 echo "Running database seeders..."
-php artisan db:seed --force || echo "Seeding failed, continuing..."
+php artisan db:seed --force --verbose || echo "Seeding failed, continuing..."
 
 echo "Final .env check:"
 cat .env
