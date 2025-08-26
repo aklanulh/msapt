@@ -4,22 +4,48 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Force MySQL connection at runtime
+        // Force MySQL connection at runtime - ALWAYS
         Config::set('database.default', 'mysql');
         
         // Remove any PostgreSQL configuration that might exist
-        if (Config::has('database.connections.pgsql')) {
-            Config::forget('database.connections.pgsql');
-        }
+        Config::forget('database.connections.pgsql');
+        
+        // Force environment variables
+        $_ENV['DB_CONNECTION'] = 'mysql';
+        putenv('DB_CONNECTION=mysql');
+        
+        // Override any existing database configuration
+        Config::set('database.connections.mysql', [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'railway'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                \PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ]);
     }
 
     public function boot(): void
     {
-        //
+        // Ensure we're using MySQL
+        DB::purge('default');
+        Config::set('database.default', 'mysql');
     }
 }

@@ -121,6 +121,18 @@ php artisan cache:clear || echo "Cache clear failed, continuing..."
 
 echo "Setting runtime environment for Laravel..."
 export DB_CONNECTION=mysql
+
+# Clear any cached config that might have wrong database settings
+php artisan config:clear || echo "Config clear failed, continuing..."
+php artisan cache:clear || echo "Cache clear failed, continuing..."
+php artisan route:clear || echo "Route clear failed, continuing..."
+php artisan view:clear || echo "View clear failed, continuing..."
+
+# Force MySQL in environment
+echo "Forcing MySQL environment variables..."
+export DB_CONNECTION=mysql
+export DATABASE_DEFAULT=mysql
+
 php artisan config:cache || echo "Config cache failed, continuing..."
 
 echo "Testing database connection..."
