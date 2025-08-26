@@ -23,6 +23,10 @@ ls -la composer.json
 echo "Testing PHP syntax..."
 php -l artisan
 
+echo "Checking PHP extensions..."
+php -m | grep -i pdo
+php -m | grep -i pgsql
+
 echo "Checking if Laravel can boot..."
 php artisan --version || echo "Laravel boot failed!"
 
