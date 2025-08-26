@@ -159,13 +159,23 @@ echo "Checking database accessibility..."
 timeout 30 php artisan tinker --execute="try { \DB::select('SELECT 1'); echo 'Database accessible'; } catch(Exception \$e) { echo 'Database NOT accessible: ' . \$e->getMessage(); exit(1); }" || echo "Database check failed"
 
 echo "Running database migrations with timeout..."
-timeout 120 php artisan migrate --force --verbose || {
-    echo "Migration failed, retrying once..."
-    sleep 5
-    timeout 120 php artisan migrate --force --verbose || echo "Migration failed completely"
+echo "Checking migration status first..."
+php artisan migrate:status || echo "Migration status check failed"
+
+echo "Running fresh migrations..."
+timeout 120 php artisan migrate:fresh --force --verbose || {
+    echo "Fresh migration failed, trying regular migrate..."
+    timeout 120 php artisan migrate --force --verbose || {
+        echo "Regular migration failed, retrying once..."
+        sleep 5
+        timeout 120 php artisan migrate --force --verbose || echo "Migration failed completely"
+    }
 }
 
 echo "Running database seeders..."
+echo "Seeding ProductSeeder specifically..."
+php artisan db:seed --class=ProductSeeder --force --verbose || echo "ProductSeeder failed"
+echo "Running all seeders..."
 php artisan db:seed --force --verbose || echo "Seeding failed, continuing..."
 
 echo "Skipping full .env dump to avoid leaking secrets. Showing key DB settings:"
