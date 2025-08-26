@@ -134,7 +134,7 @@
             <div class="text-center mt-4">
                 <small class="text-muted">
                     <i class="fas fa-info-circle me-1"></i>
-                    Demo: username = admin, password = admin123
+                    PT Mitrajaya Selaras Abadi - Admin Panel
                 </small>
             </div>
         </div>

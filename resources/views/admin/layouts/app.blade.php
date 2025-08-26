@@ -106,6 +106,9 @@
                         <a class="nav-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}" href="{{ route('admin.products') }}">
                             <i class="fas fa-box me-2"></i>Kelola Produk
                         </a>
+                        <a class="nav-link {{ request()->routeIs('admin.logs*') ? 'active' : '' }}" href="{{ route('admin.logs') }}">
+                            <i class="fas fa-history me-2"></i>Log Aktivitas
+                        </a>
                         <a class="nav-link" href="{{ route('home') }}" target="_blank">
                             <i class="fas fa-external-link-alt me-2"></i>Lihat Website
                         </a>

@@ -37,10 +37,18 @@
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
-                                <th>ID</th>
-                                <th>Nama Produk</th>
-                                <th>Brand</th>
-                                <th>Kategori</th>
+                                <th style="cursor: pointer;" onclick="sortTable(0)">
+                                    ID <i class="fas fa-sort text-muted"></i>
+                                </th>
+                                <th style="cursor: pointer;" onclick="sortTable(1)">
+                                    Nama Produk <i class="fas fa-sort text-muted"></i>
+                                </th>
+                                <th style="cursor: pointer;" onclick="sortTable(2)">
+                                    Brand <i class="fas fa-sort text-muted"></i>
+                                </th>
+                                <th style="cursor: pointer;" onclick="sortTable(3)">
+                                    Kategori <i class="fas fa-sort text-muted"></i>
+                                </th>
                                 <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
@@ -55,9 +63,14 @@
                                     @if($product->model)
                                     <small class="text-muted">Model: {{ $product->model }}</small>
                                     @endif
+                                    <div class="mt-1">
+                                        <span class="badge {{ $product->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                            {{ $product->is_active ? 'Tampil di Publik' : 'Tidak Tampil' }}
+                                        </span>
+                                    </div>
                                 </td>
-                                <td>{{ $product->brand ?? '-' }}</td>
-                                <td>
+                                <td data-brand="{{ $product->brand ?? '' }}">{{ $product->brand ?? '-' }}</td>
+                                <td data-category="{{ $product->category }}">
                                     <span class="badge bg-info">{{ $product->category_name }}</span>
                                 </td>
                                 <td>{{ $product->price_range ?? 'Hubungi untuk harga' }}</td>
@@ -159,5 +172,71 @@ document.addEventListener('DOMContentLoaded', function() {
     categoryFilter.addEventListener('change', filterProducts);
     searchProduct.addEventListener('input', filterProducts);
 });
+
+// Sorting functionality
+let sortDirection = {};
+
+function sortTable(columnIndex) {
+    const table = document.querySelector('.table');
+    const tbody = document.getElementById('productsTable');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    
+    // Initialize sort direction for this column
+    if (!sortDirection[columnIndex]) {
+        sortDirection[columnIndex] = 'asc';
+    } else {
+        sortDirection[columnIndex] = sortDirection[columnIndex] === 'asc' ? 'desc' : 'asc';
+    }
+    
+    // Update sort icons
+    const headers = table.querySelectorAll('th i.fas');
+    headers.forEach(icon => {
+        icon.className = 'fas fa-sort text-muted';
+    });
+    
+    const currentIcon = table.querySelectorAll('th')[columnIndex].querySelector('i');
+    if (sortDirection[columnIndex] === 'asc') {
+        currentIcon.className = 'fas fa-sort-up text-primary';
+    } else {
+        currentIcon.className = 'fas fa-sort-down text-primary';
+    }
+    
+    // Sort rows
+    rows.sort((a, b) => {
+        let aValue, bValue;
+        
+        switch(columnIndex) {
+            case 0: // ID
+                aValue = parseInt(a.cells[0].textContent.trim());
+                bValue = parseInt(b.cells[0].textContent.trim());
+                break;
+            case 1: // Nama Produk
+                aValue = a.cells[1].querySelector('.fw-bold').textContent.trim().toLowerCase();
+                bValue = b.cells[1].querySelector('.fw-bold').textContent.trim().toLowerCase();
+                break;
+            case 2: // Brand
+                aValue = a.cells[2].dataset.brand.toLowerCase();
+                bValue = b.cells[2].dataset.brand.toLowerCase();
+                break;
+            case 3: // Kategori
+                aValue = a.cells[3].dataset.category.toLowerCase();
+                bValue = b.cells[3].dataset.category.toLowerCase();
+                break;
+        }
+        
+        if (columnIndex === 0) {
+            // Numeric sort for ID
+            return sortDirection[columnIndex] === 'asc' ? aValue - bValue : bValue - aValue;
+        } else {
+            // String sort for others
+            if (aValue < bValue) return sortDirection[columnIndex] === 'asc' ? -1 : 1;
+            if (aValue > bValue) return sortDirection[columnIndex] === 'asc' ? 1 : -1;
+            return 0;
+        }
+    });
+    
+    // Reorder rows in table
+    rows.forEach(row => tbody.appendChild(row));
+}
 </script>
 @endsection

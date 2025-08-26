@@ -1,27 +1,24 @@
 APP_NAME="MSA Alkes"
 APP_ENV=local
-APP_KEY=base64:YourAppKeyHere
+APP_KEY=base64:+WyZZFMnPx4ZHTdpMvJYvkfcoe+g9YmbWSqFPTu5gkw=
 APP_DEBUG=true
 APP_TIMEZONE=UTC
-APP_URL=http://localhost
+APP_URL=http://localhost:8000
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=debug
 
-# MySQL Database Configuration
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=msa_alkes
-DB_USERNAME=root
-DB_PASSWORD=
+# SQLite Database Configuration
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+DB_FOREIGN_KEYS=true
 
 BROADCAST_CONNECTION=log
-CACHE_STORE=database
+CACHE_STORE=file
 FILESYSTEM_DISK=local
-QUEUE_CONNECTION=database
-SESSION_DRIVER=database
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
 SESSION_LIFETIME=120
 
 MEMCACHED_HOST=127.0.0.1

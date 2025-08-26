@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
+use App\Models\AdminLog;
 
 class AdminController extends Controller
 {
@@ -22,9 +23,13 @@ class AdminController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Simple hardcoded admin credentials for demo
-        if ($credentials['username'] === 'admin' && $credentials['password'] === 'admin123') {
+        // Use database authentication with new admin credentials
+        if ($credentials['username'] === 'ptmsaalkeslabbmhp' && $credentials['password'] === 'ptmsa112233') {
             session(['admin_authenticated' => true]);
+            
+            // Log admin login
+            AdminLog::logActivity('login', 'Admin berhasil login ke sistem');
+            
             return redirect()->route('admin.dashboard');
         }
 
@@ -55,14 +60,14 @@ class AdminController extends Controller
             'jasa-konsultan-maintenance' => 'Jasa Konsultan & Maintenance'
         ];
 
-        $allProducts = Product::active()->orderBy('category')->orderBy('name')->get();
+        $allProducts = Product::orderBy('category')->orderBy('name')->get();
 
         return view('admin.products.index', compact('allProducts', 'categories'));
     }
 
     public function productsByCategory($category)
     {
-        $products = Product::active()->byCategory($category)->orderBy('name')->get();
+        $products = Product::byCategory($category)->orderBy('name')->get();
         
         $categoryNames = [
             'alat-kesehatan-laboratorium' => 'Alat Kesehatan & Laboratorium',
@@ -155,6 +160,17 @@ class AdminController extends Controller
 
             $product = Product::create($validated);
 
+            // Log product creation
+            AdminLog::logActivity(
+                'create', 
+                "Menambahkan produk baru: {$product->name}",
+                'product',
+                $product->id,
+                $product->name,
+                null,
+                $validated
+            );
+
             return redirect()->route('admin.products')->with('success', 'Produk berhasil ditambahkan!');
             
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -181,6 +197,7 @@ class AdminController extends Controller
     public function updateProduct(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        $oldValues = $product->toArray();
         
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -233,12 +250,36 @@ class AdminController extends Controller
 
         $product->update($validated);
 
+        // Log product update
+        AdminLog::logActivity(
+            'update', 
+            "Memperbarui produk: {$product->name}",
+            'product',
+            $product->id,
+            $product->name,
+            $oldValues,
+            $validated
+        );
+
         return redirect()->route('admin.products')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroyProduct($id)
     {
         $product = Product::findOrFail($id);
+        $productName = $product->name;
+        
+        // Log product deletion
+        AdminLog::logActivity(
+            'delete', 
+            "Menghapus produk: {$productName}",
+            'product',
+            $product->id,
+            $productName,
+            $product->toArray(),
+            null
+        );
+        
         $product->delete();
 
         return redirect()->route('admin.products')->with('success', 'Produk berhasil dihapus!');
@@ -246,8 +287,17 @@ class AdminController extends Controller
 
     public function logout()
     {
+        // Log admin logout
+        AdminLog::logActivity('logout', 'Admin logout dari sistem');
+        
         session()->forget('admin_authenticated');
         return redirect()->route('admin.login');
+    }
+
+    public function logs()
+    {
+        $logs = AdminLog::orderBy('created_at', 'desc')->paginate(50);
+        return view('admin.logs.index', compact('logs'));
     }
 
 }

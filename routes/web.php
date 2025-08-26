@@ -47,6 +47,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/products/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
         Route::put('/products/{id}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
         Route::delete('/products/{id}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+        Route::get('/logs', [AdminController::class, 'logs'])->name('admin.logs');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 });
