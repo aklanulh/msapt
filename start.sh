@@ -48,9 +48,9 @@ echo "LOG_CHANNEL=single" >> .env
 echo "LOG_LEVEL=debug" >> .env
 echo "" >> .env
 
-# Force PostgreSQL connection - use Railway default
-export DB_CONNECTION=pgsql
-echo "DB_CONNECTION=pgsql" >> .env
+# Use MySQL as fallback if PostgreSQL fails
+export DB_CONNECTION=mysql
+echo "DB_CONNECTION=mysql" >> .env
 
 # Railway PostgreSQL variables - use Railway's native variable names
 if [ -n "$DATABASE_URL" ]; then
@@ -60,14 +60,17 @@ else
     echo "No DATABASE_URL found, checking Railway PostgreSQL variables..."
 fi
 
-# Railway provides these PostgreSQL variables automatically
-if [ -n "$POSTGRES_HOST" ]; then
-    echo "Using Railway PostgreSQL variables..."
-    export DB_HOST="$POSTGRES_HOST"
-    export DB_PORT="${POSTGRES_PORT:-5432}"
-    export DB_DATABASE="$POSTGRES_DB"
-    export DB_USERNAME="$POSTGRES_USER"
-    export DB_PASSWORD="$POSTGRES_PASSWORD"
+# Railway MySQL variables - check for MySQL service first
+if [ -n "$MYSQL_URL" ]; then
+    echo "Using Railway MySQL URL: $MYSQL_URL"
+    echo "MYSQL_URL=$MYSQL_URL" >> .env
+elif [ -n "$MYSQLHOST" ]; then
+    echo "Using Railway MySQL variables..."
+    export DB_HOST="$MYSQLHOST"
+    export DB_PORT="${MYSQLPORT:-3306}"
+    export DB_DATABASE="$MYSQLDATABASE"
+    export DB_USERNAME="$MYSQLUSER"
+    export DB_PASSWORD="$MYSQLPASSWORD"
     
     echo "DB_HOST=$DB_HOST" >> .env
     echo "DB_PORT=$DB_PORT" >> .env
@@ -75,36 +78,17 @@ if [ -n "$POSTGRES_HOST" ]; then
     echo "DB_USERNAME=$DB_USERNAME" >> .env
     echo "DB_PASSWORD=$DB_PASSWORD" >> .env
     
-    echo "Railway PostgreSQL config:"
-    echo "  Host: $DB_HOST"
-    echo "  Port: $DB_PORT"
-    echo "  Database: $DB_DATABASE"
-    echo "  Username: $DB_USERNAME"
-elif [ -n "$PGHOST" ]; then
-    echo "Using Railway PGHOST variables..."
-    export DB_HOST="$PGHOST"
-    export DB_PORT="${PGPORT:-5432}"
-    export DB_DATABASE="$PGDATABASE"
-    export DB_USERNAME="$PGUSER"
-    export DB_PASSWORD="$PGPASSWORD"
-    
-    echo "DB_HOST=$DB_HOST" >> .env
-    echo "DB_PORT=$DB_PORT" >> .env
-    echo "DB_DATABASE=$DB_DATABASE" >> .env
-    echo "DB_USERNAME=$DB_USERNAME" >> .env
-    echo "DB_PASSWORD=$DB_PASSWORD" >> .env
-    
-    echo "Railway PGHOST config:"
+    echo "Railway MySQL config:"
     echo "  Host: $DB_HOST"
     echo "  Port: $DB_PORT"
     echo "  Database: $DB_DATABASE"
     echo "  Username: $DB_USERNAME"
 else
-    echo "No Railway PostgreSQL variables found, using fallback..."
-    echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-    echo "DB_PORT=${DB_PORT:-5432}" >> .env
+    echo "No Railway MySQL variables found, using Railway defaults..."
+    echo "DB_HOST=${DB_HOST:-mysql.railway.internal}" >> .env
+    echo "DB_PORT=${DB_PORT:-3306}" >> .env
     echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-    echo "DB_USERNAME=${DB_USERNAME:-postgres}" >> .env
+    echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
     echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
 fi
 
