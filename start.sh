@@ -26,47 +26,39 @@ php -l artisan
 echo "Checking if Laravel can boot..."
 php artisan --version || echo "Laravel boot failed!"
 
-echo "Creating simple .env if not exists..."
-if [ ! -f .env ]; then
-    echo "APP_NAME=MSA_Alkes" > .env
-    echo "APP_ENV=production" >> .env
-    echo "APP_KEY=${APP_KEY:-base64:+WyZZFMnPx4ZHTdpMvJYvkfcoe+g9YmbWSqFPTu5gkw=}" >> .env
-    echo "APP_DEBUG=true" >> .env
-    echo "APP_URL=http://localhost:$PORT" >> .env
-    echo "LOG_CHANNEL=single" >> .env
-    echo "LOG_LEVEL=debug" >> .env
-    echo "" >> .env
-    
-    # Database configuration - use MySQL if DATABASE_URL is set, otherwise SQLite
-    if [ -n "$DATABASE_URL" ]; then
-        echo "DB_CONNECTION=mysql" >> .env
-        echo "DATABASE_URL=$DATABASE_URL" >> .env
-        echo "DB_HOST=${DB_HOST:-localhost}" >> .env
-        echo "DB_PORT=${DB_PORT:-3306}" >> .env
-        echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
-        echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
-        echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
-    else
-        echo "DB_CONNECTION=sqlite" >> .env
-        echo "DB_DATABASE=/var/www/database/database.sqlite" >> .env
-    fi
-    
-    echo "" >> .env
-    echo "SESSION_DRIVER=file" >> .env
-    echo "SESSION_LIFETIME=120" >> .env
+echo "Creating/updating .env file..."
+# Always recreate .env to ensure correct database settings
+echo "APP_NAME=MSA_Alkes" > .env
+echo "APP_ENV=production" >> .env
+echo "APP_KEY=${APP_KEY:-base64:+WyZZFMnPx4ZHTdpMvJYvkfcoe+g9YmbWSqFPTu5gkw=}" >> .env
+echo "APP_DEBUG=true" >> .env
+echo "APP_URL=http://localhost:$PORT" >> .env
+echo "LOG_CHANNEL=single" >> .env
+echo "LOG_LEVEL=debug" >> .env
+echo "" >> .env
+
+# Force MySQL connection - never use PostgreSQL
+echo "DB_CONNECTION=mysql" >> .env
+if [ -n "$DATABASE_URL" ]; then
+    echo "DATABASE_URL=$DATABASE_URL" >> .env
 fi
+echo "DB_HOST=${DB_HOST:-localhost}" >> .env
+echo "DB_PORT=${DB_PORT:-3306}" >> .env
+echo "DB_DATABASE=${DB_DATABASE:-railway}" >> .env
+echo "DB_USERNAME=${DB_USERNAME:-root}" >> .env
+echo "DB_PASSWORD=${DB_PASSWORD:-}" >> .env
+
+echo "" >> .env
+echo "SESSION_DRIVER=file" >> .env
+echo "SESSION_LIFETIME=120" >> .env
 
 echo "Setting up database..."
-# Create SQLite database if using SQLite (fallback)
-if [ "$DB_CONNECTION" = "sqlite" ] || [ -z "$DATABASE_URL" ]; then
-    mkdir -p database
-    touch database/database.sqlite
-    chmod 664 database/database.sqlite
-fi
+# Skip SQLite setup since we're forcing MySQL
 
 echo "Clearing Laravel config cache..."
 php artisan config:clear || echo "Config clear failed, continuing..."
 php artisan cache:clear || echo "Cache clear failed, continuing..."
+php artisan config:cache || echo "Config cache failed, continuing..."
 
 echo "Running database migrations..."
 php artisan migrate --force || echo "Migration failed, continuing..."
