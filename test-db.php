@@ -32,10 +32,11 @@ try {
     echo "Result: " . json_encode($result) . "\n";
     
     echo "\nChecking database tables...\n";
-    $tables = DB::select('SHOW TABLES');
+    // Use information_schema for better compatibility
+    $tables = DB::select('SELECT table_name FROM information_schema.tables WHERE table_schema = ?', [env('DB_DATABASE')]);
     echo "Tables found: " . count($tables) . "\n";
     foreach ($tables as $table) {
-        echo "- " . array_values((array)$table)[0] . "\n";
+        echo "- " . $table->table_name . "\n";
     }
     
     if (count($tables) == 0) {

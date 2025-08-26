@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "=== Laravel Startup Debug ==="
+echo "=== MSA ALKES STARTUP SCRIPT ==="
+echo "Checking PostgreSQL connection..."
 echo "Current directory: $(pwd)"
 echo "PHP version: $(php -v | head -n 1)"
 echo "PORT: ${PORT:-'not set'}"
@@ -26,6 +27,8 @@ php -l artisan
 echo "Checking PHP extensions..."
 php -m | grep -i pdo
 php -m | grep -i pgsql
+echo "Available PDO drivers:"
+php -r "print_r(PDO::getAvailableDrivers());"
 
 echo "Checking if Laravel can boot..."
 php artisan --version || echo "Laravel boot failed!"
@@ -152,6 +155,16 @@ echo "Skipping config cache to force dynamic .env reading..."
 # php artisan config:cache || echo "Config cache failed, continuing..."
 
 echo "Testing database connection..."
+echo "First checking if PostgreSQL driver is available..."
+php -r "
+if (!extension_loaded('pdo_pgsql')) {
+    echo 'ERROR: pdo_pgsql extension not loaded!' . PHP_EOL;
+    echo 'Available PDO drivers: ' . implode(', ', PDO::getAvailableDrivers()) . PHP_EOL;
+    exit(1);
+} else {
+    echo 'SUCCESS: pdo_pgsql extension is loaded' . PHP_EOL;
+}
+"
 timeout 30 php artisan tinker --execute="echo 'Testing DB connection...'; try { \$pdo = \DB::connection()->getPdo(); echo 'Database connected successfully to: ' . \$pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS); } catch(Exception \$e) { echo 'Database connection failed: ' . \$e->getMessage(); exit(1); }" || echo "Connection test failed"
 
 echo "Checking database accessibility..."
