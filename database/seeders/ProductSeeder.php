@@ -12,559 +12,2631 @@ class ProductSeeder extends Seeder
         // Clear existing products
         Product::truncate();
 
-        $products = [
-            // Alat Kesehatan & Laboratorium (23 products)
-            [
-                'name' => 'Hematology Analyzer Mindray BC 700 Series',
-                'brand' => 'Mindray',
-                'model' => 'BC 700 Series',
-                'price_range' => 'Hubungi untuk harga',
-                'description' => 'Analyzer hematologi otomatis dengan teknologi canggih untuk pemeriksaan darah lengkap dengan akurasi tinggi dan throughput optimal',
-                'image' => 'https://via.placeholder.com/400x300',
-                'category' => 'alat-kesehatan-laboratorium',
-                'features' => ['Fully automated', 'High throughput', 'Quality control', 'User-friendly interface', 'Reliable results'],
-                'specs' => [
-                    'Model' => 'BC 700 Series',
-                    'Throughput' => '60 sampel/jam',
-                    'Parameters' => '26 parameter + 3 histogram',
-                    'Sample Volume' => '20 μL'
-                ],
-                'applications' => ['Laboratory management', 'Data integration', 'Workflow automation'],
-                'is_active' => true
-            ],
-            [
-                'name' => 'Chemistry Analyzer Mindray BS-240 Pro',
-                'brand' => 'Mindray',
-                'model' => 'BS-240 Pro',
-                'price_range' => 'Hubungi untuk harga',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Analyzer kimia klinis otomatis untuk pemeriksaan biokimia darah dengan presisi tinggi dan reliabilitas terjamin',
-                'features' => ['Fully automated', 'High precision', 'Wide test menu', 'Compact design', 'User-friendly'],
-                'specs' => [
-                    'model' => 'BS-240 Pro',
-                    'throughput' => '240 tes/jam',
-                    'sample_volume' => 'Minimal',
-                    'reagent_management' => 'Otomatis'
-                ],
-                'applications' => ['Rumah Sakit', 'Laboratorium Klinik'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Urine Analyzer Mindray UA-600T',
-                'brand' => 'Mindray',
-                'model' => 'UA-600T',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Analyzer urine otomatis untuk pemeriksaan urinalisis lengkap dengan akurasi tinggi dan hasil cepat',
-                'features' => ['Automated analysis', 'High accuracy', 'Fast results', 'Easy operation', 'Quality control'],
-                'specs' => [
-                    'model' => 'UA-600T',
-                    'throughput' => '600 sampel/jam',
-                    'parameters' => '14 parameter',
-                    'sample_volume' => '1.2 mL'
-                ],
-                'applications' => ['Rumah Sakit', 'Laboratorium Klinik', 'Klinik'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Blood Gas & Electrolyte Analyzer Edan I15',
-                'brand' => 'Edan',
-                'model' => 'I15',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Analyzer gas darah dan elektrolit untuk pemeriksaan pH, pCO2, pO2, dan elektrolit dengan akurasi tinggi',
-                'features' => ['Point-of-care testing', 'Fast results', 'Easy maintenance', 'Quality control', 'Compact design'],
-                'specs' => [
-                    'model' => 'I15',
-                    'parameters' => 'pH, pCO2, pO2, Na+, K+, Cl-',
-                    'sample_volume' => '65 μL',
-                    'test_time' => '60 detik'
-                ],
-                'applications' => ['Emergency Room', 'ICU', 'Laboratorium'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Blood Gas & Electrolyte Analyzer Edan I500',
-                'brand' => 'Edan',
-                'model' => 'I500',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Analyzer gas darah dan elektrolit dengan kapasitas lebih besar untuk laboratorium dengan volume tinggi',
-                'features' => ['High throughput', 'Extended parameters', 'Auto calibration', 'Data management', 'Network connectivity'],
-                'specs' => [
-                    'model' => 'I500',
-                    'parameters' => 'Extended panel',
-                    'sample_volume' => 'Minimal',
-                    'connectivity' => 'LIS/HIS integration'
-                ],
-                'applications' => ['Rumah Sakit Besar', 'Laboratorium Sentral'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Patient Monitor',
-                'brand' => 'Various',
-                'model' => 'Multi-model',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Monitor pasien multiparameter untuk ICU dan ruang perawatan dengan TKDN 40-47%',
-                'features' => ['Multi-parameter monitoring', 'TKDN 40-47%', 'Wireless connectivity', 'Alarm management', 'Touch screen'],
-                'specs' => [
-                    'tkdn' => '40-47%',
-                    'parameters' => 'ECG, SpO2, NIBP, Temp, Resp',
-                    'display' => 'Color LCD',
-                    'connectivity' => 'Network ready'
-                ],
-                'applications' => ['ICU', 'PICU', 'NICU', 'Ruang Perawatan'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Infusion Pump',
-                'brand' => 'Various',
-                'model' => 'Medical Infusion Pump',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Pompa infus dengan layar warna 3.2 inch, waterproof IPX2, dan kompatibel dengan semua infusion sets',
-                'features' => ['Waterproof IPX2', '3.2 inch color screen', 'Manual & auto bolus', 'Universal compatibility'],
-                'specs' => [
-                    'display' => '3.2 inch color screen',
-                    'protection' => 'IPX2 waterproof',
-                    'bolus' => 'Manual & automatic',
-                    'compatibility' => 'All infusion sets'
-                ],
-                'applications' => ['ICU', 'Ruang Operasi', 'Ruang Perawatan'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Syringe Pump',
-                'brand' => 'Various',
-                'model' => 'Medical Syringe Pump',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Pompa syringe dengan dual screen LED & LCD, waterproof IPX2, dan sistem bolus otomatis',
-                'features' => ['Dual screen LED & LCD', 'Waterproof IPX2', 'Auto bolus', 'Universal compatibility'],
-                'specs' => [
-                    'display' => 'Dual LED & LCD',
-                    'protection' => 'IPX2 waterproof',
-                    'bolus' => 'Manual & automatic',
-                    'compatibility' => 'All infusion sets'
-                ],
-                'applications' => ['ICU', 'Pediatric Care', 'Anesthesia'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Ventilator Accubreathe VI 30/40',
-                'brand' => 'Various',
-                'model' => 'Accubreathe VI 30/40',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Ventilator canggih dengan sistem dual drive, interface yang dapat dikustomisasi, dan dukungan ventilasi lanjutan',
-                'features' => ['Advanced ventilation support', 'Real-time display', 'Customized interface', 'Double drive system'],
-                'specs' => [
-                    'models' => 'VI 30 & VI 40',
-                    'system' => 'Double Drive System',
-                    'display' => 'Real-time monitoring',
-                    'interface' => 'Customizable'
-                ],
-                'applications' => ['ICU', 'Emergency', 'Operating Room'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Electrocardiography (ECG)',
-                'brand' => 'Various',
-                'model' => '3-Channel ECG',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'ECG 3-channel dengan layar LCD touch 4.3 inch, filter setting support, dan multi-format report',
-                'features' => ['3-channel recording', '4.3 inch touch LCD', 'Filter setting', 'Multi-format report'],
-                'specs' => [
-                    'channels' => '3-channel',
-                    'display' => '4.3 inch color LCD touch',
-                    'features' => 'Filter setting support',
-                    'output' => 'Multi-format report'
-                ],
-                'applications' => ['Cardiology', 'Emergency', 'General Practice'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Mesin Anestesi',
-                'brand' => 'Various',
-                'model' => 'Anesthesia Machine',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Mesin anestesi dengan teknologi canggih untuk mendukung prosedur operasi dengan keamanan optimal',
-                'features' => ['Advanced anesthesia delivery', 'Safety monitoring', 'Precise control', 'User-friendly interface'],
-                'specs' => [
-                    'type' => 'Anesthesia Machine',
-                    'safety' => 'Multi-level monitoring',
-                    'control' => 'Precise gas delivery',
-                    'interface' => 'Touch screen'
-                ],
-                'applications' => ['Operating Room', 'Day Surgery'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Defibrillator Monitor Accushock 60',
-                'brand' => 'Various',
-                'model' => 'Accushock 60',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Defibrilator monitor dengan thermal printer, voice recording storage, dan desain anti shock & anti fall',
-                'features' => ['Thermal printer', 'Voice recording storage', 'Durable battery', 'Anti shock & fall'],
-                'specs' => [
-                    'model' => 'Accushock 60',
-                    'printer' => 'Thermal printer built-in',
-                    'recording' => 'Voice storage',
-                    'protection' => 'Anti shock & anti fall'
-                ],
-                'applications' => ['Emergency', 'Ambulance', 'ICU'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Doppler',
-                'brand' => 'Various',
-                'model' => 'Doppler Ultrasound',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Doppler dengan desain kompak, OLED display terang, waterproof probes 2 MHz, dan speaker Hi-Fi',
-                'features' => ['Compact design', 'Bright OLED display', 'Waterproof probes 2 MHz', 'Hi-Fi speaker', 'AA Battery'],
-                'specs' => [
-                    'display' => 'Bright OLED',
-                    'probes' => 'Waterproof 2 MHz',
-                    'audio' => 'Hi-Fi speaker',
-                    'power' => 'AA Battery'
-                ],
-                'applications' => ['Obstetrics', 'Vascular', 'General Practice'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'ICU / PICU / NICU Equipment',
-                'brand' => 'Various',
-                'model' => 'ICU Equipment',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Peralatan intensive care unit lengkap untuk ICU, PICU, dan NICU dengan teknologi monitoring canggih',
-                'features' => ['ICU/PICU/NICU compatible', 'Advanced monitoring', 'Critical care support', 'Multi-parameter'],
-                'specs' => [
-                    'application' => 'ICU/PICU/NICU',
-                    'monitoring' => 'Advanced',
-                    'support' => 'Critical care',
-                    'parameters' => 'Multi-parameter'
-                ],
-                'applications' => ['ICU', 'PICU', 'NICU'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Ultrasound',
-                'brand' => 'Various',
-                'model' => 'Ultrasound System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem ultrasound dengan berbagai jenis probe dan TKDN 45.78% untuk aplikasi diagnostik lengkap',
-                'features' => ['TKDN 45.78%', 'Multiple probes', 'High resolution imaging', 'Portable design'],
-                'specs' => [
-                    'tkdn' => '45.78%',
-                    'probes' => 'Multiple types',
-                    'imaging' => 'High resolution',
-                    'design' => 'Portable'
-                ],
-                'applications' => ['Radiology', 'Obstetrics', 'Cardiology'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'C-Arm',
-                'brand' => 'Various',
-                'model' => 'C-Arm System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem C-Arm untuk imaging intraoperatif dengan kualitas gambar tinggi dan mobilitas optimal',
-                'features' => ['Intraoperative imaging', 'High image quality', 'Mobile design', 'Easy positioning'],
-                'specs' => [
-                    'type' => 'C-Arm imaging',
-                    'quality' => 'High resolution',
-                    'mobility' => 'Mobile design',
-                    'application' => 'Intraoperative'
-                ],
-                'applications' => ['Operating Room', 'Orthopedic Surgery'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Mobile X-Ray',
-                'brand' => 'Various',
-                'model' => 'Mobile X-Ray Unit',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Unit mobile X-Ray untuk pemeriksaan radiologi di berbagai lokasi dengan kualitas gambar optimal',
-                'features' => ['Mobile design', 'High image quality', 'Easy operation', 'Versatile positioning'],
-                'specs' => [
-                    'type' => 'Mobile X-Ray',
-                    'design' => 'Portable',
-                    'quality' => 'High resolution',
-                    'operation' => 'User-friendly'
-                ],
-                'applications' => ['ICU', 'Emergency', 'Ward'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Digital Mammography',
-                'brand' => 'Various',
-                'model' => 'Digital Mammography System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem mammografi digital untuk screening dan diagnostik kanker payudara dengan akurasi tinggi',
-                'features' => ['Digital imaging', 'High accuracy', 'Breast cancer screening', 'Low dose radiation'],
-                'specs' => [
-                    'type' => 'Digital mammography',
-                    'application' => 'Breast screening',
-                    'accuracy' => 'High',
-                    'radiation' => 'Low dose'
-                ],
-                'applications' => ['Radiology', 'Breast Screening'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'MRI',
-                'brand' => 'Various',
-                'model' => 'MRI System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem MRI untuk pencitraan medis dengan resolusi tinggi dan teknologi canggih',
-                'features' => ['High resolution imaging', 'Advanced technology', 'Non-invasive', 'Multi-sequence'],
-                'specs' => [
-                    'type' => 'MRI System',
-                    'resolution' => 'High',
-                    'technology' => 'Advanced',
-                    'application' => 'Multi-organ'
-                ],
-                'applications' => ['Radiology', 'Neurology', 'Orthopedic'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Stationary X-Ray',
-                'brand' => 'Various',
-                'model' => 'Stationary X-Ray System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem X-Ray stasioner untuk pemeriksaan radiologi rutin dengan kualitas gambar optimal',
-                'features' => ['Fixed installation', 'High image quality', 'Routine examinations', 'Digital processing'],
-                'specs' => [
-                    'type' => 'Stationary X-Ray',
-                    'installation' => 'Fixed',
-                    'quality' => 'High resolution',
-                    'processing' => 'Digital'
-                ],
-                'applications' => ['Radiology', 'General Practice'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Surgical Instruments',
-                'brand' => 'Various',
-                'model' => 'Surgical Instrument Set',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Berbagai peralatan bedah berkualitas tinggi untuk mendukung prosedur operasi dengan presisi optimal',
-                'features' => ['High quality materials', 'Precision instruments', 'Sterilizable', 'Ergonomic design'],
-                'specs' => [
-                    'material' => 'Stainless steel',
-                    'quality' => 'Medical grade',
-                    'sterilization' => 'Autoclavable',
-                    'design' => 'Ergonomic'
-                ],
-                'applications' => ['Operating Room', 'Minor Surgery'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Operating Table',
-                'brand' => 'Various',
-                'model' => 'Operating Table System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Meja operasi dengan sistem kontrol otomatis dan manual, cocok untuk berbagai jenis operasi termasuk cerebral surgery',
-                'features' => ['Kidney bridge elevation', 'Detachable control system', 'Automatic control', 'Low tabletop option'],
-                'specs' => [
-                    'control' => 'Automatic & Manual',
-                    'applications' => 'Various surgeries',
-                    'special' => 'Low tabletop for cerebral surgery',
-                    'material' => 'Stainless steel'
-                ],
-                'applications' => ['Operating Room', 'Surgery Center'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Laboratory Information System (LIS)',
-                'brand' => 'MSA IT Solutions',
-                'model' => 'LIS System',
-                'category' => 'alat-kesehatan-laboratorium',
-                'description' => 'Sistem informasi laboratorium lengkap untuk manajemen data dan workflow laboratorium modern',
-                'features' => ['Complete lab management', 'Data integration', 'Workflow automation', 'Report generation'],
-                'specs' => [
-                    'type' => 'Laboratory Information System',
-                    'features' => 'Complete lab management',
-                    'integration' => 'Multi-instrument',
-                    'reporting' => 'Automated reports'
-                ],
-                'applications' => ['Laboratorium', 'Hospital Lab'],
-                'price_range' => 'Hubungi untuk harga'
-            ]
-        ];
-
-        // Produk Konsumabel
-        $produkKonsumabel = [
-            [
-                'name' => 'DS Diluent - Reagent Hematology',
-                'brand' => 'Diasys',
-                'model' => 'DS Diluent',
-                'category' => 'produk-konsumabel',
-                'description' => 'Reagent diluent untuk hematology analyzer dengan stabilitas tinggi.',
-                'features' => [
-                    'Stabilitas 18 bulan',
-                    'Ready to use',
-                    'Kompatibel berbagai analyzer',
-                    'Kontrol kualitas ketat',
-                    'Kemasan praktis'
-                ],
-                'specs' => [
-                    'volume' => '20L per container',
-                    'storage' => '2-8°C',
-                    'stability' => '18 months',
-                    'ph' => '7.0-7.4',
-                    'osmolality' => '290-310 mOsm/kg'
-                ],
-                'applications' => ['Hematology Analyzer', 'CBC Testing'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'SC Cal Plus - Reagent Hematology',
-                'brand' => 'Diasys',
-                'model' => 'SC Cal Plus',
-                'category' => 'produk-konsumabel',
-                'description' => 'Calibrator untuk hematology analyzer dengan akurasi tinggi.',
-                'features' => [
-                    'Multi-level calibrator',
-                    'Traceability NIST',
-                    'Long term stability',
-                    'Easy to use',
-                    'Quality assured'
-                ],
-                'specs' => [
-                    'levels' => '3 levels (Low, Normal, High)',
-                    'volume' => '3mL per vial',
-                    'storage' => '2-8°C',
-                    'stability' => '12 months unopened',
-                    'traceability' => 'NIST traceable'
-                ],
-                'applications' => ['Hematology Calibration', 'Quality Control'],
-                'price_range' => 'Hubungi untuk harga'
-            ],
-            [
-                'name' => 'Safety Box Vicom',
-                'brand' => 'Vicom',
-                'model' => 'Standard',
-                'category' => 'produk-konsumabel',
-                'description' => 'Safety box untuk disposal jarum suntik dan benda tajam medis.',
-                'features' => [
-                    'Puncture resistant',
-                    'Leak proof design',
-                    'Easy disposal',
-                    'Color coded',
-                    'Various sizes available'
-                ],
-                'specs' => [
-                    'material' => 'High-density polyethylene',
-                    'capacity' => '1L, 2L, 5L, 10L',
-                    'color' => 'Yellow',
-                    'standard' => 'WHO compliant',
-                    'closure' => 'Permanent lock'
-                ],
-                'applications' => ['Rumah Sakit', 'Klinik', 'Laboratorium'],
-                'price_range' => 'Rp 15.000 - Rp 75.000'
-            ]
-        ];
-
-        // Linen & Apparel RS
-        $linenApparel = [
-            [
-                'name' => 'Surgical Face Mask',
-                'brand' => 'Medicom',
-                'model' => '3-Ply',
-                'category' => 'linen-apparel-rs',
-                'description' => 'Masker bedah 3 lapis dengan filtrasi tinggi untuk perlindungan optimal.',
-                'features' => [
-                    '3-layer protection',
-                    'Fluid resistant',
-                    'Comfortable ear loops',
-                    'Latex-free',
-                    'Disposable'
-                ],
-                'specs' => [
-                    'filtration' => '>95% BFE',
-                    'material' => 'Non-woven polypropylene',
-                    'size' => '17.5 x 9.5 cm',
-                    'packaging' => '50 pcs/box',
-                    'standard' => 'ASTM Level 1'
-                ],
-                'applications' => ['Bedah', 'Perawatan Pasien', 'Laboratorium'],
-                'price_range' => 'Rp 75.000 - Rp 150.000/box'
-            ],
-            [
-                'name' => 'Sarung Tangan Cosmomed',
-                'brand' => 'Cosmomed',
-                'model' => 'Latex Powder-Free',
-                'category' => 'linen-apparel-rs',
-                'description' => 'Sarung tangan latex bebas bedak untuk pemeriksaan medis.',
-                'features' => [
-                    'Powder-free',
-                    'High elasticity',
-                    'Textured fingertips',
-                    'Ambidextrous',
-                    'Single use'
-                ],
-                'specs' => [
-                    'material' => 'Natural rubber latex',
-                    'thickness' => '0.12mm',
-                    'length' => '240mm',
-                    'sizes' => 'S, M, L, XL',
-                    'packaging' => '100 pcs/box'
-                ],
-                'applications' => ['Pemeriksaan Medis', 'Laboratorium', 'Dental'],
-                'price_range' => 'Rp 85.000 - Rp 120.000/box'
-            ]
-        ];
-
-        // Jasa Konsultan & Maintenance
-        $jasaKonsultan = [
-            [
-                'name' => 'Kalibrasi Alat Medis & Laboratorium',
-                'brand' => 'MSA',
-                'model' => 'Comprehensive Service',
-                'category' => 'jasa-konsultan-maintenance',
-                'description' => 'Layanan kalibrasi profesional untuk alat medis dan laboratorium sesuai standar internasional.',
-                'features' => [
-                    'Teknisi bersertifikat',
-                    'Standar ISO 17025',
-                    'Sertifikat kalibrasi',
-                    'On-site service',
-                    'Dokumentasi lengkap'
-                ],
-                'specs' => [
-                    'standard' => 'ISO 17025:2017',
-                    'coverage' => 'Nationwide',
-                    'response_time' => '24-48 hours',
-                    'certificate' => 'Traceable to national standard',
-                    'validity' => '1 year'
-                ],
-                'applications' => ['Rumah Sakit', 'Laboratorium', 'Klinik'],
-                'price_range' => 'Hubungi untuk quotation'
-            ],
-            [
-                'name' => 'Instalasi Operating Theatre (MOT)',
-                'brand' => 'MSA',
-                'model' => 'Turnkey Solution',
-                'category' => 'jasa-konsultan-maintenance',
-                'description' => 'Layanan instalasi ruang operasi modern dengan sistem terintegrasi.',
-                'features' => [
-                    'Design consultation',
-                    'Equipment installation',
-                    'System integration',
-                    'Training & commissioning',
-                    'After-sales support'
-                ],
-                'specs' => [
-                    'scope' => 'Complete OR setup',
-                    'standards' => 'WHO & MOH compliant',
-                    'timeline' => '3-6 months',
-                    'warranty' => '1-2 years',
-                    'support' => '24/7 technical support'
-                ],
-                'applications' => ['Rumah Sakit', 'Klinik Bedah'],
-                'price_range' => 'Hubungi untuk proposal'
-            ]
-        ];
-
-        // Merge all product arrays
-        $allProducts = array_merge($products, $produkKonsumabel, $linenApparel, $jasaKonsultan);
+        $products = array (
+  0 => 
+  array (
+    'name' => 'Hematology Analyzer Mindray BC 700 Series',
+    'brand' => 'Mindray',
+    'model' => 'BC 700 Series',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Analyzer hematologi otomatis dengan teknologi canggih untuk pemeriksaan darah lengkap dengan akurasi tinggi dan throughput optimal',
+    'features' => 
+    array (
+      0 => 'Fully automated',
+      1 => 'High throughput',
+      2 => 'Quality control',
+      3 => 'User-friendly interface',
+      4 => 'Reliable results',
+    ),
+    'specs' => 
+    array (
+      'Model' => 'BC 700 Series',
+      'Throughput' => '60 sampel/jam',
+      'Parameters' => '26 parameter + 3 histogram',
+      'Sample Volume' => '20 μL',
+    ),
+    'applications' => 
+    array (
+      0 => 'Laboratory management',
+      1 => 'Data integration',
+      2 => 'Workflow automation',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000002330000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987367',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006150000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987376',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  1 => 
+  array (
+    'name' => 'Chemistry Analyzer Mindray BS-240 Pro',
+    'brand' => 'Mindray',
+    'model' => 'BS-240 Pro',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Analyzer kimia klinis otomatis untuk pemeriksaan biokimia darah dengan presisi tinggi dan reliabilitas terjamin',
+    'features' => 
+    array (
+      0 => 'Fully automated',
+      1 => 'High precision',
+      2 => 'Wide test menu',
+      3 => 'Compact design',
+      4 => 'User-friendly',
+    ),
+    'specs' => 
+    array (
+      'model' => 'BS-240 Pro',
+      'throughput' => '240 tes/jam',
+      'sample_volume' => 'Minimal',
+      'reagent_management' => 'Otomatis',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit',
+      1 => 'Laboratorium Klinik',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006140000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987412',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006130000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987415',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  2 => 
+  array (
+    'name' => 'Urine Analyzer Mindray UA-600T',
+    'brand' => 'Mindray',
+    'model' => 'UA-600T',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Analyzer urine otomatis untuk pemeriksaan urinalisis lengkap dengan akurasi tinggi dan hasil cepat',
+    'features' => 
+    array (
+      0 => 'Automated analysis',
+      1 => 'High accuracy',
+      2 => 'Fast results',
+      3 => 'Easy operation',
+      4 => 'Quality control',
+    ),
+    'specs' => 
+    array (
+      'model' => 'UA-600T',
+      'throughput' => '600 sampel/jam',
+      'parameters' => '14 parameter',
+      'sample_volume' => '1.2 mL',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit',
+      1 => 'Laboratorium Klinik',
+      2 => 'Klinik',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006120000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987445',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006110000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987447',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  3 => 
+  array (
+    'name' => 'Blood Gas & Electrolyte Analyzer Edan I15',
+    'brand' => 'Edan',
+    'model' => 'I15',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Analyzer gas darah dan elektrolit untuk pemeriksaan pH, pCO2, pO2, dan elektrolit dengan akurasi tinggi',
+    'features' => 
+    array (
+      0 => 'Point-of-care testing',
+      1 => 'Fast results',
+      2 => 'Easy maintenance',
+      3 => 'Quality control',
+      4 => 'Compact design',
+    ),
+    'specs' => 
+    array (
+      'model' => 'I15',
+      'parameters' => 'pH, pCO2, pO2, Na+, K+, Cl-',
+      'sample_volume' => '65 μL',
+      'test_time' => '60 detik',
+    ),
+    'applications' => 
+    array (
+      0 => 'Emergency Room',
+      1 => 'ICU',
+      2 => 'Laboratorium',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006100000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987475',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060f0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987477',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  4 => 
+  array (
+    'name' => 'Blood Gas & Electrolyte Analyzer Edan I500',
+    'brand' => 'Edan',
+    'model' => 'I500',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Analyzer gas darah dan elektrolit dengan kapasitas lebih besar untuk laboratorium dengan volume tinggi',
+    'features' => 
+    array (
+      0 => 'High throughput',
+      1 => 'Extended parameters',
+      2 => 'Auto calibration',
+      3 => 'Data management',
+      4 => 'Network connectivity',
+    ),
+    'specs' => 
+    array (
+      'model' => 'I500',
+      'parameters' => 'Extended panel',
+      'sample_volume' => 'Minimal',
+      'connectivity' => 'LIS/HIS integration',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit Besar',
+      1 => 'Laboratorium Sentral',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060e0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987503',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060d0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987505',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  5 => 
+  array (
+    'name' => 'Patient Monitor',
+    'brand' => 'Various',
+    'model' => 'Multi-model',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Monitor pasien multiparameter untuk ICU dan ruang perawatan dengan TKDN 40-47%',
+    'features' => 
+    array (
+      0 => 'Multi-parameter monitoring',
+      1 => 'TKDN 40-47%',
+      2 => 'Wireless connectivity',
+      3 => 'Alarm management',
+      4 => 'Touch screen',
+    ),
+    'specs' => 
+    array (
+      'tkdn' => '40-47%',
+      'parameters' => 'ECG, SpO2, NIBP, Temp, Resp',
+      'display' => 'Color LCD',
+      'connectivity' => 'Network ready',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'PICU',
+      2 => 'NICU',
+      3 => 'Ruang Perawatan',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060c0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987531',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060b0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987533',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  6 => 
+  array (
+    'name' => 'Infusion Pump',
+    'brand' => 'Various',
+    'model' => 'Medical Infusion Pump',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Pompa infus dengan layar warna 3.2 inch, waterproof IPX2, dan kompatibel dengan semua infusion sets',
+    'features' => 
+    array (
+      0 => 'Waterproof IPX2',
+      1 => '3.2 inch color screen',
+      2 => 'Manual & auto bolus',
+      3 => 'Universal compatibility',
+    ),
+    'specs' => 
+    array (
+      'display' => '3.2 inch color screen',
+      'protection' => 'IPX2 waterproof',
+      'bolus' => 'Manual & automatic',
+      'compatibility' => 'All infusion sets',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'Ruang Operasi',
+      2 => 'Ruang Perawatan',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000060a0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987560',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006090000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987561',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  7 => 
+  array (
+    'name' => 'Syringe Pump',
+    'brand' => 'Various',
+    'model' => 'Medical Syringe Pump',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Pompa syringe dengan dual screen LED & LCD, waterproof IPX2, dan sistem bolus otomatis',
+    'features' => 
+    array (
+      0 => 'Dual screen LED & LCD',
+      1 => 'Waterproof IPX2',
+      2 => 'Auto bolus',
+      3 => 'Universal compatibility',
+    ),
+    'specs' => 
+    array (
+      'display' => 'Dual LED & LCD',
+      'protection' => 'IPX2 waterproof',
+      'bolus' => 'Manual & automatic',
+      'compatibility' => 'All infusion sets',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'Pediatric Care',
+      2 => 'Anesthesia',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006080000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987594',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006070000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987596',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  8 => 
+  array (
+    'name' => 'Ventilator Accubreathe VI 30/40',
+    'brand' => 'Various',
+    'model' => 'Accubreathe VI 30/40',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Ventilator canggih dengan sistem dual drive, interface yang dapat dikustomisasi, dan dukungan ventilasi lanjutan',
+    'features' => 
+    array (
+      0 => 'Advanced ventilation support',
+      1 => 'Real-time display',
+      2 => 'Customized interface',
+      3 => 'Double drive system',
+    ),
+    'specs' => 
+    array (
+      'models' => 'VI 30 & VI 40',
+      'system' => 'Double Drive System',
+      'display' => 'Real-time monitoring',
+      'interface' => 'Customizable',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'Emergency',
+      2 => 'Operating Room',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006060000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987622',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006050000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987624',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  9 => 
+  array (
+    'name' => 'Electrocardiography (ECG)',
+    'brand' => 'Various',
+    'model' => '3-Channel ECG',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'ECG 3-channel dengan layar LCD touch 4.3 inch, filter setting support, dan multi-format report',
+    'features' => 
+    array (
+      0 => '3-channel recording',
+      1 => '4.3 inch touch LCD',
+      2 => 'Filter setting',
+      3 => 'Multi-format report',
+    ),
+    'specs' => 
+    array (
+      'channels' => '3-channel',
+      'display' => '4.3 inch color LCD touch',
+      'features' => 'Filter setting support',
+      'output' => 'Multi-format report',
+    ),
+    'applications' => 
+    array (
+      0 => 'Cardiology',
+      1 => 'Emergency',
+      2 => 'General Practice',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006040000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987650',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006030000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987652',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  10 => 
+  array (
+    'name' => 'Mesin Anestesi',
+    'brand' => 'Various',
+    'model' => 'Anesthesia Machine',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Mesin anestesi dengan teknologi canggih untuk mendukung prosedur operasi dengan keamanan optimal',
+    'features' => 
+    array (
+      0 => 'Advanced anesthesia delivery',
+      1 => 'Safety monitoring',
+      2 => 'Precise control',
+      3 => 'User-friendly interface',
+    ),
+    'specs' => 
+    array (
+      'type' => 'Anesthesia Machine',
+      'safety' => 'Multi-level monitoring',
+      'control' => 'Precise gas delivery',
+      'interface' => 'Touch screen',
+    ),
+    'applications' => 
+    array (
+      0 => 'Operating Room',
+      1 => 'Day Surgery',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006020000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987678',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006010000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987680',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  11 => 
+  array (
+    'name' => 'Defibrillator Monitor Accushock 60',
+    'brand' => 'Various',
+    'model' => 'Accushock 60',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Defibrilator monitor dengan thermal printer, voice recording storage, dan desain anti shock & anti fall',
+    'features' => 
+    array (
+      0 => 'Thermal printer',
+      1 => 'Voice recording storage',
+      2 => 'Durable battery',
+      3 => 'Anti shock & fall',
+    ),
+    'specs' => 
+    array (
+      'model' => 'Accushock 60',
+      'printer' => 'Thermal printer built-in',
+      'recording' => 'Voice storage',
+      'protection' => 'Anti shock & anti fall',
+    ),
+    'applications' => 
+    array (
+      0 => 'Emergency',
+      1 => 'Ambulance',
+      2 => 'ICU',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006000000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987705',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005ff0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987707',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  12 => 
+  array (
+    'name' => 'Doppler',
+    'brand' => 'Various',
+    'model' => 'Doppler Ultrasound',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Doppler dengan desain kompak, OLED display terang, waterproof probes 2 MHz, dan speaker Hi-Fi',
+    'features' => 
+    array (
+      0 => 'Compact design',
+      1 => 'Bright OLED display',
+      2 => 'Waterproof probes 2 MHz',
+      3 => 'Hi-Fi speaker',
+      4 => 'AA Battery',
+    ),
+    'specs' => 
+    array (
+      'display' => 'Bright OLED',
+      'probes' => 'Waterproof 2 MHz',
+      'audio' => 'Hi-Fi speaker',
+      'power' => 'AA Battery',
+    ),
+    'applications' => 
+    array (
+      0 => 'Obstetrics',
+      1 => 'Vascular',
+      2 => 'General Practice',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005fe0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987734',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005fd0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987739',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  13 => 
+  array (
+    'name' => 'ICU / PICU / NICU Equipment',
+    'brand' => 'Various',
+    'model' => 'ICU Equipment',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Peralatan intensive care unit lengkap untuk ICU, PICU, dan NICU dengan teknologi monitoring canggih',
+    'features' => 
+    array (
+      0 => 'ICU/PICU/NICU compatible',
+      1 => 'Advanced monitoring',
+      2 => 'Critical care support',
+      3 => 'Multi-parameter',
+    ),
+    'specs' => 
+    array (
+      'application' => 'ICU/PICU/NICU',
+      'monitoring' => 'Advanced',
+      'support' => 'Critical care',
+      'parameters' => 'Multi-parameter',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'PICU',
+      2 => 'NICU',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005fc0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987765',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005fb0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987767',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  14 => 
+  array (
+    'name' => 'Ultrasound',
+    'brand' => 'Various',
+    'model' => 'Ultrasound System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem ultrasound dengan berbagai jenis probe dan TKDN 45.78% untuk aplikasi diagnostik lengkap',
+    'features' => 
+    array (
+      0 => 'TKDN 45.78%',
+      1 => 'Multiple probes',
+      2 => 'High resolution imaging',
+      3 => 'Portable design',
+    ),
+    'specs' => 
+    array (
+      'tkdn' => '45.78%',
+      'probes' => 'Multiple types',
+      'imaging' => 'High resolution',
+      'design' => 'Portable',
+    ),
+    'applications' => 
+    array (
+      0 => 'Radiology',
+      1 => 'Obstetrics',
+      2 => 'Cardiology',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000004f20000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987793',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005240000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987795',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  15 => 
+  array (
+    'name' => 'C-Arm',
+    'brand' => 'Various',
+    'model' => 'C-Arm System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem C-Arm untuk imaging intraoperatif dengan kualitas gambar tinggi dan mobilitas optimal',
+    'features' => 
+    array (
+      0 => 'Intraoperative imaging',
+      1 => 'High image quality',
+      2 => 'Mobile design',
+      3 => 'Easy positioning',
+    ),
+    'specs' => 
+    array (
+      'type' => 'C-Arm imaging',
+      'quality' => 'High resolution',
+      'mobility' => 'Mobile design',
+      'application' => 'Intraoperative',
+    ),
+    'applications' => 
+    array (
+      0 => 'Operating Room',
+      1 => 'Orthopedic Surgery',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005230000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987821',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005690000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987823',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  16 => 
+  array (
+    'name' => 'Mobile X-Ray',
+    'brand' => 'Various',
+    'model' => 'Mobile X-Ray Unit',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Unit mobile X-Ray untuk pemeriksaan radiologi di berbagai lokasi dengan kualitas gambar optimal',
+    'features' => 
+    array (
+      0 => 'Mobile design',
+      1 => 'High image quality',
+      2 => 'Easy operation',
+      3 => 'Versatile positioning',
+    ),
+    'specs' => 
+    array (
+      'type' => 'Mobile X-Ray',
+      'design' => 'Portable',
+      'quality' => 'High resolution',
+      'operation' => 'User-friendly',
+    ),
+    'applications' => 
+    array (
+      0 => 'ICU',
+      1 => 'Emergency',
+      2 => 'Ward',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000002350000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987849',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000005250000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987851',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  17 => 
+  array (
+    'name' => 'Digital Mammography',
+    'brand' => 'Various',
+    'model' => 'Digital Mammography System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem mammografi digital untuk screening dan diagnostik kanker payudara dengan akurasi tinggi',
+    'features' => 
+    array (
+      0 => 'Digital imaging',
+      1 => 'High accuracy',
+      2 => 'Breast cancer screening',
+      3 => 'Low dose radiation',
+    ),
+    'specs' => 
+    array (
+      'type' => 'Digital mammography',
+      'application' => 'Breast screening',
+      'accuracy' => 'High',
+      'radiation' => 'Low dose',
+    ),
+    'applications' => 
+    array (
+      0 => 'Radiology',
+      1 => 'Breast Screening',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006340000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987877',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006350000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987879',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  18 => 
+  array (
+    'name' => 'MRI',
+    'brand' => 'Various',
+    'model' => 'MRI System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem MRI untuk pencitraan medis dengan resolusi tinggi dan teknologi canggih',
+    'features' => 
+    array (
+      0 => 'High resolution imaging',
+      1 => 'Advanced technology',
+      2 => 'Non-invasive',
+      3 => 'Multi-sequence',
+    ),
+    'specs' => 
+    array (
+      'type' => 'MRI System',
+      'resolution' => 'High',
+      'technology' => 'Advanced',
+      'application' => 'Multi-organ',
+    ),
+    'applications' => 
+    array (
+      0 => 'Radiology',
+      1 => 'Neurology',
+      2 => 'Orthopedic',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006360000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987905',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006370000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987907',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  19 => 
+  array (
+    'name' => 'Stationary X-Ray',
+    'brand' => 'Various',
+    'model' => 'Stationary X-Ray System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem X-Ray stasioner untuk pemeriksaan radiologi rutin dengan kualitas gambar optimal',
+    'features' => 
+    array (
+      0 => 'Fixed installation',
+      1 => 'High image quality',
+      2 => 'Routine examinations',
+      3 => 'Digital processing',
+    ),
+    'specs' => 
+    array (
+      'type' => 'Stationary X-Ray',
+      'installation' => 'Fixed',
+      'quality' => 'High resolution',
+      'processing' => 'Digital',
+    ),
+    'applications' => 
+    array (
+      0 => 'Radiology',
+      1 => 'General Practice',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006380000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987932',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006390000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987934',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  20 => 
+  array (
+    'name' => 'Surgical Instruments',
+    'brand' => 'Various',
+    'model' => 'Surgical Instrument Set',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Berbagai peralatan bedah berkualitas tinggi untuk mendukung prosedur operasi dengan presisi optimal',
+    'features' => 
+    array (
+      0 => 'High quality materials',
+      1 => 'Precision instruments',
+      2 => 'Sterilizable',
+      3 => 'Ergonomic design',
+    ),
+    'specs' => 
+    array (
+      'material' => 'Stainless steel',
+      'quality' => 'Medical grade',
+      'sterilization' => 'Autoclavable',
+      'design' => 'Ergonomic',
+    ),
+    'applications' => 
+    array (
+      0 => 'Operating Room',
+      1 => 'Minor Surgery',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063a0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987960',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063b0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987962',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  21 => 
+  array (
+    'name' => 'Operating Table',
+    'brand' => 'Various',
+    'model' => 'Operating Table System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Meja operasi dengan sistem kontrol otomatis dan manual, cocok untuk berbagai jenis operasi termasuk cerebral surgery',
+    'features' => 
+    array (
+      0 => 'Kidney bridge elevation',
+      1 => 'Detachable control system',
+      2 => 'Automatic control',
+      3 => 'Low tabletop option',
+    ),
+    'specs' => 
+    array (
+      'control' => 'Automatic & Manual',
+      'applications' => 'Various surgeries',
+      'special' => 'Low tabletop for cerebral surgery',
+      'material' => 'Stainless steel',
+    ),
+    'applications' => 
+    array (
+      0 => 'Operating Room',
+      1 => 'Surgery Center',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063c0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987988',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063d0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.987990',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  22 => 
+  array (
+    'name' => 'Laboratory Information System (LIS)',
+    'brand' => 'MSA IT Solutions',
+    'model' => 'LIS System',
+    'category' => 'alat-kesehatan-laboratorium',
+    'description' => 'Sistem informasi laboratorium lengkap untuk manajemen data dan workflow laboratorium modern',
+    'features' => 
+    array (
+      0 => 'Complete lab management',
+      1 => 'Data integration',
+      2 => 'Workflow automation',
+      3 => 'Report generation',
+    ),
+    'specs' => 
+    array (
+      'type' => 'Laboratory Information System',
+      'features' => 'Complete lab management',
+      'integration' => 'Multi-instrument',
+      'reporting' => 'Automated reports',
+    ),
+    'applications' => 
+    array (
+      0 => 'Laboratorium',
+      1 => 'Hospital Lab',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063e0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988016',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000063f0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988017',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  23 => 
+  array (
+    'name' => 'DS Diluent - Reagent Hematology',
+    'brand' => 'Diasys',
+    'model' => 'DS Diluent',
+    'category' => 'produk-konsumabel',
+    'description' => 'Reagent diluent untuk hematology analyzer dengan stabilitas tinggi.',
+    'features' => 
+    array (
+      0 => 'Stabilitas 18 bulan',
+      1 => 'Ready to use',
+      2 => 'Kompatibel berbagai analyzer',
+      3 => 'Kontrol kualitas ketat',
+      4 => 'Kemasan praktis',
+    ),
+    'specs' => 
+    array (
+      'volume' => '20L per container',
+      'storage' => '2-8°C',
+      'stability' => '18 months',
+      'ph' => '7.0-7.4',
+      'osmolality' => '290-310 mOsm/kg',
+    ),
+    'applications' => 
+    array (
+      0 => 'Hematology Analyzer',
+      1 => 'CBC Testing',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006400000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988046',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006410000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988048',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  24 => 
+  array (
+    'name' => 'SC Cal Plus - Reagent Hematology',
+    'brand' => 'Diasys',
+    'model' => 'SC Cal Plus',
+    'category' => 'produk-konsumabel',
+    'description' => 'Calibrator untuk hematology analyzer dengan akurasi tinggi.',
+    'features' => 
+    array (
+      0 => 'Multi-level calibrator',
+      1 => 'Traceability NIST',
+      2 => 'Long term stability',
+      3 => 'Easy to use',
+      4 => 'Quality assured',
+    ),
+    'specs' => 
+    array (
+      'levels' => '3 levels (Low, Normal, High)',
+      'volume' => '3mL per vial',
+      'storage' => '2-8°C',
+      'stability' => '12 months unopened',
+      'traceability' => 'NIST traceable',
+    ),
+    'applications' => 
+    array (
+      0 => 'Hematology Calibration',
+      1 => 'Quality Control',
+    ),
+    'price_range' => 'Hubungi untuk harga',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006420000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988074',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006430000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988076',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  25 => 
+  array (
+    'name' => 'Safety Box Vicom',
+    'brand' => 'Vicom',
+    'model' => 'Standard',
+    'category' => 'produk-konsumabel',
+    'description' => 'Safety box untuk disposal jarum suntik dan benda tajam medis.',
+    'features' => 
+    array (
+      0 => 'Puncture resistant',
+      1 => 'Leak proof design',
+      2 => 'Easy disposal',
+      3 => 'Color coded',
+      4 => 'Various sizes available',
+    ),
+    'specs' => 
+    array (
+      'material' => 'High-density polyethylene',
+      'capacity' => '1L, 2L, 5L, 10L',
+      'color' => 'Yellow',
+      'standard' => 'WHO compliant',
+      'closure' => 'Permanent lock',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit',
+      1 => 'Klinik',
+      2 => 'Laboratorium',
+    ),
+    'price_range' => 'Rp 15.000 - Rp 75.000',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006440000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988102',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006450000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988104',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  26 => 
+  array (
+    'name' => 'Surgical Face Mask',
+    'brand' => 'Medicom',
+    'model' => '3-Ply',
+    'category' => 'linen-apparel-rs',
+    'description' => 'Masker bedah 3 lapis dengan filtrasi tinggi untuk perlindungan optimal.',
+    'features' => 
+    array (
+      0 => '3-layer protection',
+      1 => 'Fluid resistant',
+      2 => 'Comfortable ear loops',
+      3 => 'Latex-free',
+      4 => 'Disposable',
+    ),
+    'specs' => 
+    array (
+      'filtration' => '>95% BFE',
+      'material' => 'Non-woven polypropylene',
+      'size' => '17.5 x 9.5 cm',
+      'packaging' => '50 pcs/box',
+      'standard' => 'ASTM Level 1',
+    ),
+    'applications' => 
+    array (
+      0 => 'Bedah',
+      1 => 'Perawatan Pasien',
+      2 => 'Laboratorium',
+    ),
+    'price_range' => 'Rp 75.000 - Rp 150.000/box',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006460000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988130',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006470000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988132',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  27 => 
+  array (
+    'name' => 'Sarung Tangan Cosmomed',
+    'brand' => 'Cosmomed',
+    'model' => 'Latex Powder-Free',
+    'category' => 'linen-apparel-rs',
+    'description' => 'Sarung tangan latex bebas bedak untuk pemeriksaan medis.',
+    'features' => 
+    array (
+      0 => 'Powder-free',
+      1 => 'High elasticity',
+      2 => 'Textured fingertips',
+      3 => 'Ambidextrous',
+      4 => 'Single use',
+    ),
+    'specs' => 
+    array (
+      'material' => 'Natural rubber latex',
+      'thickness' => '0.12mm',
+      'length' => '240mm',
+      'sizes' => 'S, M, L, XL',
+      'packaging' => '100 pcs/box',
+    ),
+    'applications' => 
+    array (
+      0 => 'Pemeriksaan Medis',
+      1 => 'Laboratorium',
+      2 => 'Dental',
+    ),
+    'price_range' => 'Rp 85.000 - Rp 120.000/box',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006480000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988158',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '00000000000006490000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988160',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  28 => 
+  array (
+    'name' => 'Kalibrasi Alat Medis & Laboratorium',
+    'brand' => 'MSA',
+    'model' => 'Comprehensive Service',
+    'category' => 'jasa-konsultan-maintenance',
+    'description' => 'Layanan kalibrasi profesional untuk alat medis dan laboratorium sesuai standar internasional.',
+    'features' => 
+    array (
+      0 => 'Teknisi bersertifikat',
+      1 => 'Standar ISO 17025',
+      2 => 'Sertifikat kalibrasi',
+      3 => 'On-site service',
+      4 => 'Dokumentasi lengkap',
+    ),
+    'specs' => 
+    array (
+      'standard' => 'ISO 17025:2017',
+      'coverage' => 'Nationwide',
+      'response_time' => '24-48 hours',
+      'certificate' => 'Traceable to national standard',
+      'validity' => '1 year',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit',
+      1 => 'Laboratorium',
+      2 => 'Klinik',
+    ),
+    'price_range' => 'Hubungi untuk quotation',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000064a0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988186',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000064b0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988188',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+  29 => 
+  array (
+    'name' => 'Instalasi Operating Theatre (MOT)',
+    'brand' => 'MSA',
+    'model' => 'Turnkey Solution',
+    'category' => 'jasa-konsultan-maintenance',
+    'description' => 'Layanan instalasi ruang operasi modern dengan sistem terintegrasi.',
+    'features' => 
+    array (
+      0 => 'Design consultation',
+      1 => 'Equipment installation',
+      2 => 'System integration',
+      3 => 'Training & commissioning',
+      4 => 'After-sales support',
+    ),
+    'specs' => 
+    array (
+      'scope' => 'Complete OR setup',
+      'standards' => 'WHO & MOH compliant',
+      'timeline' => '3-6 months',
+      'warranty' => '1-2 years',
+      'support' => '24/7 technical support',
+    ),
+    'applications' => 
+    array (
+      0 => 'Rumah Sakit',
+      1 => 'Klinik Bedah',
+    ),
+    'price_range' => 'Hubungi untuk proposal',
+    'images' => NULL,
+    'is_active' => true,
+    'created_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000064c0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988214',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+    'updated_at' => 
+    \Illuminate\Support\Carbon::__set_state(array(
+       'endOfTime' => false,
+       'startOfTime' => false,
+       'constructedObjectId' => '000000000000064d0000000000000000',
+       'clock' => NULL,
+       'localMonthsOverflow' => NULL,
+       'localYearsOverflow' => NULL,
+       'localStrictModeEnabled' => NULL,
+       'localHumanDiffOptions' => NULL,
+       'localToStringFormat' => NULL,
+       'localSerializer' => NULL,
+       'localMacros' => NULL,
+       'localGenericMacros' => NULL,
+       'localFormatFunction' => NULL,
+       'localTranslator' => NULL,
+       'dumpProperties' => 
+      array (
+        0 => 'date',
+        1 => 'timezone_type',
+        2 => 'timezone',
+      ),
+       'dumpLocale' => NULL,
+       'dumpDateProperties' => NULL,
+       'date' => '2025-08-26 01:45:59.988216',
+       'timezone_type' => 3,
+       'timezone' => 'UTC',
+    )),
+  ),
+);
 
         // Insert all products
-        foreach ($allProducts as $product) {
+        foreach ($products as $product) {
             Product::create($product);
         }
     }
