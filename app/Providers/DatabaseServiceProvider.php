@@ -3,17 +3,24 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Service provider for database configuration
-        // Uses default Laravel database configuration from config/database.php and .env
+        // Auto-detect environment and set appropriate database
+        if (env('RAILWAY_ENVIRONMENT') || env('DATABASE_URL')) {
+            // Railway environment - use PostgreSQL
+            Config::set('database.default', 'pgsql');
+        } else {
+            // Local environment - use SQLite
+            Config::set('database.default', 'sqlite');
+        }
     }
 
     public function boot(): void
     {
-        // Boot method - uses default Laravel database configuration
+        // Boot method - database configuration handled in register
     }
 }
