@@ -17,6 +17,15 @@ mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage
 echo "Setting permissions..."
 chmod -R 777 storage bootstrap/cache
 
+# Set Railway volume permissions if volume is mounted
+if [ -n "$RAILWAY_VOLUME_MOUNT_PATH" ]; then
+    echo "Railway volume detected at: $RAILWAY_VOLUME_MOUNT_PATH"
+    chmod -R 777 "$RAILWAY_VOLUME_MOUNT_PATH"
+    # Create products directory in volume if not exists
+    mkdir -p "$RAILWAY_VOLUME_MOUNT_PATH/products"
+    chmod -R 777 "$RAILWAY_VOLUME_MOUNT_PATH/products"
+fi
+
 echo "Checking Laravel files..."
 ls -la artisan
 ls -la composer.json
