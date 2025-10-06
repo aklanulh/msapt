@@ -40,6 +40,13 @@ storage/backups/
 .env.production.local
 backup_*.php
 setup_*.php
+
+# Sensitive documentation (keep local only)
+*DEPLOYMENT*.md
+*HOSTINGER*.md
+*DATABASE*.md
+CARA-*.md
+STEP-BY-STEP*.md
 /vendor
 Homestead.json
 Homestead.yaml

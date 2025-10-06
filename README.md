@@ -1,102 +1,27 @@
-# 🏢 MSAPT - PT. Mitrajaya Selaras Abadi
+# MSAPT
 
-## 📋 Procurement & Inventory Management System
+PT. Mitrajaya Selaras Abadi - Procurement & Inventory Management System
 
-**MSAPT** adalah sistem manajemen inventori dan pengadaan untuk PT. Mitrajaya Selaras Abadi yang bergerak di bidang peralatan medis dan laboratorium.
+## About
 
-### 🚀 **Live Website**
-- **URL:** https://msapt.co.id
-- **Repository:** https://github.com/aklanulh/msapt
+This is a Laravel-based web application for inventory and procurement management.
 
-### ✨ **Fitur Utama**
+## Requirements
 
-- 📊 **Dashboard Real-time** - KPI dan analytics inventori
-- 📦 **Manajemen Produk** - Katalog peralatan medis & laboratorium
-- 📈 **Stock In/Out** - Tracking pergerakan stok otomatis
-- 🏥 **Supplier & Customer** - Manajemen partner bisnis
-- 📋 **Stock Opname** - Reconciliation fisik vs sistem
-- 📊 **Reporting** - Laporan lengkap dengan export Excel
-- 🔐 **Security** - Authentication & data protection
-- 📱 **Responsive** - Mobile-friendly interface
+- PHP 8.2+
+- MySQL 5.7+
+- Composer
+- Node.js & NPM
 
-### 🛠️ **Teknologi**
+## Installation
 
-- **Framework:** Laravel 12 + PHP 8.2
-- **Database:** MySQL
-- **Frontend:** Tailwind CSS + Alpine.js
-- **Charts:** Chart.js
-- **Deployment:** Hostinger dengan Git auto-deploy
-
-### 🚀 **Quick Start**
-
-1. **Clone Repository:**
-   ```bash
-   git clone https://github.com/aklanulh/msapt.git
-   cd msapt
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   composer install
-   npm install
-   ```
-
-3. **Setup Environment:**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-4. **Setup Database:**
-   ```bash
-   php artisan migrate --seed
-   ```
-
-5. **Run Development Server:**
-   ```bash
-   php artisan serve
-   ```
-
-### 📚 **Dokumentasi Deployment**
-
-- 📖 [Panduan Lengkap Deployment](README-DEPLOYMENT.md)
-- ⚡ [Quick Start Hostinger](HOSTINGER-QUICKSTART.md)
-- 📋 [Step by Step Guide](STEP-BY-STEP-HOSTINGER.md)
-
-### 🔒 **Keamanan**
-
-⚠️ **PENTING:** Jangan pernah commit file `.env` ke repository!
-- File `.env.hostinger` hanya template - update dengan data real di server
-- Ganti semua password default setelah deployment
-- Aktifkan 2FA untuk akun GitHub dan Hostinger
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Clone repository
+2. Install dependencies: `composer install`
+3. Setup environment: `cp .env.example .env`
+4. Generate key: `php artisan key:generate`
+5. Run migrations: `php artisan migrate --seed`
+6. Start server: `php artisan serve`
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proprietary - All rights reserved.
