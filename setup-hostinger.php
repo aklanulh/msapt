@@ -15,62 +15,9 @@ function runCommand($command) {
 }
 
 try {
-    // 1. Check deployment path and fix nested structure
-    echo "1. Checking deployment path...\n";
-    
-    // Check if we're in a nested deployment (common Hostinger issue)
-    if (file_exists('public_html') && is_dir('public_html')) {
-        echo "⚠️ Detected nested deployment path, moving files...\n";
-        
-        // Move all files from public_html to current directory
-        $files = scandir('public_html');
-        foreach ($files as $file) {
-            if ($file != '.' && $file != '..') {
-                $source = "public_html/$file";
-                $dest = $file;
-                
-                if (is_dir($source)) {
-                    if (!is_dir($dest)) {
-                        runCommand("mv '$source' '$dest' 2>/dev/null || move '$source' '$dest' 2>nul || echo 'Moved $file'");
-                    }
-                } else {
-                    if (!file_exists($dest)) {
-                        runCommand("mv '$source' '$dest' 2>/dev/null || move '$source' '$dest' 2>nul || echo 'Moved $file'");
-                    }
-                }
-            }
-        }
-        
-        // Remove empty public_html directory
-        if (is_dir('public_html') && count(scandir('public_html')) == 2) {
-            rmdir('public_html');
-        }
-        
-        echo "✅ Fixed nested deployment structure\n";
-    }
-    
-    // 2. Copy public files to root (for Hostinger)
-    echo "2. Copying public files to root directory...\n";
-    $publicFiles = ['index.php', '.htaccess', 'favicon.ico'];
-    foreach ($publicFiles as $file) {
-        if (file_exists("public/$file")) {
-            copy("public/$file", $file);
-            echo "✅ Copied $file\n";
-        }
-    }
-    
-    // Copy images folder if exists
-    if (is_dir('public/images')) {
-        if (!is_dir('images')) {
-            mkdir('images', 0755, true);
-        }
-        runCommand('cp -r public/images/* images/ 2>/dev/null || xcopy public\\images images\\ /E /I /Y 2>nul || echo "Images copied manually"');
-        echo "✅ Images folder copied\n";
-    }
-
-    // 3. Check if .env exists
+    // 1. Check if .env exists
     if (!file_exists('.env')) {
-        echo "3. Creating .env file from .env.hostinger...\n";
+        echo "1. Creating .env file from .env.hostinger...\n";
         if (file_exists('.env.hostinger')) {
             copy('.env.hostinger', '.env');
             echo "✅ .env file created\n";
@@ -79,25 +26,15 @@ try {
             exit(1);
         }
     } else {
-        echo "3. .env file already exists\n";
+        echo "1. .env file already exists\n";
     }
     
-    // 4. Generate application key
-    echo "4. Generating application key...\n";
+    // 2. Generate application key
+    echo "2. Generating application key...\n";
     runCommand('php artisan key:generate --force');
     
-    // 4.1 Verify APP_KEY exists
-    $envContent = file_get_contents('.env');
-    if (strpos($envContent, 'APP_KEY=base64:') === false) {
-        echo "⚠️ APP_KEY not generated properly, creating manually...\n";
-        $key = 'base64:' . base64_encode(random_bytes(32));
-        $envContent = preg_replace('/APP_KEY=.*/', "APP_KEY=$key", $envContent);
-        file_put_contents('.env', $envContent);
-        echo "✅ APP_KEY created manually\n";
-    }
-    
-    // 5. Create storage directories
-    echo "5. Creating storage directories...\n";
+    // 3. Create storage directories
+    echo "3. Creating storage directories...\n";
     $directories = [
         'storage/app/public',
         'storage/backups',
@@ -112,22 +49,23 @@ try {
         }
     }
     
+    // 4. Set proper permissions
     echo "4. Setting permissions...\n";
     runCommand('chmod -R 755 storage');
     runCommand('chmod -R 755 bootstrap/cache');
     runCommand('chmod -R 644 .env');
     
-    // 5. Clear all caches and optimize
-    echo "5. Clearing caches and optimizing...\n";
+    // 5. Clear all caches
+    echo "5. Clearing caches...\n";
     runCommand('php artisan config:clear');
-    runCommand('php artisan cache:clear');
     runCommand('php artisan route:clear');
     runCommand('php artisan view:clear');
+    runCommand('php artisan cache:clear');
     
     // 6. Test database connection
     echo "6. Testing database connection...\n";
-    $dbTest = runCommand('php artisan migrate:status');
-    if (strpos($dbTest, 'could not find driver') !== false || strpos($dbTest, 'Connection refused') !== false) {
+    $output = runCommand('php artisan migrate:status');
+    if (strpos($output, 'Connection refused') !== false || strpos($output, 'Access denied') !== false) {
         echo "❌ Database connection failed!\n";
         echo "Please check your .env database configuration:\n";
         echo "- DB_HOST\n";

@@ -1,0 +1,48 @@
+===============================================
+📋 CHECKLIST UPLOAD MSAPT KE HOSTINGER
+===============================================
+
+🗂️ PERSIAPAN FILE:
+□ Buat folder baru: msapt-upload
+□ Copy semua file dari d:\laragon\www\msapt\
+□ Hapus folder tidak perlu:
+  □ node_modules (jika ada)
+  □ .git (jika ada)
+  □ tests
+  □ vendor (akan diinstall otomatis)
+□ Compress jadi msapt-website.zip
+
+🌐 HOSTINGER SETUP:
+□ Login ke hpanel.hostinger.com
+□ Pilih domain msapt.co.id
+□ Buka File Manager
+□ Masuk ke folder public_html
+□ Hapus semua file lama (jika ada)
+
+📤 UPLOAD PROCESS:
+□ Klik tombol "Upload"
+□ Drag & drop file msapt-website.zip
+□ Tunggu upload 100%
+□ Klik kanan zip → "Extract Here"
+□ Hapus file zip setelah extract
+
+⚙️ SETUP WEBSITE:
+□ Buka: https://msapt.co.id/setup-hostinger.php
+□ Tunggu proses setup selesai
+□ Lihat pesan "Setup Completed Successfully!"
+
+✅ TEST WEBSITE:
+□ Buka: https://msapt.co.id
+□ Login admin:
+  Email: admin@msa.com
+  Password: password
+□ Ganti password admin
+
+🔧 JIKA ERROR:
+□ Error 500: Jalankan ulang setup-hostinger.php
+□ Database error: Cek database di panel Hostinger
+□ Permission error: Set folder storage ke 755
+
+===============================================
+💡 TIPS: Screenshot setiap langkah untuk backup!
+===============================================
