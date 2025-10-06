@@ -63,6 +63,13 @@
 - ⚡ [Quick Start Hostinger](HOSTINGER-QUICKSTART.md)
 - 📋 [Step by Step Guide](STEP-BY-STEP-HOSTINGER.md)
 
+### 🔒 **Keamanan**
+
+⚠️ **PENTING:** Jangan pernah commit file `.env` ke repository!
+- File `.env.hostinger` hanya template - update dengan data real di server
+- Ganti semua password default setelah deployment
+- Aktifkan 2FA untuk akun GitHub dan Hostinger
+
 ## Laravel Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).

@@ -34,6 +34,12 @@ TUTORIAL_POSTGRESQL.md
 storage/backups/
 *.sql
 *.zip
+
+# Sensitive deployment files (keep local only)
+.env.local
+.env.production.local
+backup_*.php
+setup_*.php
 /vendor
 Homestead.json
 Homestead.yaml
