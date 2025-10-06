@@ -15,8 +15,18 @@ function runCommand($command) {
 }
 
 try {
-    // 1. Copy public files to root (for Hostinger)
-    echo "1. Copying public files to root directory...\n";
+    // 1. Fix Hostinger deployment path issue
+    echo "1. Checking deployment path...\n";
+    if (file_exists('../public_html') && is_dir('../public_html')) {
+        echo "⚠️ Detected nested deployment path, moving files...\n";
+        shell_exec('cp -r * ../public_html/ 2>/dev/null || xcopy * ..\\public_html\\ /E /I /Y 2>nul');
+        echo "✅ Files moved to correct path\n";
+        chdir('../public_html');
+        echo "✅ Changed working directory\n";
+    }
+    
+    // 2. Copy public files to root (for Hostinger)
+    echo "2. Copying public files to root directory...\n";
     $publicFiles = ['index.php', '.htaccess', 'favicon.ico'];
     foreach ($publicFiles as $file) {
         if (file_exists("public/$file")) {
@@ -34,9 +44,9 @@ try {
         echo "✅ Images folder copied\n";
     }
 
-    // 2. Check if .env exists
+    // 3. Check if .env exists
     if (!file_exists('.env')) {
-        echo "2. Creating .env file from .env.hostinger...\n";
+        echo "3. Creating .env file from .env.hostinger...\n";
         if (file_exists('.env.hostinger')) {
             copy('.env.hostinger', '.env');
             echo "✅ .env file created\n";
@@ -45,11 +55,11 @@ try {
             exit(1);
         }
     } else {
-        echo "2. .env file already exists\n";
+        echo "3. .env file already exists\n";
     }
     
-    // 3. Generate application key
-    echo "3. Generating application key...\n";
+    // 4. Generate application key
+    echo "4. Generating application key...\n";
     runCommand('php artisan key:generate --force');
     
     // 3.1 Verify APP_KEY exists
@@ -62,8 +72,8 @@ try {
         echo "✅ APP_KEY created manually\n";
     }
     
-    // 4. Create storage directories
-    echo "4. Creating storage directories...\n";
+    // 5. Create storage directories
+    echo "5. Creating storage directories...\n";
     $directories = [
         'storage/app/public',
         'storage/backups',
