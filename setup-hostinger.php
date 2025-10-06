@@ -15,9 +15,28 @@ function runCommand($command) {
 }
 
 try {
-    // 1. Check if .env exists
+    // 1. Copy public files to root (for Hostinger)
+    echo "1. Copying public files to root directory...\n";
+    $publicFiles = ['index.php', '.htaccess', 'favicon.ico'];
+    foreach ($publicFiles as $file) {
+        if (file_exists("public/$file")) {
+            copy("public/$file", $file);
+            echo "✅ Copied $file\n";
+        }
+    }
+    
+    // Copy images folder if exists
+    if (is_dir('public/images')) {
+        if (!is_dir('images')) {
+            mkdir('images', 0755, true);
+        }
+        runCommand('cp -r public/images/* images/ 2>/dev/null || xcopy public\\images images\\ /E /I /Y 2>nul || echo "Images copied manually"');
+        echo "✅ Images folder copied\n";
+    }
+
+    // 2. Check if .env exists
     if (!file_exists('.env')) {
-        echo "1. Creating .env file from .env.hostinger...\n";
+        echo "2. Creating .env file from .env.hostinger...\n";
         if (file_exists('.env.hostinger')) {
             copy('.env.hostinger', '.env');
             echo "✅ .env file created\n";
@@ -26,15 +45,15 @@ try {
             exit(1);
         }
     } else {
-        echo "1. .env file already exists\n";
+        echo "2. .env file already exists\n";
     }
     
-    // 2. Generate application key
-    echo "2. Generating application key...\n";
+    // 3. Generate application key
+    echo "3. Generating application key...\n";
     runCommand('php artisan key:generate --force');
     
-    // 3. Create storage directories
-    echo "3. Creating storage directories...\n";
+    // 4. Create storage directories
+    echo "4. Creating storage directories...\n";
     $directories = [
         'storage/app/public',
         'storage/backups',
