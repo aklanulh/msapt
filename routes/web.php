@@ -47,6 +47,23 @@ Route::prefix('admin')->group(function () {
         Route::get('/products/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
         Route::put('/products/{id}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
         Route::delete('/products/{id}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+        
+        // Project Gallery Management
+        Route::get('/project-galleries', [AdminController::class, 'projectGalleries'])->name('admin.project-galleries');
+        Route::get('/project-galleries/create', [AdminController::class, 'createProjectGallery'])->name('admin.project-galleries.create');
+        Route::post('/project-galleries', [AdminController::class, 'storeProjectGallery'])->name('admin.project-galleries.store');
+        Route::get('/project-galleries/{id}/edit', [AdminController::class, 'editProjectGallery'])->name('admin.project-galleries.edit');
+        Route::put('/project-galleries/{id}', [AdminController::class, 'updateProjectGallery'])->name('admin.project-galleries.update');
+        Route::delete('/project-galleries/{id}', [AdminController::class, 'destroyProjectGallery'])->name('admin.project-galleries.destroy');
+        
+        // Trusted Client Management
+        Route::get('/trusted-clients', [AdminController::class, 'trustedClients'])->name('admin.trusted-clients');
+        Route::get('/trusted-clients/create', [AdminController::class, 'createTrustedClient'])->name('admin.trusted-clients.create');
+        Route::post('/trusted-clients', [AdminController::class, 'storeTrustedClient'])->name('admin.trusted-clients.store');
+        Route::get('/trusted-clients/{id}/edit', [AdminController::class, 'editTrustedClient'])->name('admin.trusted-clients.edit');
+        Route::put('/trusted-clients/{id}', [AdminController::class, 'updateTrustedClient'])->name('admin.trusted-clients.update');
+        Route::delete('/trusted-clients/{id}', [AdminController::class, 'destroyTrustedClient'])->name('admin.trusted-clients.destroy');
+        
         Route::get('/logs', [AdminController::class, 'logs'])->name('admin.logs');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });

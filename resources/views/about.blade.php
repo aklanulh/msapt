@@ -124,7 +124,10 @@
             </div>
             <div class="col-lg-6">
                 <div class="text-center">
-                    <img src="{{ asset('images/foto_gedung_tentang_kami.png') }}" alt="Gedung Kantor MSA" class="img-fluid rounded shadow-lg" style="max-height: 400px; width: 100%; object-fit: cover;">
+                    <video autoplay loop muted class="img-fluid rounded shadow-lg" style="max-height: 400px; width: 100%; object-fit: cover;">
+                        <source src="{{ asset('mapsmsa.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                     <p class="text-muted mt-3"><small>Kantor Pusat MSA - Ruko Maison Avenue MA.19, Kota Wisata, Cibubur</small></p>
                 </div>
             </div>
@@ -134,7 +137,10 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="text-center">
-                            <img src="{{ asset('images/foto_gedung_tentang_kami.png') }}" alt="Fasilitas MSA" class="img-fluid rounded shadow" style="max-height: 300px; width: 100%; object-fit: cover; filter: sepia(20%);">
+                            <video autoplay loop muted class="img-fluid rounded shadow" style="max-height: 300px; width: 100%; object-fit: cover;">
+                                <source src="{{ asset('videotentangkami.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -266,8 +272,9 @@
     </div>
 </section>
 
-<!-- Legal Information -->
-<section class="py-5" style="background-color: #f8f9fa;">
+<!-- Legal Information - Hidden -->
+<!-- 
+<section class="py-5" style="background-color: #f8f9fa; display: none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
@@ -317,6 +324,7 @@
         </div>
     </div>
 </section>
+-->
 
 <!-- Team Values -->
 <section class="py-5">

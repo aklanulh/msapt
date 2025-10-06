@@ -19,15 +19,21 @@
 /storage/*.key
 /storage/pail
 
-# Ignore other project folders in this directory
-/BACKUP-AN/
-/adscampaign*/
-/boi-bekasi-rides-web-main/
-/boibekasi/
-/bootsrap/
-/coma/
-*.zip
+# Deployment files (not needed for Hostinger)
+railway.json
+nixpacks.toml
+Dockerfile
+Procfile
+start.sh
+env-railway
+env-sqlite
+force-env.php
+TUTORIAL_POSTGRESQL.md
+
+# Backup files
+storage/backups/
 *.sql
+*.zip
 /vendor
 Homestead.json
 Homestead.yaml

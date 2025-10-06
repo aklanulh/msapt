@@ -4,75 +4,114 @@
 @section('description', 'Hubungi MSA untuk konsultasi, penawaran, dan informasi produk alat kesehatan. Tim ahli kami siap membantu kebutuhan institusi kesehatan Anda.')
 
 @section('content')
-<!-- Page Header -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 class="display-4 fw-bold mb-3">Hubungi Kami</h1>
-                <p class="lead">Tim ahli MSA siap membantu kebutuhan alat kesehatan institusi Anda</p>
+<!-- Hero Section with Animation -->
+<section class="hero-contact py-5" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%); color: white; position: relative; overflow: hidden;">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container position-relative">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-3 animate-fade-in">Hubungi Kami</h1>
+                <p class="lead mb-4 animate-fade-in-delay">Tim ahli MSA siap membantu kebutuhan alat kesehatan institusi Anda dengan solusi terbaik dan pelayanan profesional</p>
+                <div class="d-flex gap-3 animate-fade-in-delay-2">
+                    <div class="stat-item text-center">
+                        <h3 class="fw-bold mb-1">24/7</h3>
+                        <small>Support</small>
+                    </div>
+                    <div class="stat-item text-center">
+                        <h3 class="fw-bold mb-1">100+</h3>
+                        <small>Klien</small>
+                    </div>
+                    <div class="stat-item text-center">
+                        <h3 class="fw-bold mb-1">17</h3>
+                        <small>Tahun</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="contact-hero-image animate-float">
+                    <img src="{{ asset('images/fotomeeting.jpg') }}" alt="MSA Team Meeting" class="img-fluid rounded-4 shadow-lg" style="max-height: 400px; object-fit: cover;">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Information -->
-<section class="py-5">
+<!-- Contact Information Cards -->
+<section class="py-5" style="background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 100%);">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mb-5">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="contact-item text-center">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-map-marker-alt" style="font-size: 2rem;"></i>
-                            </div>
-                            <h5 class="fw-bold">Alamat Kantor</h5>
-                            <p class="text-muted">{{ $contact_info['address'] }}</p>
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="fw-bold mb-3">Informasi Kontak</h2>
+                <p class="text-muted">Berbagai cara untuk menghubungi tim MSA</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon-wrapper mb-4">
+                        <div class="contact-icon bg-primary">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="contact-item text-center">
-                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fab fa-whatsapp" style="font-size: 2rem;"></i>
-                            </div>
-                            <h5 class="fw-bold">WhatsApp</h5>
-                            <p class="text-muted">
-                                <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $contact_info['whatsapp']) }}" class="text-decoration-none" target="_blank">
-                                    {{ $contact_info['whatsapp'] }}
-                                </a>
-                            </p>
+                    <h5 class="fw-bold mb-3">Alamat Kantor</h5>
+                    <p class="text-muted mb-0">{{ $contact_info['address'] }}</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon-wrapper mb-4">
+                        <div class="contact-icon bg-success">
+                            <i class="fab fa-whatsapp"></i>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 mb-4">
-                        <div class="contact-item text-center">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                                <i class="fas fa-envelope" style="font-size: 2rem;"></i>
-                            </div>
-                            <h5 class="fw-bold">Email</h5>
-                            <p class="text-muted">
-                                <a href="mailto:{{ $contact_info['email'] }}" class="text-decoration-none">
-                                    {{ $contact_info['email'] }}
-                                </a><br>
-                                <a href="mailto:{{ $contact_info['email_cs'] }}" class="text-decoration-none">
-                                    {{ $contact_info['email_cs'] }}
-                                </a><br>
-                                <a href="mailto:{{ $contact_info['email_alt'] }}" class="text-decoration-none">
-                                    {{ $contact_info['email_alt'] }}
-                                </a>
-                            </p>
+                    <h5 class="fw-bold mb-3">WhatsApp</h5>
+                    <p class="text-muted mb-3">
+                        <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $contact_info['whatsapp']) }}" class="text-decoration-none text-success fw-semibold" target="_blank">
+                            {{ $contact_info['whatsapp'] }}
+                        </a>
+                    </p>
+                    <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $contact_info['whatsapp']) }}" class="btn btn-success btn-sm" target="_blank">
+                        <i class="fab fa-whatsapp me-1"></i>Chat Now
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon-wrapper mb-4">
+                        <div class="contact-icon bg-info">
+                            <i class="fas fa-envelope"></i>
                         </div>
+                    </div>
+                    <h5 class="fw-bold mb-3">Email</h5>
+                    <div class="mb-3">
+                        <small class="text-muted d-block">General:</small>
+                        <a href="mailto:{{ $contact_info['email'] }}" class="text-decoration-none">
+                            {{ $contact_info['email'] }}
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-muted d-block">Customer Service:</small>
+                        <a href="mailto:{{ $contact_info['email_cs'] }}" class="text-decoration-none">
+                            {{ $contact_info['email_cs'] }}
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-3">Jam Operasional</h5>
-                        <p class="mb-2"><i class="fas fa-clock me-2 text-primary"></i>{{ $contact_info['office_hours'] }}</p>
-                        <p class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>Support 24/7 untuk emergency</p>
-                        <p class="mb-0"><i class="fas fa-globe me-2 text-primary"></i>{{ $contact_info['website'] }}</p>
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100 bg-primary text-white">
+                    <div class="contact-icon-wrapper mb-4">
+                        <div class="contact-icon bg-white text-primary">
+                            <i class="fas fa-clock"></i>
+                        </div>
                     </div>
+                    <h5 class="fw-bold mb-3">Jam Operasional</h5>
+                    <p class="mb-2"><i class="fas fa-clock me-2"></i>{{ $contact_info['office_hours'] }}</p>
+                    <p class="mb-2"><i class="fas fa-phone me-2"></i>Support 24/7 Emergency</p>
+                    <p class="mb-0"><i class="fas fa-globe me-2"></i>{{ $contact_info['website'] }}</p>
                 </div>
             </div>
         </div>
@@ -80,14 +119,35 @@
 </section>
 
 <!-- Contact Form -->
-<section class="py-5" style="background-color: #f8f9fa;">
+<section class="py-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="card border-0 shadow">
-                    <div class="card-body p-5">
-                        <h3 class="fw-bold text-center mb-4">Kirim Pesan</h3>
-                        <p class="text-center text-muted mb-4">Isi form di bawah ini dan tim kami akan menghubungi Anda dalam 1x24 jam</p>
+            <div class="col-lg-10 mx-auto">
+                <div class="row g-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="col-lg-5 bg-primary text-white p-5 d-flex flex-column justify-content-center">
+                        <h3 class="fw-bold mb-4">Mari Berkolaborasi</h3>
+                        <p class="mb-4">Kami siap membantu kebutuhan alat kesehatan institusi Anda dengan solusi terbaik dan pelayanan profesional.</p>
+                        <div class="contact-benefits">
+                            <div class="benefit-item mb-3">
+                                <i class="fas fa-check-circle me-3"></i>
+                                <span>Konsultasi gratis dengan ahli</span>
+                            </div>
+                            <div class="benefit-item mb-3">
+                                <i class="fas fa-check-circle me-3"></i>
+                                <span>Penawaran harga terbaik</span>
+                            </div>
+                            <div class="benefit-item mb-3">
+                                <i class="fas fa-check-circle me-3"></i>
+                                <span>Respon cepat dalam 1x24 jam</span>
+                            </div>
+                            <div class="benefit-item mb-3">
+                                <i class="fas fa-check-circle me-3"></i>
+                                <span>Garansi dan purna jual terpercaya</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 bg-white p-5">
+                        <h3 class="fw-bold mb-4">Kirim Pesan</h3>
                         
                         @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -204,11 +264,6 @@
                     <i class="fas fa-envelope me-2"></i>Email
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6 mb-3">
-                <a href="{{ route('rfq.create') }}" class="btn btn-warning btn-lg w-100">
-                    <i class="fas fa-file-alt me-2"></i>Request Quote
-                </a>
-            </div>
         </div>
     </div>
 </section>
@@ -257,7 +312,7 @@
                         </h2>
                         <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Anda dapat mengisi form Request for Quotation (RFQ) di website kami, menghubungi via WhatsApp, atau mengirim email dengan spesifikasi produk yang dibutuhkan. Tim kami akan memberikan penawaran terbaik dalam 1x24 jam.
+                                Anda dapat menghubungi kami via WhatsApp atau mengirim email dengan spesifikasi produk yang dibutuhkan. Tim kami akan memberikan penawaran terbaik dalam 1x24 jam.
                             </div>
                         </div>
                     </div>
@@ -282,16 +337,256 @@
 
 @section('styles')
 <style>
-.contact-item {
+/* Hero Section Animations */
+.hero-contact {
+    min-height: 60vh;
+}
+
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    animation: float-shapes 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 70%;
+    animation-delay: 4s;
+}
+
+@keyframes float-shapes {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animate-fade-in-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.animate-fade-in-delay-2 {
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.stat-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+/* Contact Cards */
+.contact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.contact-card:hover::before {
+    left: 100%;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.contact-icon-wrapper {
+    position: relative;
+}
+
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.contact-icon::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.3), transparent);
+    z-index: -1;
+}
+
+/* Form Enhancements */
+.benefit-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.benefit-item i {
+    color: rgba(255,255,255,0.8);
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+}
+
+/* Map Container */
+.map-container {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
 
-.contact-item:hover {
+.map-container:hover {
     transform: translateY(-5px);
 }
 
-.map-container {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* Quick Contact Buttons */
+.btn-lg {
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Accordion Styling */
+.accordion-item {
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.accordion-button {
+    background: white;
+    border: none;
+    font-weight: 600;
+    padding: 1.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--primary-color);
+    color: white;
+}
+
+.accordion-body {
+    padding: 1.5rem;
+    background: #f8f9fa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-contact {
+        min-height: 50vh;
+        text-align: center;
+    }
+    
+    .contact-card {
+        margin-bottom: 2rem;
+    }
+    
+    .shape {
+        display: none;
+    }
 }
 </style>
 @endsection

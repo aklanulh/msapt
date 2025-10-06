@@ -17,7 +17,7 @@ class ContactController extends Controller
             'email_alt' => '',
             'website' => 'www.ptmsa.co.id',
             'office_hours' => 'Senin - Jumat: 08:00 - 17:00 WIB',
-            'maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.1234567890!2d106.9234567!3d-6.3456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69abc123def456%3A0x789abc123def4567!2sRuko%20Maison%20Avenue%2C%20Kota%20Wisata%2C%20Cibubur!5e0!3m2!1sen!2sid!4v1234567890'
+            'maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.748684284785!2d106.96004352475438!3d-6.381105261549892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6995cd270379f1%3A0xc9fa186bdf6bb544!2sPT.%20MITRAJAYA%20SELARAS%20ABADI!5e0!3m2!1sen!2sid!4v1726110123456'
         ];
 
         return view('contact', compact('contact_info'));

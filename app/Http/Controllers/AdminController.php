@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
 use App\Models\AdminLog;
+use App\Models\ProjectGallery;
+use App\Models\TrustedClient;
 
 class AdminController extends Controller
 {
@@ -298,6 +300,234 @@ class AdminController extends Controller
     {
         $logs = AdminLog::orderBy('created_at', 'desc')->paginate(50);
         return view('admin.logs.index', compact('logs'));
+    }
+
+    // Project Gallery Management
+    public function projectGalleries()
+    {
+        $galleries = ProjectGallery::orderBy('year', 'desc')->orderBy('client')->get();
+        return view('admin.project-galleries.index', compact('galleries'));
+    }
+
+    public function createProjectGallery()
+    {
+        $categories = [
+            'Alat Kesehatan' => 'Alat Kesehatan',
+            'Alat Laboratorium' => 'Alat Laboratorium',
+            'Alat Medis' => 'Alat Medis',
+            'Jasa Konsultan' => 'Jasa Konsultan'
+        ];
+        
+        return view('admin.project-galleries.create', compact('categories'));
+    }
+
+    public function storeProjectGallery(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'client' => 'required|string|max:255',
+                'category' => 'required|string|max:255',
+                'year' => 'required|integer|min:2000|max:' . (date('Y') + 1),
+                'description' => 'required|string',
+                'images' => 'required|array|min:1',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'is_active' => 'nullable|boolean'
+            ]);
+
+            // Handle image uploads
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('project-galleries', 'public');
+                $imagePaths[] = $path;
+            }
+            $validated['images'] = $imagePaths;
+            $validated['is_active'] = (bool) $request->input('is_active', 1);
+
+            $gallery = ProjectGallery::create($validated);
+
+            AdminLog::logActivity(
+                'create', 
+                "Menambahkan galeri proyek: {$gallery->client}",
+                'project_gallery',
+                $gallery->id,
+                $gallery->client,
+                null,
+                $validated
+            );
+
+            return redirect()->route('admin.project-galleries')->with('success', 'Galeri proyek berhasil ditambahkan!');
+            
+        } catch (\Exception $e) {
+            Log::error('Error creating project gallery: ' . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat menyimpan galeri proyek: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function editProjectGallery($id)
+    {
+        $gallery = ProjectGallery::findOrFail($id);
+        $categories = [
+            'Alat Kesehatan' => 'Alat Kesehatan',
+            'Alat Laboratorium' => 'Alat Laboratorium',
+            'Alat Medis' => 'Alat Medis',
+            'Jasa Konsultan' => 'Jasa Konsultan'
+        ];
+        
+        return view('admin.project-galleries.edit', compact('gallery', 'categories'));
+    }
+
+    public function updateProjectGallery(Request $request, $id)
+    {
+        $gallery = ProjectGallery::findOrFail($id);
+        $oldValues = $gallery->toArray();
+        
+        $validated = $request->validate([
+            'client' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'year' => 'required|integer|min:2000|max:' . (date('Y') + 1),
+            'description' => 'required|string',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'is_active' => 'nullable|boolean'
+        ]);
+
+        // Handle image uploads for update
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('project-galleries', 'public');
+                $imagePaths[] = $path;
+            }
+            $validated['images'] = $imagePaths;
+        } else {
+            unset($validated['images']);
+        }
+
+        $validated['is_active'] = (bool) $request->input('is_active', 1);
+        $gallery->update($validated);
+
+        AdminLog::logActivity(
+            'update', 
+            "Memperbarui galeri proyek: {$gallery->client}",
+            'project_gallery',
+            $gallery->id,
+            $gallery->client,
+            $oldValues,
+            $validated
+        );
+
+        return redirect()->route('admin.project-galleries')->with('success', 'Galeri proyek berhasil diperbarui!');
+    }
+
+    public function destroyProjectGallery($id)
+    {
+        $gallery = ProjectGallery::findOrFail($id);
+        $clientName = $gallery->client;
+        
+        AdminLog::logActivity(
+            'delete', 
+            "Menghapus galeri proyek: {$clientName}",
+            'project_gallery',
+            $gallery->id,
+            $clientName,
+            $gallery->toArray(),
+            null
+        );
+        
+        $gallery->delete();
+        return redirect()->route('admin.project-galleries')->with('success', 'Galeri proyek berhasil dihapus!');
+    }
+
+    // Trusted Client Management
+    public function trustedClients()
+    {
+        $clients = TrustedClient::orderBy('hospital_name')->get();
+        return view('admin.trusted-clients.index', compact('clients'));
+    }
+
+    public function createTrustedClient()
+    {
+        return view('admin.trusted-clients.create');
+    }
+
+    public function storeTrustedClient(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'hospital_name' => 'required|string|max:255',
+                'is_active' => 'nullable|boolean'
+            ]);
+
+            $validated['is_active'] = (bool) $request->input('is_active', 1);
+            $client = TrustedClient::create($validated);
+
+            AdminLog::logActivity(
+                'create', 
+                "Menambahkan klien terpercaya: {$client->hospital_name}",
+                'trusted_client',
+                $client->id,
+                $client->hospital_name,
+                null,
+                $validated
+            );
+
+            return redirect()->route('admin.trusted-clients')->with('success', 'Klien terpercaya berhasil ditambahkan!');
+            
+        } catch (\Exception $e) {
+            Log::error('Error creating trusted client: ' . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat menyimpan klien terpercaya: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function editTrustedClient($id)
+    {
+        $client = TrustedClient::findOrFail($id);
+        return view('admin.trusted-clients.edit', compact('client'));
+    }
+
+    public function updateTrustedClient(Request $request, $id)
+    {
+        $client = TrustedClient::findOrFail($id);
+        $oldValues = $client->toArray();
+        
+        $validated = $request->validate([
+            'hospital_name' => 'required|string|max:255',
+            'is_active' => 'nullable|boolean'
+        ]);
+
+        $validated['is_active'] = (bool) $request->input('is_active', 1);
+        $client->update($validated);
+
+        AdminLog::logActivity(
+            'update', 
+            "Memperbarui klien terpercaya: {$client->hospital_name}",
+            'trusted_client',
+            $client->id,
+            $client->hospital_name,
+            $oldValues,
+            $validated
+        );
+
+        return redirect()->route('admin.trusted-clients')->with('success', 'Klien terpercaya berhasil diperbarui!');
+    }
+
+    public function destroyTrustedClient($id)
+    {
+        $client = TrustedClient::findOrFail($id);
+        $hospitalName = $client->hospital_name;
+        
+        AdminLog::logActivity(
+            'delete', 
+            "Menghapus klien terpercaya: {$hospitalName}",
+            'trusted_client',
+            $client->id,
+            $hospitalName,
+            $client->toArray(),
+            null
+        );
+        
+        $client->delete();
+        return redirect()->route('admin.trusted-clients')->with('success', 'Klien terpercaya berhasil dihapus!');
     }
 
 }

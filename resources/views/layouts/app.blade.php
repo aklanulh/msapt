@@ -290,9 +290,6 @@
                         <a class="nav-link" href="{{ route('projects') }}">Klien & Proyek <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('blog') }}">Artikel <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">Kontak</a>
                     </li>
                 </ul>
@@ -335,7 +332,6 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('about') }}">Tentang Kami</a></li>
                         <li><a href="{{ route('projects') }}">Klien & Proyek</a></li>
-                        <li><a href="{{ route('blog') }}">Artikel</a></li>
                         <li><a href="{{ route('catalog') }}">Katalog</a></li>
                     </ul>
                 </div>

@@ -10,28 +10,19 @@ class CatalogController extends Controller
     {
         $catalogs = [
             [
-                'title' => 'Katalog Alat Kesehatan 2024',
-                'description' => 'Katalog lengkap peralatan medis dan alat kesehatan terbaru',
-                'file' => 'catalog-alat-kesehatan-2024.pdf',
-                'size' => '15.2 MB',
-                'pages' => 120,
-                'updated' => '2024-01-15'
-            ],
-            [
-                'title' => 'Katalog Alat Laboratorium 2024',
-                'description' => 'Instrumen laboratorium dan peralatan analisis medis',
-                'file' => 'catalog-alat-laboratorium-2024.pdf',
-                'size' => '12.8 MB',
-                'pages' => 95,
-                'updated' => '2024-01-10'
-            ],
-            [
-                'title' => 'Katalog Alat Medis 2024',
+                'title' => 'Katalog Alat Medis',
                 'description' => 'Perangkat medis canggih untuk diagnosis dan terapi',
-                'file' => 'catalog-alat-medis-2024.pdf',
-                'size' => '18.5 MB',
-                'pages' => 150,
-                'updated' => '2024-01-20'
+                'icon' => 'fas fa-stethoscope'
+            ],
+            [
+                'title' => 'Katalog Alat Laboratorium',
+                'description' => 'Instrumen laboratorium dan peralatan analisis medis',
+                'icon' => 'fas fa-microscope'
+            ],
+            [
+                'title' => 'Katalog Alat BMHP',
+                'description' => 'Bahan Medis Habis Pakai untuk kebutuhan medis sehari-hari',
+                'icon' => 'fas fa-box-open'
             ]
         ];
 

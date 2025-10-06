@@ -106,6 +106,12 @@
                         <a class="nav-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}" href="{{ route('admin.products') }}">
                             <i class="fas fa-box me-2"></i>Kelola Produk
                         </a>
+                        <a class="nav-link {{ request()->routeIs('admin.project-galleries*') ? 'active' : '' }}" href="{{ route('admin.project-galleries') }}">
+                            <i class="fas fa-images me-2"></i>Kelola Galeri Proyek
+                        </a>
+                        <a class="nav-link {{ request()->routeIs('admin.trusted-clients*') ? 'active' : '' }}" href="{{ route('admin.trusted-clients') }}">
+                            <i class="fas fa-hospital me-2"></i>Kelola Klien Terpercaya
+                        </a>
                         <a class="nav-link {{ request()->routeIs('admin.logs*') ? 'active' : '' }}" href="{{ route('admin.logs') }}">
                             <i class="fas fa-history me-2"></i>Log Aktivitas
                         </a>

@@ -20,37 +20,6 @@
     </div>
 </section>
 
-<!-- Statistics -->
-<section class="py-5" style="background-color: var(--secondary-color);">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">{{ $stats['total_projects'] }}+</h2>
-                    <p class="mb-0 fw-bold">Proyek Selesai</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">{{ $stats['satisfied_clients'] }}+</h2>
-                    <p class="mb-0 fw-bold">Klien Puas</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">{{ $stats['years_experience'] }}</h2>
-                    <p class="mb-0 fw-bold">Tahun Pengalaman</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="stat-item">
-                    <h2 class="display-4 fw-bold" style="color: var(--primary-color);">{{ $stats['total_value'] }}</h2>
-                    <p class="mb-0 fw-bold">Total Nilai Proyek</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Project Gallery -->
 <section class="py-5">
@@ -98,7 +67,6 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <span class="badge bg-secondary">{{ $project['category'] }}</span>
-                            <span class="text-primary fw-bold">{{ $project['value'] }}</span>
                         </div>
                         <h5 class="card-title fw-bold">{{ $project['title'] }}</h5>
                         <p class="text-muted mb-2"><i class="fas fa-building me-2"></i>{{ $project['client'] }}</p>
@@ -134,19 +102,23 @@
                                 <div class="col-md-6">
                                     <strong>Tahun:</strong> {{ $project['year'] }}
                                 </div>
-                                <div class="col-md-6">
-                                    <strong>Nilai Proyek:</strong> {{ $project['value'] }}
-                                </div>
                             </div>
                             <p>{{ $project['description'] }}</p>
                             <div class="row">
-                                @foreach($project['gallery'] as $index => $image)
-                                <div class="col-md-4 mb-3">
-                                    <div class="gallery-item d-flex align-items-center justify-content-center" style="height: 150px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%); border-radius: 10px;">
-                                        <i class="fas fa-image" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                @if($project['gallery'] && count($project['gallery']) > 0)
+                                    @foreach($project['gallery'] as $index => $image)
+                                    <div class="col-md-4 mb-3">
+                                        <img src="{{ asset('storage/' . $image) }}" class="img-fluid rounded" alt="Project Image {{ $index + 1 }}" style="height: 150px; width: 100%; object-fit: cover;">
                                     </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                    <div class="col-12 text-center">
+                                        <div class="gallery-item d-flex align-items-center justify-content-center" style="height: 150px; background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%); border-radius: 10px;">
+                                            <i class="fas fa-image" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                            <p class="ms-3 mb-0">Belum ada gambar</p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -164,7 +136,7 @@
 </section>
 
 <!-- Client Logos -->
-<section class="py-5" style="background-color: #f8f9fa;">
+<section class="py-5" style="background-color: #f8f9fa; overflow: hidden;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
@@ -172,44 +144,35 @@
                 <p class="lead text-muted">Institusi kesehatan yang telah mempercayai MSA</p>
             </div>
         </div>
-        <div class="row align-items-center">
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-hospital" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">RS Husada Jakarta</p>
+        @if($trustedClients->count() > 0)
+        <div class="clients-carousel-wrapper">
+            <div class="clients-carousel d-flex align-items-center">
+                @foreach($trustedClients as $client)
+                <div class="client-item flex-shrink-0 text-center mx-4">
+                    <div class="client-logo p-3">
+                        <i class="fas fa-hospital" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        <p class="mt-2 mb-0 small">{{ $client->hospital_name }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-clinic-medical" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">RSUD Tangerang</p>
+                @endforeach
+                <!-- Duplicate for seamless loop -->
+                @foreach($trustedClients as $client)
+                <div class="client-item flex-shrink-0 text-center mx-4">
+                    <div class="client-logo p-3">
+                        <i class="fas fa-hospital" style="font-size: 3rem; color: var(--primary-color);"></i>
+                        <p class="mt-2 mb-0 small">{{ $client->hospital_name }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-hospital-alt" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">RS Permata Bekasi</p>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-building" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">Dinkes Kota Depok</p>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-hospital-user" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">RS Siloam</p>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4 text-center">
-                <div class="client-logo p-3">
-                    <i class="fas fa-plus-square" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p class="mt-2 mb-0 small">RS Mayapada</p>
-                </div>
+                @endforeach
             </div>
         </div>
+        @else
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="text-muted">Belum ada klien terpercaya yang ditambahkan.</p>
+            </div>
+        </div>
+        @endif
     </div>
 </section>
 
@@ -243,6 +206,64 @@
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+
+.clients-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.clients-carousel {
+    animation: scroll-left 60s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+}
+
+.client-item {
+    display: inline-block;
+    min-width: 200px;
+    vertical-align: top;
+}
+
+.client-logo {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-logo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.clients-carousel:hover {
+    animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+    .clients-carousel {
+        animation-duration: 40s;
+    }
+    
+    .client-item {
+        min-width: 150px;
+    }
 }
 
 .client-logo {

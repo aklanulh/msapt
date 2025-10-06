@@ -25,8 +25,12 @@
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <div class="hero-image mt-5 mt-lg-0">
-                    <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid logo-animation" style="max-height: 300px;">
+                <div class="hero-video mt-5 mt-lg-0">
+                    <video autoplay muted loop class="img-fluid" style="max-height: 500px; width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <source src="{{ asset('homemsa.mp4') }}" type="video/mp4">
+                        <!-- Fallback image if video doesn't load -->
+                        <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid logo-animation" style="max-height: 300px;">
+                    </video>
                 </div>
             </div>
         </div>
@@ -298,24 +302,22 @@
 </section>
 @endsection
 
+@section('styles')
 <style>
-/* Logo Animation */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #003d7a 100%);
+    color: white;
+    padding: 100px 0 80px;
+}
+
 .logo-animation {
-    animation: logoFloat 3s ease-in-out infinite;
-    transition: transform 0.3s ease;
+    animation: float 3s ease-in-out infinite;
 }
 
-.logo-animation:hover {
-    transform: scale(1.05);
-}
 
-@keyframes logoFloat {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 /* Product Carousel Styles */
