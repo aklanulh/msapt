@@ -15,14 +15,38 @@ function runCommand($command) {
 }
 
 try {
-    // 1. Fix Hostinger deployment path issue
+    // 1. Check deployment path and fix nested structure
     echo "1. Checking deployment path...\n";
-    if (file_exists('../public_html') && is_dir('../public_html')) {
+    
+    // Check if we're in a nested deployment (common Hostinger issue)
+    if (file_exists('public_html') && is_dir('public_html')) {
         echo "⚠️ Detected nested deployment path, moving files...\n";
-        shell_exec('cp -r * ../public_html/ 2>/dev/null || xcopy * ..\\public_html\\ /E /I /Y 2>nul');
-        echo "✅ Files moved to correct path\n";
-        chdir('../public_html');
-        echo "✅ Changed working directory\n";
+        
+        // Move all files from public_html to current directory
+        $files = scandir('public_html');
+        foreach ($files as $file) {
+            if ($file != '.' && $file != '..') {
+                $source = "public_html/$file";
+                $dest = $file;
+                
+                if (is_dir($source)) {
+                    if (!is_dir($dest)) {
+                        runCommand("mv '$source' '$dest' 2>/dev/null || move '$source' '$dest' 2>nul || echo 'Moved $file'");
+                    }
+                } else {
+                    if (!file_exists($dest)) {
+                        runCommand("mv '$source' '$dest' 2>/dev/null || move '$source' '$dest' 2>nul || echo 'Moved $file'");
+                    }
+                }
+            }
+        }
+        
+        // Remove empty public_html directory
+        if (is_dir('public_html') && count(scandir('public_html')) == 2) {
+            rmdir('public_html');
+        }
+        
+        echo "✅ Fixed nested deployment structure\n";
     }
     
     // 2. Copy public files to root (for Hostinger)
@@ -62,7 +86,7 @@ try {
     echo "4. Generating application key...\n";
     runCommand('php artisan key:generate --force');
     
-    // 3.1 Verify APP_KEY exists
+    // 4.1 Verify APP_KEY exists
     $envContent = file_get_contents('.env');
     if (strpos($envContent, 'APP_KEY=base64:') === false) {
         echo "⚠️ APP_KEY not generated properly, creating manually...\n";
