@@ -52,6 +52,16 @@ try {
     echo "3. Generating application key...\n";
     runCommand('php artisan key:generate --force');
     
+    // 3.1 Verify APP_KEY exists
+    $envContent = file_get_contents('.env');
+    if (strpos($envContent, 'APP_KEY=base64:') === false) {
+        echo "⚠️ APP_KEY not generated properly, creating manually...\n";
+        $key = 'base64:' . base64_encode(random_bytes(32));
+        $envContent = preg_replace('/APP_KEY=.*/', "APP_KEY=$key", $envContent);
+        file_put_contents('.env', $envContent);
+        echo "✅ APP_KEY created manually\n";
+    }
+    
     // 4. Create storage directories
     echo "4. Creating storage directories...\n";
     $directories = [
@@ -68,23 +78,22 @@ try {
         }
     }
     
-    // 4. Set proper permissions
     echo "4. Setting permissions...\n";
     runCommand('chmod -R 755 storage');
     runCommand('chmod -R 755 bootstrap/cache');
     runCommand('chmod -R 644 .env');
     
-    // 5. Clear all caches
-    echo "5. Clearing caches...\n";
+    // 5. Clear all caches and optimize
+    echo "5. Clearing caches and optimizing...\n";
     runCommand('php artisan config:clear');
+    runCommand('php artisan cache:clear');
     runCommand('php artisan route:clear');
     runCommand('php artisan view:clear');
-    runCommand('php artisan cache:clear');
     
     // 6. Test database connection
     echo "6. Testing database connection...\n";
-    $output = runCommand('php artisan migrate:status');
-    if (strpos($output, 'Connection refused') !== false || strpos($output, 'Access denied') !== false) {
+    $dbTest = runCommand('php artisan migrate:status');
+    if (strpos($dbTest, 'could not find driver') !== false || strpos($dbTest, 'Connection refused') !== false) {
         echo "❌ Database connection failed!\n";
         echo "Please check your .env database configuration:\n";
         echo "- DB_HOST\n";
