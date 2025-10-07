@@ -163,25 +163,40 @@ try {
     echo "\n";
 
     // ==========================================
-    // STEP 4: CLEAR ALL CACHED FILES
+    // STEP 4: AGGRESSIVELY CLEAR ALL CACHED FILES
     // ==========================================
-    echo "STEP 4: Clearing ALL cached files and directories...\n";
+    echo "STEP 4: Aggressively clearing ALL cached files and directories...\n";
+    
+    // Remove specific cache files that cause config issues
+    $cacheFiles = [
+        'bootstrap/cache/config.php',
+        'bootstrap/cache/packages.php', 
+        'bootstrap/cache/services.php',
+        'bootstrap/cache/routes-v7.php'
+    ];
+    
+    foreach ($cacheFiles as $file) {
+        if (file_exists($file)) {
+            unlink($file);
+            echo "Removed: $file\n";
+        }
+    }
     
     $cacheDirs = [
         'bootstrap/cache',
-        'storage/framework/cache/data',
+        'storage/framework/cache',
         'storage/framework/sessions', 
-        'storage/framework/views',
-        'storage/logs'
+        'storage/framework/views'
     ];
     
     foreach ($cacheDirs as $dir) {
         if (is_dir($dir)) {
             shell_exec("rm -rf $dir/* 2>/dev/null");
+            shell_exec("rm -rf $dir/.* 2>/dev/null");
             echo "Cleared: $dir\n";
         }
     }
-    echo "✅ All cached files cleared\n";
+    echo "✅ All cached files aggressively cleared\n";
     echo "\n";
 
     // ==========================================
