@@ -41,12 +41,20 @@
 4. Klik kanan zip → "Extract Here"
 5. Hapus file zip setelah extract
 
-## ⚙️ Langkah 3: Setup Otomatis
+## ⚙️ Langkah 3: Setup Manual
 
-### A. Jalankan Setup
-1. Buka browser: `https://msapt.co.id/setup-hostinger.php`
-2. Tunggu proses setup (2-3 menit)
-3. Jika sukses: "Setup Completed Successfully!"
+### A. Setup Environment
+1. Di File Manager, copy `.env.hostinger` ke `.env`
+2. Buka Terminal di Hostinger
+3. Jalankan perintah setup:
+   ```bash
+   composer install --no-dev --optimize-autoloader
+   php artisan key:generate --force
+   php artisan migrate --force
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
 
 ### B. Test Website
 1. Buka: `https://msapt.co.id`
@@ -57,7 +65,8 @@
 ## 🔧 Jika Ada Masalah
 
 ### Error 500
-- Jalankan ulang: `https://msapt.co.id/setup-hostinger.php`
+- Periksa file `.env` sudah ada
+- Jalankan ulang perintah setup di terminal
 
 ### Database Error
 - Cek database di Hostinger panel
@@ -75,7 +84,7 @@ Untuk update selanjutnya:
 1. Edit file di local
 2. Compress folder baru
 3. Upload & extract di Hostinger
-4. Jalankan: `https://msapt.co.id/deploy.php`
+4. Jalankan perintah Laravel standar di terminal
 
 ## 📞 Bantuan
 Jika masih error, screenshot error nya dan tanya lagi!
