@@ -26,10 +26,40 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama Rumah Sakit</th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => ($sortBy == 'id' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            ID
+                                            @if($sortBy == 'id')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'hospital_name', 'direction' => ($sortBy == 'hospital_name' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            Nama Rumah Sakit
+                                            @if($sortBy == 'hospital_name')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
                                     <th>Status</th>
-                                    <th>Tanggal Dibuat</th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'direction' => ($sortBy == 'created_at' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            Tanggal Dibuat
+                                            @if($sortBy == 'created_at')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -74,4 +104,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+<style>
+.table th a {
+    color: #495057 !important;
+    font-weight: 600;
+}
+
+.table th a:hover {
+    color: #007bff !important;
+}
+
+.table th a i {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.table th a:hover i {
+    opacity: 1;
+}
+</style>
 @endsection

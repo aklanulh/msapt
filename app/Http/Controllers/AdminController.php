@@ -439,10 +439,24 @@ class AdminController extends Controller
     }
 
     // Trusted Client Management
-    public function trustedClients()
+    public function trustedClients(Request $request)
     {
-        $clients = TrustedClient::orderBy('hospital_name')->get();
-        return view('admin.trusted-clients.index', compact('clients'));
+        $sortBy = $request->get('sort', 'hospital_name');
+        $sortDirection = $request->get('direction', 'asc');
+        
+        // Validate sort parameters
+        $allowedSorts = ['id', 'hospital_name', 'created_at'];
+        if (!in_array($sortBy, $allowedSorts)) {
+            $sortBy = 'hospital_name';
+        }
+        
+        if (!in_array($sortDirection, ['asc', 'desc'])) {
+            $sortDirection = 'asc';
+        }
+        
+        $clients = TrustedClient::orderBy($sortBy, $sortDirection)->get();
+        
+        return view('admin.trusted-clients.index', compact('clients', 'sortBy', 'sortDirection'));
     }
 
     public function createTrustedClient()
