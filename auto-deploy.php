@@ -33,8 +33,8 @@ if (is_dir('public_html')) {
         }
     }
     
-    // Remove empty nested directory
-    rmdir('public_html');
+    // Force remove nested directory (even if not empty)
+    $output = shell_exec('rm -rf public_html 2>&1');
     echo "✅ Nested directory issue fixed\n";
 } else {
     echo "✅ No nested directory issue found\n";
