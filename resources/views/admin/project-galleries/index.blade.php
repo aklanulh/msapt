@@ -26,10 +26,50 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Klien</th>
-                                    <th>Kategori</th>
-                                    <th>Tahun</th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => ($sortBy == 'id' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            ID
+                                            @if($sortBy == 'id')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'client', 'direction' => ($sortBy == 'client' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            Klien
+                                            @if($sortBy == 'client')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'category', 'direction' => ($sortBy == 'category' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            Kategori
+                                            @if($sortBy == 'category')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'year', 'direction' => ($sortBy == 'year' && $sortDirection == 'asc') ? 'desc' : 'asc']) }}" 
+                                           class="text-decoration-none text-dark d-flex align-items-center">
+                                            Tahun
+                                            @if($sortBy == 'year')
+                                                <i class="fas fa-sort-{{ $sortDirection == 'asc' ? 'up' : 'down' }} ms-1"></i>
+                                            @else
+                                                <i class="fas fa-sort ms-1 text-muted"></i>
+                                            @endif
+                                        </a>
+                                    </th>
                                     <th>Deskripsi</th>
                                     <th>Gambar</th>
                                     <th>Status</th>
@@ -91,4 +131,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+<style>
+.table th a {
+    color: #495057 !important;
+    font-weight: 600;
+}
+
+.table th a:hover {
+    color: #007bff !important;
+}
+
+.table th a i {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.table th a:hover i {
+    opacity: 1;
+}
+</style>
 @endsection

@@ -303,10 +303,24 @@ class AdminController extends Controller
     }
 
     // Project Gallery Management
-    public function projectGalleries()
+    public function projectGalleries(Request $request)
     {
-        $galleries = ProjectGallery::orderBy('year', 'desc')->orderBy('client')->get();
-        return view('admin.project-galleries.index', compact('galleries'));
+        $sortBy = $request->get('sort', 'year');
+        $sortDirection = $request->get('direction', 'desc');
+        
+        // Validate sort parameters
+        $allowedSorts = ['id', 'client', 'category', 'year'];
+        if (!in_array($sortBy, $allowedSorts)) {
+            $sortBy = 'year';
+        }
+        
+        if (!in_array($sortDirection, ['asc', 'desc'])) {
+            $sortDirection = 'desc';
+        }
+        
+        $galleries = ProjectGallery::orderBy($sortBy, $sortDirection)->get();
+        
+        return view('admin.project-galleries.index', compact('galleries', 'sortBy', 'sortDirection'));
     }
 
     public function createProjectGallery()
