@@ -9,14 +9,8 @@ class DatabaseServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Auto-detect environment and set appropriate database
-        if (env('RAILWAY_ENVIRONMENT') || env('DATABASE_URL')) {
-            // Railway environment - use PostgreSQL
-            Config::set('database.default', 'pgsql');
-        } else {
-            // Local environment - use SQLite
-            Config::set('database.default', 'sqlite');
-        }
+        // Force MySQL for all environments (Hostinger deployment)
+        Config::set('database.default', 'mysql');
     }
 
     public function boot(): void

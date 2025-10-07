@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin.auth' => \App\Http\Middleware\AdminAuth::class,
         ]);
+        
+        // Auto migrate on web requests
+        $middleware->web(append: [
+            \App\Http\Middleware\AutoMigrate::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

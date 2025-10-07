@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         // Create admin user with specific credentials
         User::create([
             'name' => 'PT MSA Alkes Lab Admin',
-            'email' => 'ptmsaalkeslabbmhp',
+            'email' => 'admin@msapt.co.id',
             'password' => Hash::make('ptmsa112233'),
             'email_verified_at' => now(),
         ]);
