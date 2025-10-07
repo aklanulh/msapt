@@ -125,7 +125,7 @@
             <div class="col-lg-6">
                 <div class="text-center">
                     <video autoplay loop muted class="img-fluid rounded shadow-lg" style="max-height: 400px; width: 100%; object-fit: cover;">
-                        <source src="{{ url('mapsmsa.mp4') }}" type="video/mp4">
+                        <source src="{{ asset('videos/mapsmsa.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p class="text-muted mt-3"><small>Kantor Pusat MSA - Ruko Maison Avenue MA.19, Kota Wisata, Cibubur</small></p>
@@ -138,7 +138,7 @@
                     <div class="col-lg-6">
                         <div class="text-center">
                             <video autoplay loop muted class="img-fluid rounded shadow" style="max-height: 300px; width: 100%; object-fit: cover;">
-                                <source src="{{ url('videotentangkami.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('videos/videotentangkami.mp4') }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
