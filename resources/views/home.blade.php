@@ -27,7 +27,7 @@
             <div class="col-lg-6 text-center">
                 <div class="hero-video mt-5 mt-lg-0">
                     <video autoplay muted loop class="img-fluid" style="max-height: 500px; width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                        <source src="https://msapt.co.id/videos/homemsa.mp4" type="video/mp4">
+                        <source src="https://msapt.co.id/public/videos/homemsa.mp4" type="video/mp4">
                         <!-- Fallback image if video doesn't load -->
                         <img src="{{ asset('images/logo/msa-logo-bg.jpeg') }}" alt="MSA Logo" class="img-fluid logo-animation" style="max-height: 300px;">
                     </video>
