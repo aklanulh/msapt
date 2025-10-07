@@ -49,11 +49,20 @@ function runCommand($command) {
 }
 
 try {
-    // 1. Copy environment file
+    // 1. Fix environment file with proper encoding
     echo "1. Setting up environment file...\n";
     if (file_exists('.env.hostinger')) {
-        copy('.env.hostinger', '.env');
-        echo "✅ .env file created from .env.hostinger\n";
+        // Read content and fix encoding issues
+        $content = file_get_contents('.env.hostinger');
+        
+        // Remove BOM and fix line endings
+        $content = preg_replace('/^\xEF\xBB\xBF/', '', $content);
+        $content = str_replace(["\r\n", "\r"], "\n", $content);
+        
+        // Write with proper encoding
+        file_put_contents('.env', $content);
+        chmod('.env', 0644);
+        echo "✅ .env file created with proper encoding\n";
     } else {
         copy('.env.example', '.env');
         echo "✅ .env file created from .env.example\n";
@@ -81,12 +90,15 @@ try {
     runCommand('chmod -R 755 storage');
     runCommand('chmod -R 755 bootstrap/cache');
     
-    // 5. Clear all caches
-    echo "5. Clearing all caches...\n";
+    // 5. Clear all caches and force reload config
+    echo "5. Clearing all caches and reloading config...\n";
     runCommand('php artisan config:clear');
     runCommand('php artisan route:clear');
     runCommand('php artisan view:clear');
     runCommand('php artisan cache:clear');
+    
+    // Force reload environment and cache config
+    runCommand('php artisan config:cache');
     
     // 6. Test database connection
     echo "6. Testing database connection...\n";
