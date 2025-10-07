@@ -27,11 +27,10 @@ try {
     Artisan::call('view:clear');
     echo "✅ View cache cleared\n";
     
-    // Force PostgreSQL environment
-    putenv('DB_CONNECTION=pgsql');
-    $_ENV['DB_CONNECTION'] = 'pgsql';
+    // Use environment database connection
+    // Don't force database connection - use what's in .env
     
-    echo "✅ Environment forced to PostgreSQL\n";
+    echo "✅ Using environment database configuration\n";
     
     // Test database connection
     echo "\nTesting database connection...\n";

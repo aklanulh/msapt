@@ -47,6 +47,14 @@ setup_*.php
 *DATABASE*.md
 CARA-*.md
 STEP-BY-STEP*.md
+
+# Development and cleanup files
+cleanup.php
+diagnose.php
+test-db.php
+pre-deploy.php
+post-deploy.php
+deployment-checklist.md
 /vendor
 Homestead.json
 Homestead.yaml

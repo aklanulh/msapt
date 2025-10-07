@@ -23,27 +23,26 @@ try {
     echo "1. Installing/Updating Composer dependencies...\n";
     runCommand('composer install --no-dev --optimize-autoloader');
     
-    // 2. Copy environment file if not exists
-    if (!file_exists('.env')) {
-        echo "2. Creating .env file...\n";
-        if (file_exists('.env.hostinger')) {
-            copy('.env.hostinger', '.env');
-            echo ".env file created from .env.hostinger\n";
-        } else {
-            copy('.env.example', '.env');
-            echo ".env file created from .env.example\n";
-        }
+    // 2. Copy environment file (always refresh from .env.hostinger)
+    echo "2. Creating/Updating .env file...\n";
+    if (file_exists('.env.hostinger')) {
+        copy('.env.hostinger', '.env');
+        echo ".env file created/updated from .env.hostinger\n";
     } else {
-        echo "2. .env file already exists, skipping...\n";
+        copy('.env.example', '.env');
+        echo ".env file created from .env.example\n";
     }
     
-    // 3. Generate application key if not set
+    // 3. Generate application key if not set or invalid
     $envContent = file_get_contents('.env');
-    if (strpos($envContent, 'APP_KEY=') !== false && strpos($envContent, 'APP_KEY=base64:') === false) {
+    if (strpos($envContent, 'APP_KEY=base64:YourGeneratedKeyWillBeHere') !== false || 
+        preg_match('/APP_KEY=\s*$/', $envContent) ||
+        preg_match('/APP_KEY=base64:YourGeneratedKeyWillBeHere32CharactersLong=/', $envContent) ||
+        (strpos($envContent, 'APP_KEY=') !== false && strpos($envContent, 'APP_KEY=base64:') === false)) {
         echo "3. Generating application key...\n";
         runCommand('php artisan key:generate --force');
     } else {
-        echo "3. Application key already exists, skipping...\n";
+        echo "3. Application key already exists and is valid, skipping...\n";
     }
     
     // 4. Clear all caches
