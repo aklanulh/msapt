@@ -76,17 +76,17 @@ try {
     echo "3. Installing Composer dependencies...\n";
     runCommand('composer install --no-dev --optimize-autoloader');
     
-    // 4. Clear all caches
-    echo "4. Clearing all caches...\n";
+    // 4. Set proper permissions FIRST (before cache operations)
+    echo "4. Setting proper permissions...\n";
+    runCommand('chmod -R 755 storage');
+    runCommand('chmod -R 755 bootstrap/cache');
+    
+    // 5. Clear all caches
+    echo "5. Clearing all caches...\n";
     runCommand('php artisan config:clear');
     runCommand('php artisan route:clear');
     runCommand('php artisan view:clear');
     runCommand('php artisan cache:clear');
-    
-    // 5. Set proper permissions
-    echo "5. Setting proper permissions...\n";
-    runCommand('chmod -R 755 storage');
-    runCommand('chmod -R 755 bootstrap/cache');
     
     // 6. Test database connection
     echo "6. Testing database connection...\n";
