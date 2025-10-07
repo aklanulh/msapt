@@ -10,6 +10,36 @@ echo "=== MSAPT Auto Deployment & Fix Started ===\n";
 $projectPath = __DIR__;
 chdir($projectPath);
 
+// Fix nested directory issue (Hostinger git push problem)
+echo "0. Checking for nested directory issue...\n";
+if (is_dir('public_html')) {
+    echo "Found nested public_html directory, fixing...\n";
+    
+    // Move all files from nested directory
+    $files = glob('public_html/*');
+    foreach ($files as $file) {
+        $filename = basename($file);
+        if (!file_exists($filename)) {
+            rename($file, $filename);
+        }
+    }
+    
+    // Move hidden files
+    $hiddenFiles = glob('public_html/.*');
+    foreach ($hiddenFiles as $file) {
+        $filename = basename($file);
+        if ($filename !== '.' && $filename !== '..' && !file_exists($filename)) {
+            rename($file, $filename);
+        }
+    }
+    
+    // Remove empty nested directory
+    rmdir('public_html');
+    echo "✅ Nested directory issue fixed\n";
+} else {
+    echo "✅ No nested directory issue found\n";
+}
+
 // Function to run command and show output
 function runCommand($command) {
     echo "Running: $command\n";
