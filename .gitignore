@@ -38,6 +38,7 @@ storage/backups/
 # Sensitive deployment files (keep local only)
 .env.local
 .env.production.local
+.env.hostinger
 backup_*.php
 setup_*.php
 
