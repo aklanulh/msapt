@@ -96,7 +96,12 @@ echo "🗄️  Running database migrations...\n";
 shell_exec('php artisan migrate --force');
 echo "✅ Database updated\n";
 
-// Step 9: Test database connection
+// Step 9: Run seeders (if needed)
+echo "🌱 Running database seeders...\n";
+shell_exec('php artisan db:seed --force');
+echo "✅ Seeders completed\n";
+
+// Step 10: Test database connection
 echo "🔍 Testing database connection...\n";
 $output = shell_exec('php artisan tinker --execute="DB::connection()->getPdo(); echo \"Database connected successfully\";"');
 if (strpos($output, 'Database connected successfully') !== false) {
