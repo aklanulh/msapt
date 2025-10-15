@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\AdminLog;
 use App\Models\ProjectGallery;
@@ -21,22 +22,25 @@ class AdminController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Use database authentication with new admin credentials
-        if ($credentials['username'] === 'ptmsaalkeslabbmhp' && $credentials['password'] === 'ptmsa112233') {
+        // Use database authentication with User model
+        $user = User::where('email', $credentials['email'])->first();
+        
+        if ($user && Hash::check($credentials['password'], $user->password)) {
             session(['admin_authenticated' => true]);
+            session(['admin_user' => $user->toArray()]);
             
             // Log admin login
-            AdminLog::logActivity('login', 'Admin berhasil login ke sistem');
+            AdminLog::logActivity('login', 'Admin berhasil login ke sistem: ' . $user->email);
             
             return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([
-            'username' => 'Username atau password salah.',
+            'email' => 'Email atau password salah.',
         ]);
     }
 

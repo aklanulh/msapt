@@ -106,13 +106,13 @@
                 @endif
                 
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="email" class="form-label">Email</label>
                     <div class="input-group">
                         <span class="input-group-text">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-envelope"></i>
                         </span>
-                        <input type="text" class="form-control with-icon" id="username" name="username" 
-                               value="{{ old('username') }}" required autofocus>
+                        <input type="email" class="form-control with-icon" id="email" name="email" 
+                               value="{{ old('email') }}" required autofocus>
                     </div>
                 </div>
                 
