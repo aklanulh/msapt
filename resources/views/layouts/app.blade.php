@@ -284,7 +284,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('catalog') }}">Katalog <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>
+                        <a class="nav-link" href="{{ route('catalog') }}">Katalog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('projects') }}">Klien & Proyek <span class="badge bg-warning text-dark ms-1">Coming Soon</span></a>

@@ -11,10 +11,6 @@
             <div class="col-lg-12 text-center">
                 <h1 class="display-4 fw-bold mb-3">Katalog Produk</h1>
                 <p class="lead">Jelajahi katalog lengkap produk MSA untuk referensi dan pengadaan</p>
-                <div class="alert alert-warning mt-3" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>Informasi:</strong> Isi halaman ini hanya ilustrasi. Konten lengkap akan segera tersedia.
-                </div>
             </div>
         </div>
     </div>
