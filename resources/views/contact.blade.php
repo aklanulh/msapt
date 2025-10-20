@@ -88,15 +88,8 @@
                     </div>
                     <h5 class="fw-bold mb-3">Email</h5>
                     <div class="mb-3">
-                        <small class="text-muted d-block">General:</small>
                         <a href="mailto:{{ $contact_info['email'] }}" class="text-decoration-none">
                             {{ $contact_info['email'] }}
-                        </a>
-                    </div>
-                    <div class="mb-3">
-                        <small class="text-muted d-block">Customer Service:</small>
-                        <a href="mailto:{{ $contact_info['email_cs'] }}" class="text-decoration-none">
-                            {{ $contact_info['email_cs'] }}
                         </a>
                     </div>
                 </div>

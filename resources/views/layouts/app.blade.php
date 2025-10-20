@@ -49,7 +49,7 @@
         .navbar {
             background: var(--white-color);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 0;
+            padding: 0.5rem 0;
         }
 
         .navbar-brand {
@@ -246,16 +246,89 @@
                 font-size: 24px;
             }
         }
+
+        /* Instagram Banner Styles */
+        .instagram-banner {
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+            color: white;
+            padding: 8px 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1060;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .instagram-banner a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .instagram-banner a:hover {
+            color: #fcb045;
+            text-decoration: underline;
+        }
+
+        .instagram-banner i {
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Adjust navbar position to account for Instagram banner */
+        .navbar.fixed-top {
+            top: 40px;
+        }
+
+        /* Adjust body padding to account for both banners */
+        body {
+            padding-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .instagram-banner {
+                font-size: 12px;
+                padding: 6px 0;
+            }
+            
+            .navbar.fixed-top {
+                top: 32px;
+            }
+            
+            body {
+                padding-top: 30px;
+            }
+        }
     </style>
     
     @yield('styles')
 </head>
 <body>
+    <!-- Instagram Banner -->
+    <div class="instagram-banner">
+        <div class="container">
+            <i class="fab fa-instagram"></i>
+            Ikuti kami juga di Instagram: 
+            <a href="https://www.instagram.com/msa_pengadaanalkes" target="_blank">@msa_pengadaanalkes</a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo/msa-logo-original.png') }}" alt="MSA Logo" class="logo-animated" style="height: 70px; width: auto; max-width: 200px;">
+                <img src="{{ asset('images/logo/msa-logo-original.png') }}" alt="MSA Logo" class="logo-animated" style="height: 50px; width: auto; max-width: 180px;">
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -27,8 +27,8 @@ class AboutController extends Controller
                 'documents' => 'NIB, IDAK, dan seluruh dokumen hukum tersedia dan sah',
                 'address' => 'Ruko Maison Avenue MA.19, Kota Wisata, Cibubur, Kabupaten Bogor, 16820',
                 'whatsapp' => '0811 9466 470',
-                'emails' => ['mitrajayaselarasabadi@gmail.com', 'cs@ptmsa.biz.id', 'marketing@ptmsa.biz.id'],
-                'website' => 'www.ptmsa.biz.id'
+                'emails' => ['mitrajayaselarasabadi@gmail.com'],
+                'website' => 'www.msapt.co.id'
             ]
         ];
 
