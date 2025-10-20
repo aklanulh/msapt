@@ -298,16 +298,24 @@
 
         @media (max-width: 768px) {
             .instagram-banner {
-                font-size: 12px;
-                padding: 6px 0;
+                font-size: 11px;
+                padding: 8px 0;
+            }
+            
+            .instagram-banner .col-md-6 {
+                margin-bottom: 4px;
+            }
+            
+            .instagram-banner .col-md-6:last-child {
+                margin-bottom: 0;
             }
             
             .navbar.fixed-top {
-                top: 32px;
+                top: 40px;
             }
             
             body {
-                padding-top: 30px;
+                padding-top: 35px;
             }
         }
     </style>
@@ -315,12 +323,20 @@
     @yield('styles')
 </head>
 <body>
-    <!-- Instagram Banner -->
+    <!-- Promo Banner -->
     <div class="instagram-banner">
         <div class="container">
-            <i class="fab fa-instagram"></i>
-            Ikuti kami juga di Instagram: 
-            <a href="https://www.instagram.com/msa_pengadaanalkes" target="_blank">@msa_pengadaanalkes</a>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <i class="fab fa-instagram"></i>
+                    Ikuti kami juga di Instagram: 
+                    <a href="https://www.instagram.com/msa_pengadaanalkes" target="_blank">@msa_pengadaanalkes</a>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Produk tersedia di <strong>e-Catalog</strong> & <strong>INAPROC</strong>
+                </div>
+            </div>
         </div>
     </div>
 
