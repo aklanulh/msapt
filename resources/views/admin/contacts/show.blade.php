@@ -1,6 +1,7 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
-@section('title', 'Detail Pesan Kontak')
+@section('title', 'Detail Pesan Kontak - Admin Panel MSA')
+@section('page-title', 'Detail Pesan Kontak')
 
 @section('content')
 <div class="container-fluid">
@@ -224,6 +225,7 @@
 @endsection
 
 @section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     // Mark as Read/Unread

@@ -1,6 +1,7 @@
-@extends('admin.layout')
+@extends('admin.layouts.app')
 
-@section('title', 'Pesan Kontak')
+@section('title', 'Pesan Kontak - Admin Panel MSA')
+@section('page-title', 'Pesan Kontak')
 
 @section('content')
 <div class="container-fluid">
@@ -184,6 +185,7 @@
 @endsection
 
 @section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     // Select All functionality
