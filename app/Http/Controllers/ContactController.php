@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use App\Mail\ContactFormSubmitted;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
 
 class ContactController extends Controller
 {
@@ -39,7 +36,7 @@ class ContactController extends Controller
         ]);
 
         try {
-            // Step 1: Save to Database
+            // Save to Database
             $contact = Contact::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -48,23 +45,6 @@ class ContactController extends Controller
                 'subject' => $request->subject,
                 'message' => $request->message,
             ]);
-
-            // Step 2: Send Email Notification
-            try {
-                Mail::to('mitrajayaselarasabadi@gmail.com')
-                    ->send(new ContactFormSubmitted($contact));
-                
-                $contact->update(['email_sent' => true]);
-                Log::info('Contact email sent successfully', ['contact_id' => $contact->id]);
-            } catch (\Exception $e) {
-                Log::error('Failed to send contact email', [
-                    'contact_id' => $contact->id,
-                    'error' => $e->getMessage()
-                ]);
-            }
-
-            // Step 3: Send WhatsApp Notification (if configured)
-            $this->sendWhatsAppNotification($contact);
 
             return redirect()->route('contact')->with('success', 'Pesan Anda telah berhasil dikirim. Tim kami akan segera menghubungi Anda.');
 
@@ -77,53 +57,6 @@ class ContactController extends Controller
             return redirect()->route('contact')
                 ->with('error', 'Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.')
                 ->withInput();
-        }
-    }
-
-    private function sendWhatsAppNotification(Contact $contact)
-    {
-        try {
-            // Check if WhatsApp API is configured
-            $whatsappToken = env('WHATSAPP_API_TOKEN');
-            $whatsappUrl = env('WHATSAPP_API_URL');
-            $whatsappNumber = '6281194664700'; // 0811 9466 470 in international format
-
-            if (!$whatsappToken || !$whatsappUrl) {
-                Log::info('WhatsApp API not configured, skipping notification');
-                return;
-            }
-
-            $message = "🔔 *Pesan Kontak Baru MSAPT*\n\n" .
-                      "👤 *Nama:* {$contact->name}\n" .
-                      "🏢 *Perusahaan:* " . ($contact->company ?: 'Tidak disebutkan') . "\n" .
-                      "📞 *Telepon:* {$contact->phone}\n" .
-                      "📧 *Email:* {$contact->email}\n" .
-                      "📋 *Subjek:* {$contact->subject}\n\n" .
-                      "💬 *Pesan:*\n{$contact->message}\n\n" .
-                      "⏰ Diterima: " . $contact->created_at->format('d/m/Y H:i') . " WIB";
-
-            // Example for Fonnte.com API (adjust based on your chosen provider)
-            $response = Http::post($whatsappUrl, [
-                'target' => $whatsappNumber,
-                'message' => $message,
-                'token' => $whatsappToken
-            ]);
-
-            if ($response->successful()) {
-                $contact->update(['whatsapp_sent' => true]);
-                Log::info('WhatsApp notification sent successfully', ['contact_id' => $contact->id]);
-            } else {
-                Log::error('Failed to send WhatsApp notification', [
-                    'contact_id' => $contact->id,
-                    'response' => $response->body()
-                ]);
-            }
-
-        } catch (\Exception $e) {
-            Log::error('WhatsApp notification error', [
-                'contact_id' => $contact->id,
-                'error' => $e->getMessage()
-            ]);
         }
     }
 }

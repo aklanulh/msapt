@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('company')->nullable();
             $table->string('subject');
             $table->text('message');
-            $table->boolean('email_sent')->default(false);
-            $table->boolean('whatsapp_sent')->default(false);
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

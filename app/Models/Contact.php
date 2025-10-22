@@ -13,14 +13,10 @@ class Contact extends Model
         'company',
         'subject',
         'message',
-        'email_sent',
-        'whatsapp_sent',
         'read_at'
     ];
 
     protected $casts = [
-        'email_sent' => 'boolean',
-        'whatsapp_sent' => 'boolean',
         'read_at' => 'datetime',
     ];
 
