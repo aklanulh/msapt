@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\AdminLog;
 use App\Models\ProjectGallery;
 use App\Models\TrustedClient;
+use App\Models\Contact;
 
 class AdminController extends Controller
 {
@@ -52,6 +53,9 @@ class AdminController extends Controller
             'konsumabel' => Product::active()->byCategory('produk-konsumabel')->count(),
             'linen_apparel' => Product::active()->byCategory('linen-apparel-rs')->count(),
             'jasa_konsultan' => Product::active()->byCategory('jasa-konsultan-maintenance')->count(),
+            'total_contacts' => Contact::count(),
+            'unread_contacts' => Contact::whereNull('read_at')->count(),
+            'contacts_today' => Contact::whereDate('created_at', today())->count(),
         ];
 
         return view('admin.dashboard', compact('stats'));
@@ -560,6 +564,152 @@ class AdminController extends Controller
         
         $client->delete();
         return redirect()->route('admin.trusted-clients')->with('success', 'Klien terpercaya berhasil dihapus!');
+    }
+
+    // Contact Messages Management
+    public function contacts(Request $request)
+    {
+        $query = Contact::query();
+        
+        // Filter by status
+        $status = $request->get('status', 'all');
+        if ($status === 'unread') {
+            $query->whereNull('read_at');
+        } elseif ($status === 'read') {
+            $query->whereNotNull('read_at');
+        }
+        
+        // Search functionality
+        $search = $request->get('search');
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('company', 'like', "%{$search}%")
+                  ->orWhere('subject', 'like', "%{$search}%")
+                  ->orWhere('message', 'like', "%{$search}%");
+            });
+        }
+        
+        // Sort by newest first
+        $contacts = $query->orderBy('created_at', 'desc')->paginate(20);
+        
+        return view('admin.contacts.index', compact('contacts', 'status', 'search'));
+    }
+
+    public function showContact($id)
+    {
+        $contact = Contact::findOrFail($id);
+        
+        // Mark as read if not already read
+        if (!$contact->isRead()) {
+            $contact->markAsRead();
+            
+            AdminLog::logActivity(
+                'read', 
+                "Membaca pesan kontak dari: {$contact->name}",
+                'contact',
+                $contact->id,
+                $contact->name
+            );
+        }
+        
+        return view('admin.contacts.show', compact('contact'));
+    }
+
+    public function markContactAsRead($id)
+    {
+        $contact = Contact::findOrFail($id);
+        
+        if (!$contact->isRead()) {
+            $contact->markAsRead();
+            
+            AdminLog::logActivity(
+                'read', 
+                "Menandai pesan kontak sebagai dibaca: {$contact->name}",
+                'contact',
+                $contact->id,
+                $contact->name
+            );
+        }
+        
+        return response()->json(['success' => true]);
+    }
+
+    public function markContactAsUnread($id)
+    {
+        $contact = Contact::findOrFail($id);
+        
+        $contact->update(['read_at' => null]);
+        
+        AdminLog::logActivity(
+            'unread', 
+            "Menandai pesan kontak sebagai belum dibaca: {$contact->name}",
+            'contact',
+            $contact->id,
+            $contact->name
+        );
+        
+        return response()->json(['success' => true]);
+    }
+
+    public function destroyContact($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contactName = $contact->name;
+        
+        AdminLog::logActivity(
+            'delete', 
+            "Menghapus pesan kontak dari: {$contactName}",
+            'contact',
+            $contact->id,
+            $contactName,
+            $contact->toArray(),
+            null
+        );
+        
+        $contact->delete();
+        
+        return redirect()->route('admin.contacts')->with('success', 'Pesan kontak berhasil dihapus!');
+    }
+
+    public function bulkActionContacts(Request $request)
+    {
+        $action = $request->get('action');
+        $contactIds = $request->get('contact_ids', []);
+        
+        if (empty($contactIds)) {
+            return back()->with('error', 'Pilih minimal satu pesan kontak.');
+        }
+        
+        $contacts = Contact::whereIn('id', $contactIds)->get();
+        
+        switch ($action) {
+            case 'mark_read':
+                foreach ($contacts as $contact) {
+                    if (!$contact->isRead()) {
+                        $contact->markAsRead();
+                    }
+                }
+                AdminLog::logActivity('bulk_read', "Menandai " . count($contacts) . " pesan kontak sebagai dibaca");
+                return back()->with('success', count($contacts) . ' pesan kontak berhasil ditandai sebagai dibaca.');
+                
+            case 'mark_unread':
+                foreach ($contacts as $contact) {
+                    $contact->update(['read_at' => null]);
+                }
+                AdminLog::logActivity('bulk_unread', "Menandai " . count($contacts) . " pesan kontak sebagai belum dibaca");
+                return back()->with('success', count($contacts) . ' pesan kontak berhasil ditandai sebagai belum dibaca.');
+                
+            case 'delete':
+                $contactNames = $contacts->pluck('name')->implode(', ');
+                $contacts->each->delete();
+                AdminLog::logActivity('bulk_delete', "Menghapus " . count($contacts) . " pesan kontak: {$contactNames}");
+                return back()->with('success', count($contacts) . ' pesan kontak berhasil dihapus.');
+                
+            default:
+                return back()->with('error', 'Aksi tidak valid.');
+        }
     }
 
 }

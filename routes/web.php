@@ -64,6 +64,14 @@ Route::prefix('admin')->group(function () {
         Route::put('/trusted-clients/{id}', [AdminController::class, 'updateTrustedClient'])->name('admin.trusted-clients.update');
         Route::delete('/trusted-clients/{id}', [AdminController::class, 'destroyTrustedClient'])->name('admin.trusted-clients.destroy');
         
+        // Contact Messages Management
+        Route::get('/contacts', [AdminController::class, 'contacts'])->name('admin.contacts');
+        Route::get('/contacts/{id}', [AdminController::class, 'showContact'])->name('admin.contacts.show');
+        Route::post('/contacts/{id}/mark-read', [AdminController::class, 'markContactAsRead'])->name('admin.contacts.mark-read');
+        Route::post('/contacts/{id}/mark-unread', [AdminController::class, 'markContactAsUnread'])->name('admin.contacts.mark-unread');
+        Route::delete('/contacts/{id}', [AdminController::class, 'destroyContact'])->name('admin.contacts.destroy');
+        Route::post('/contacts/bulk-action', [AdminController::class, 'bulkActionContacts'])->name('admin.contacts.bulk-action');
+        
         Route::get('/logs', [AdminController::class, 'logs'])->name('admin.logs');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });

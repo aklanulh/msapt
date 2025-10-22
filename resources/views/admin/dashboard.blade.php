@@ -63,6 +63,51 @@
     </div>
 </div>
 
+<!-- Contact Messages Statistics -->
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card h-100">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <div class="rounded-circle p-3" style="background: rgba(13, 202, 240, 0.1);">
+                        <i class="fas fa-envelope fa-2x text-info"></i>
+                    </div>
+                </div>
+                <h3 class="fw-bold text-info">{{ $stats['total_contacts'] }}</h3>
+                <p class="text-muted mb-0">Total Pesan Kontak</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card h-100">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <div class="rounded-circle p-3" style="background: rgba(255, 193, 7, 0.1);">
+                        <i class="fas fa-exclamation-circle fa-2x text-warning"></i>
+                    </div>
+                </div>
+                <h3 class="fw-bold text-warning">{{ $stats['unread_contacts'] }}</h3>
+                <p class="text-muted mb-0">Pesan Belum Dibaca</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card stats-card h-100">
+            <div class="card-body text-center">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <div class="rounded-circle p-3" style="background: rgba(25, 135, 84, 0.1);">
+                        <i class="fas fa-calendar-day fa-2x text-success"></i>
+                    </div>
+                </div>
+                <h3 class="fw-bold text-success">{{ $stats['contacts_today'] }}</h3>
+                <p class="text-muted mb-0">Pesan Hari Ini</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <!-- Quick Actions -->
     <div class="col-md-8 mb-4">
@@ -95,6 +140,22 @@
                     <div class="col-md-6 mb-3">
                         <a href="{{ route('admin.products.category', 'jasa-konsultan-maintenance') }}" class="btn btn-outline-info w-100 py-3">
                             <i class="fas fa-tools me-2"></i>Jasa Konsultan
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a href="{{ route('admin.contacts') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-envelope me-2"></i>Pesan Kontak
+                            @if($stats['unread_contacts'] > 0)
+                                <span class="badge bg-warning ms-2">{{ $stats['unread_contacts'] }}</span>
+                            @endif
+                        </a>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <a href="{{ route('admin.contacts', ['status' => 'unread']) }}" class="btn btn-outline-warning w-100 py-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>Pesan Belum Dibaca
+                            @if($stats['unread_contacts'] > 0)
+                                <span class="badge bg-danger ms-2">{{ $stats['unread_contacts'] }}</span>
+                            @endif
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
